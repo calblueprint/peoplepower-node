@@ -3,5 +3,9 @@
   "version": "1.0.0",
   "description": "People Power Node Scripts",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "dotenv-safe": "^8.2.0",
+    "node-fetch": "^2.6.0"
+  }
 }
