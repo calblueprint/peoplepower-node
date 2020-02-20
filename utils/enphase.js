@@ -1,9 +1,12 @@
 const fetch = require('node-fetch'); // Import fetch (for network requests)
 
 // API call to get enery over lifetime of system
-function energyLifetime(systemId, userParams) {
-  // Base URL for Enphase Enlighten API v2
-  const apiUrl = 'https://api.enphaseenergy.com/api/v2';
+const getLifetimeEnergyData = async (key, userId, systemId) => {
+  // Build API Url
+  const baseUrl = 'https://api.enphaseenergy.com/api/v2';
+
+  const url = `${baseUrl}/systems/${systemId}/energy_lifetime?key=${key}&user_id=${userId}&production=all`;
+
   const options = {
     muteHttpExceptions: true,
     headers: {
@@ -11,16 +14,9 @@ function energyLifetime(systemId, userParams) {
     }
   };
 
-  const url =
-    apiUrl +
-    '/systems/' +
-    systemId +
-    '/energy_lifetime?' +
-    userParams +
-    '&production=all';
-
-  return fetch(url, options);
-}
+  const response = await fetch(url, options);
+  return response.json();
+};
 
 // date array
 function getDateArray(start, length) {
@@ -35,17 +31,13 @@ function getDateArray(start, length) {
   return arr;
 }
 
-async function getEnphaseData(key, userId, systemId) {
+const getEnphaseData = async (key, userId, systemId) => {
   // SEE ENPHASE API DOCS HERE https://developer.enphase.com/docs
 
-  // use this with any request
-  var userParams = 'key=' + key + '&user_id=' + userId;
-
   // parse response data from energy lifetime
-  var response = await energyLifetime(systemId, userParams);
-  var data = response.json();
+  const lifetimeData = await getLifetimeEnergyData(key, userId, systemId);
 
-  return data;
+  return lifetimeData;
   var start_date = new Date(data.start_date);
   var meter_production = data.meter_production;
   var micro_production = data.micro_production;
@@ -59,7 +51,7 @@ async function getEnphaseData(key, userId, systemId) {
   //   var range = sheet.getRange(1, 2, 3, meter_production.length);
   //   range.setValues([date_array, micro_production, meter_production]);
   //   Logger.log(range.getValues());
-}
+};
 
 module.exports = {
   getEnphaseData
