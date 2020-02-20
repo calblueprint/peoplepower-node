@@ -1,0 +1,7 @@
+{
+  "name": "peoplepower-node",
+  "version": "1.0.0",
+  "description": "People Power Node Scripts",
+  "main": "index.js",
+  "license": "MIT"
+}
