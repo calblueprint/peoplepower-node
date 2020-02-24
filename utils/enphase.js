@@ -2,6 +2,7 @@ const fetch = require('node-fetch'); // Import fetch (for network requests)
 const moment = require('moment');
 
 // SEE ENPHASE API DOCS HERE https://developer.enphase.com/docs
+// Returns object with `production`, `meter_production`, `micro_production` keys with production data
 const getEnphaseData = async (userId, systemId, startDate, endDate) => {
   // Build API Url
   const baseUrl = 'https://api.enphaseenergy.com/api/v2';
