@@ -1,5 +1,9 @@
 # peoplepower-node
 
+_Last updated: Feb 23, 2020 (by Fang)_
+
+For the peoplepower-web repo, go to: https://github.com/calblueprint/peoplepower-web
+
 This repo is the home for any and all server-side code and scripts that are written for Blueprint's People Power Solar Cooperative Project
 
 ## How to Setup
