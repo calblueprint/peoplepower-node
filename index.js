@@ -1,13 +1,18 @@
 require('dotenv-safe').config(); // Set up environment variables
 const fetch = require('node-fetch'); // Import fetch (for network requests)
+const moment = require('moment');
 
-// This function (for now) will be what is called when the program is run.
-// Use this to help test other functions
-function main() {
-  console.log('Currently there is nothing here!');
+const EnphaseUtils = require('./utils/enphase.js');
+
+async function main() {
+  console.log('Testing Enphase Data');
+  const result = await EnphaseUtils.getEnphaseData(
+    process.env.SAMPLE_ENPHASE_USER_ID,
+    process.env.SAMPLE_ENPHASE_SYSTEM_ID,
+    moment().subtract(30, 'days'),
+    moment()
+  );
+  console.log(result);
 }
-
-// Add other functions below that perform the individual operations
-// Example: (Pull data from EnPhase API, Generate PDF given billing data, etc.)
 
 main();
