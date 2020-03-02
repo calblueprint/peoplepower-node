@@ -3,6 +3,7 @@ const fetch = require('node-fetch'); // Import fetch (for network requests)
 const moment = require('moment');
 
 const EnphaseUtils = require('./utils/enphase.js');
+const UtilityAPI = require('./utils/utility-api.js');
 
 async function main() {
   console.log('Testing Enphase Data');
@@ -13,6 +14,11 @@ async function main() {
     moment()
   );
   console.log(result);
+
+  // Testing UtilityAPI
+  const bill = await UtilityAPI.getLatestBill(541196)
+  console.log("Latest bill information:", bill)
+
 }
 
 main();
