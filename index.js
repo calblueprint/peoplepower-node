@@ -1,4 +1,3 @@
-import moment from 'moment';
 import {
   createGeneration,
   createPGEUsage,
@@ -6,6 +5,7 @@ import {
   getOwnerById
 } from './airtable/request';
 import getEnphaseData from './utils/enphase';
+import getLatestBill from './utils/utilityApi';
 
 require('dotenv-safe').config(); // Set up environment variables
 
@@ -17,15 +17,10 @@ require('dotenv-safe').config(); // Set up environment variables
 
 // app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
-const SampleUtilityData = {
-  netGeneration: 1000,
-  ebceRebate: 10,
-  startDate: moment().subtract(30, 'days'),
-  endDate: moment()
-};
-
 const generateBillForSubscriber = async (subscriber, solarProject) => {
-  const { netUsage, ebceRebate, startDate, endDate } = SampleUtilityData;
+  const { netUsage, ebceRebate, startDate, endDate } = getLatestBill(
+    subscriber.meterId
+  );
   const generationData = await getEnphaseData(
     subscriber.id,
     solarProject.enphaseUserId,
