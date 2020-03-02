@@ -1,8 +1,10 @@
+import moment from 'moment';
 import {
-  createGeneration,
-  createPGEUsage,
   getSolarProjectById,
-  getOwnerById
+  getOwnerById,
+  getRateScheduleById,
+  createSubscriberBill,
+  getSubscriberBillsByStatementNumber
 } from './airtable/request';
 import getEnphaseData from './utils/enphase';
 import getLatestBill from './utils/utilityApi';
@@ -18,7 +20,8 @@ require('dotenv-safe').config(); // Set up environment variables
 // app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 const generateBillForSubscriber = async (subscriber, solarProject) => {
-  const { netUsage, ebceRebate, startDate, endDate } = getLatestBill(
+  // Get data necessary to generate bill
+  const { netPgeUsage, ebceRebate, startDate, endDate } = await getLatestBill(
     subscriber.meterId
   );
   const generationData = await getEnphaseData(
@@ -29,22 +32,36 @@ const generateBillForSubscriber = async (subscriber, solarProject) => {
     endDate
   );
 
-  const systemGeneration = generationData.reduce((a, b) => a + b, 0);
+  let prevBill;
+  if (subscriber.lastBillNumber !== 0) {
+    [prevBill] = await getSubscriberBillsByStatementNumber(
+      subscriber.lastBillNumber
+    );
+  } else {
+    // Edge case for first bill
+    prevBill = {
+      statementNumber: 0,
+      totalEstimatedRebate: 0,
+      balance: 0
+    };
+  }
 
-  createGeneration({
-    amount: systemGeneration,
-    solarProjectId: [solarProject.id],
-    subscriberOwnerId: [subscriber.id],
-    startDate: startDate.format('MM/DD/YYYY'),
-    endDate: endDate.format('MM/DD/YYYY')
-  });
-  createPGEUsage({
-    solarProjectId: [solarProject.id],
-    subscriberOwnerId: [subscriber.id],
+  const rateSchedule = await getRateScheduleById(subscriber.rateScheduleId);
+  const systemProduction = generationData.reduce((a, b) => a + b, 0);
+
+  createSubscriberBill({
     startDate: startDate.format('MM/DD/YYYY'),
     endDate: endDate.format('MM/DD/YYYY'),
-    netUsage,
-    ebceRebate
+    statementDate: moment().format('MM/DD/YYYY'),
+    subscriberId: [subscriber.id],
+    solarProjectId: [solarProject.id],
+    rateScheduleId: [rateSchedule.id],
+    netPgeUsage,
+    ebceRebate,
+    systemProduction,
+    statementNumber: prevBill.statementNumber + 1,
+    previousTotalEstimatedRebate: prevBill.totalEstimatedRebate,
+    balanceOnPrevious: prevBill.balance
   });
 };
 
@@ -52,7 +69,7 @@ const generateBillsForSolarProject = async solarProjectId => {
   // const subscribers = getOwnersBySolarProjectId(solarProjectId);
   const solarProject = await getSolarProjectById(solarProjectId);
   const subscribers = await Promise.all(
-    solarProject.subscriberOwnerIds.map(id => getOwnerById(id))
+    solarProject.subscriberIds.map(id => getOwnerById(id))
   );
   subscribers.forEach(subscriber => {
     generateBillForSubscriber(subscriber);

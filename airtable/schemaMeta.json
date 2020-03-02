@@ -1,5 +1,5 @@
 {
-  "Owner": {
-    "lookupFields": ["ID"]
+  "Subscriber Bill": {
+    "lookupFields": ["Statement Number"]
   }
 }

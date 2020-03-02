@@ -39,7 +39,7 @@ const getLatestBill = async meterId => {
   const startDate = moment(billBase.bill_start_date);
   const endDate = moment(billBase.bill_end_date);
 
-  const netUsage = billBase.bill_total_volume;
+  const netPgeUsage = billBase.bill_total_volume;
 
   const lineItems = latestBill.bills[0].line_items;
   const rebateItem = lineItems.filter(
@@ -47,7 +47,7 @@ const getLatestBill = async meterId => {
   );
   const ebceRebate = rebateItem[0].cost;
 
-  return { startDate, endDate, netUsage, ebceRebate };
+  return { startDate, endDate, netPgeUsage, ebceRebate };
 };
 
 export default getLatestBill;
