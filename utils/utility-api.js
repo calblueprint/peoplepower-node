@@ -5,10 +5,12 @@ A set of low-level functions that gives us the details we need from the Utility 
 */
 
 const fetch = require("node-fetch");
+const moment = require('moment');
 const API_KEY = process.env.UTILITY_API_KEY;
+const EBCERebateString = 'Credited to (Debited from) NEM Balance';
 
 // Base URL for Utility API BILLS
-const bills_base_url = 'https://utilityapi.com/api/v2/bills';
+const billsBaseUrl = 'https://utilityapi.com/api/v2/bills';
 
 const options = {
 	headers: {
@@ -18,36 +20,34 @@ const options = {
 
 
 /* Given a meterUID, return an object containing Net Usage and EBCE Rebate
-
 	{
+		startDate:
+		endDate:
 		netUsage:
-		ebce_rebate:
+		EBCERebate:
 	}
 */
 const getLatestBill = async (meterUID) => {
 
-	var meter_uid = '?meters=' + meterUID;
+	var meterURL = '?meters=' + meterUID;
 	var latest = '&limit=1&order=latest_first';
 
-	var url = bills_base_url + meter_uid + latest;
+	var url = billsBaseUrl + meterURL + latest;
 	const response = await fetch(url, options);
-	const responseToJson = await response.json();
-	const pge_details = responseToJson.bills[0]["pge_details"];
-	const netUsage = pge_details.consumption + pge_details.net_generation;
+	const latestBill = await response.json();
+	const pgeDetails = latestBill.bills[0]["pgeDetails"];
+	const billBase = latestBill.bills[0]["base"];
+	
+	const startDate = moment(billBase["bill_start_date"]);
+	const endDate = moment(billBase["bill_end_date"]);
+	
+	const netUsage = billBase["bill_total_volume"];
 
-	const line_items = responseToJson.bills[0]["line_items"];
-	const rebate_item = line_items.filter(function(element) {
-		return element.name === 'Credited to (Debited from) NEM Balance'
-	})
+	const lineItems = latestBill.bills[0]["line_items"];
+	const rebateItem = lineItems.filter(element => element.name === EBCERebateString);
+	const EBCERebate = rebateItem[0].cost;
 
-	const rebate = rebate_item[0].cost
-
-	var returnObj = {
-		netUsage: netUsage,
-		ebce_rebate: rebate
-	}
-
-	return returnObj
+	return { startDate, endDate, netUsage, EBCERebate }
 }
 
 
