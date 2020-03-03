@@ -66,7 +66,6 @@ const generateBillForSubscriber = async (subscriber, solarProject) => {
 };
 
 const generateBillsForSolarProject = async solarProjectId => {
-  // const subscribers = getOwnersBySolarProjectId(solarProjectId);
   const solarProject = await getSolarProjectById(solarProjectId);
   const subscribers = await Promise.all(
     solarProject.subscriberIds.map(id => getOwnerById(id))
