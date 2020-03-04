@@ -13,6 +13,8 @@ app.use(express.json());
 
 app.post('/generate', (req, res) => {
   const { solarProjectId } = req.body;
+  console.log('Received Generate Request with body:');
+  console.log(req.body);
   if (solarProjectId) {
     generateBillsForSolarProject(solarProjectId);
   }
