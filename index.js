@@ -9,6 +9,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors());
+app.use(express.json());
 
 app.post('/generate', (req, res) => {
   const { solarProjectId } = req.body;
