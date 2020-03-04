@@ -63,7 +63,6 @@
           "foreignTableId": "tblLThuEdRTuqCBpR",
           "symmetricColumnId": "fld5iPFRwYHQzQkWj"
         },
-        "foreignTable": "tblLThuEdRTuqCBpR",
         "$$hashKey": "object:81"
       },
       {
@@ -75,7 +74,6 @@
           "symmetricColumnId": "fld6ZCGI0afrN8qrY",
           "relationship": "many"
         },
-        "foreignTable": "tbl1W7ArDUv9zzmq0",
         "$$hashKey": "object:82"
       },
       {
@@ -137,7 +135,6 @@
           "symmetricColumnId": "fldZAlv2G9jUIIaFh",
           "relationship": "many"
         },
-        "foreignTable": "tblZ2eBBhNq2VEA2D",
         "$$hashKey": "object:85"
       },
       {
@@ -149,7 +146,6 @@
           "foreignTableId": "tblnLYnT6QW8hO7Aw",
           "symmetricColumnId": "fldwky2RISOgVbnjw"
         },
-        "foreignTable": "tblnLYnT6QW8hO7Aw",
         "$$hashKey": "object:86"
       },
       {
@@ -161,7 +157,6 @@
           "foreignTableId": "tblLThuEdRTuqCBpR",
           "symmetricColumnId": "fldBX40bRkBT4btM7"
         },
-        "foreignTable": "tblLThuEdRTuqCBpR",
         "$$hashKey": "object:87"
       },
       {
@@ -194,7 +189,6 @@
           "foreignTableId": "tblpppeJpGXgnbPbx",
           "symmetricColumnId": "fld0dZJNQ86sRUXnF"
         },
-        "foreignTable": "tblpppeJpGXgnbPbx",
         "$$hashKey": "object:90"
       },
       {
@@ -332,7 +326,6 @@
           "symmetricColumnId": "fldyiQJezFPH8g5Wv",
           "relationship": "many"
         },
-        "foreignTable": "tblZouKimJQmZkzmD",
         "$$hashKey": "object:108"
       },
       {
@@ -438,7 +431,6 @@
           "symmetricColumnId": "fldyFLnN6E2XBk0Gl",
           "relationship": "many"
         },
-        "foreignTable": "tblTXzlIwQ6znEf4R",
         "$$hashKey": "object:116"
       },
       {
@@ -505,7 +497,6 @@
           "symmetricColumnId": "fldbvtSXzsX6PRkXR",
           "relationship": "many"
         },
-        "foreignTable": "tblz1dquH21O9QSle",
         "$$hashKey": "object:518"
       },
       {
@@ -579,7 +570,6 @@
           "foreignTableId": "tblpppeJpGXgnbPbx",
           "symmetricColumnId": "fld5CGScrThLmkAct"
         },
-        "foreignTable": "tblpppeJpGXgnbPbx",
         "$$hashKey": "object:524"
       },
       {
@@ -591,7 +581,6 @@
           "foreignTableId": "tblz1dquH21O9QSle",
           "symmetricColumnId": "fld6X0OlfWc6EazuW"
         },
-        "foreignTable": "tblz1dquH21O9QSle",
         "$$hashKey": "object:525"
       },
       {
@@ -603,7 +592,6 @@
           "symmetricColumnId": "flda1gW85LVGLGMNr",
           "relationship": "many"
         },
-        "foreignTable": "tblZouKimJQmZkzmD",
         "$$hashKey": "object:526"
       },
       {
@@ -766,7 +754,6 @@
           "foreignTableId": "tblLThuEdRTuqCBpR",
           "symmetricColumnId": "fldhBSqsrZSN6zCfG"
         },
-        "foreignTable": "tblLThuEdRTuqCBpR",
         "$$hashKey": "object:743"
       },
       {
@@ -778,7 +765,6 @@
           "foreignTableId": "tblz1dquH21O9QSle",
           "symmetricColumnId": "fldGJ9xpyoUH8fqSm"
         },
-        "foreignTable": "tblz1dquH21O9QSle",
         "$$hashKey": "object:744"
       },
       {
@@ -995,7 +981,6 @@
           "foreignTableId": "tblLThuEdRTuqCBpR",
           "symmetricColumnId": "fldZbpB87AhZu3H0k"
         },
-        "foreignTable": "tblLThuEdRTuqCBpR",
         "$$hashKey": "object:896"
       },
       {
@@ -1055,7 +1040,6 @@
           "symmetricColumnId": "fldOyNuQy3yLyh3uD",
           "relationship": "many"
         },
-        "foreignTable": "tblz1dquH21O9QSle",
         "$$hashKey": "object:903"
       },
       {
@@ -1081,7 +1065,6 @@
           "symmetricColumnId": "fldPbPkHINBGdYwwK",
           "relationship": "many"
         },
-        "foreignTable": "tblZ2eBBhNq2VEA2D",
         "$$hashKey": "object:906"
       }
     ],
@@ -1161,7 +1144,6 @@
           "symmetricColumnId": "fldJ8T6NHBU75ZqCW",
           "viewIdForRecordSelection": "viwIG34fV3VkyaGNu"
         },
-        "foreignTable": "tblz1dquH21O9QSle",
         "$$hashKey": "object:1096"
       },
       {
@@ -1203,7 +1185,6 @@
           "foreignTableId": "tblTXzlIwQ6znEf4R",
           "symmetricColumnId": "fldxGLtkhooiAcymW"
         },
-        "foreignTable": "tblTXzlIwQ6znEf4R",
         "$$hashKey": "object:1100"
       },
       {
@@ -1260,7 +1241,6 @@
           "foreignTableId": "tbl1W7ArDUv9zzmq0",
           "symmetricColumnId": "fldpTSKzGrMKpqStb"
         },
-        "foreignTable": "tbl1W7ArDUv9zzmq0",
         "$$hashKey": "object:1104"
       },
       {
@@ -1500,7 +1480,6 @@
           "relationship": "one",
           "symmetricColumnId": "fldmTHMwr5WcCUNv2"
         },
-        "foreignTable": "tblpppeJpGXgnbPbx",
         "$$hashKey": "object:1118"
       }
     ],
@@ -1544,7 +1523,6 @@
           "symmetricColumnId": "fldLAlePnIpFMEO7T",
           "relationship": "many"
         },
-        "foreignTable": "tblZ2eBBhNq2VEA2D",
         "$$hashKey": "object:1308"
       },
       {
@@ -1631,7 +1609,6 @@
           "viewIdForRecordSelection": "viwIG34fV3VkyaGNu",
           "symmetricColumnId": "fldqJ73npDiEfsFkq"
         },
-        "foreignTable": "tblz1dquH21O9QSle",
         "$$hashKey": "object:1314"
       }
     ],
@@ -1675,7 +1652,6 @@
           "foreignTableId": "tblz1dquH21O9QSle",
           "symmetricColumnId": "fld8ACQZoxeu0Axi9"
         },
-        "foreignTable": "tblz1dquH21O9QSle",
         "$$hashKey": "object:1406"
       },
       {
@@ -1876,7 +1852,6 @@
           "foreignTableId": "tblz1dquH21O9QSle",
           "symmetricColumnId": "fldt69IlRNBMhXRsX"
         },
-        "foreignTable": "tblz1dquH21O9QSle",
         "$$hashKey": "object:1546"
       },
       {
@@ -1928,7 +1903,6 @@
           "foreignTableId": "tblZ2eBBhNq2VEA2D",
           "symmetricColumnId": "fldzXjOiOkPw3CcfW"
         },
-        "foreignTable": "tblZ2eBBhNq2VEA2D",
         "$$hashKey": "object:1550"
       },
       {
