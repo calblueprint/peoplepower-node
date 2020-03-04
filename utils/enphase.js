@@ -4,7 +4,11 @@ const moment = require('moment');
 const baseUrl = 'https://api.enphaseenergy.com/api/v2';
 const key = process.env.ENPHASE_KEY;
 
-const EnphaseSettings = {};
+const EnphaseSettings = {
+  rechN8WXaM60Xx859: data => data.meter_production, // lora foo Unit B
+  recMzaIHIl5Uq1xRJ: data =>
+    data.micro_production.map((v, i) => v - data.meter_production[i]) // lora foo unit A
+};
 
 // Takes the raw Enphase Response and gets the subscriber specific data out of it.
 // Returns array of production values
