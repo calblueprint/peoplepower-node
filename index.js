@@ -1,5 +1,6 @@
 import dotenv from 'dotenv-safe';
 import express from 'express';
+import cors from 'cors';
 import generateBillsForSolarProject from './utils/billgeneration';
 
 dotenv.config(); // Set up environment variables
@@ -7,9 +8,13 @@ dotenv.config(); // Set up environment variables
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(cors());
+
 app.post('/generate', (req, res) => {
   const { solarProjectId } = req.body;
-  generateBillsForSolarProject(solarProjectId);
+  if (solarProjectId) {
+    generateBillsForSolarProject(solarProjectId);
+  }
   res.end();
 });
 
