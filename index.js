@@ -13,4 +13,10 @@ app.post('/generate', (req, res) => {
   res.end();
 });
 
+app.get('/', (req, res) => {
+  res.send(
+    'Nothing to see here. Try sending a request to one of the backend endpoints!'
+  );
+});
+
 app.listen(port, () => console.log(`Express App Listening on port ${port}!`));
