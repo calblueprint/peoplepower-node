@@ -13,4 +13,4 @@ app.post('/generate', (req, res) => {
   res.end();
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`Express App Listening on port ${port}!`));
