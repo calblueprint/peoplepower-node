@@ -1,41 +1,58 @@
 import dotenv from 'dotenv-safe';
 import express from 'express';
+import cors from 'cors';
 import { getPledgeInviteById } from './airtable/request';
+import generateBillsForSolarProject from './utils/billgeneration';
 
 dotenv.config(); // Set up environment variables
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.get('/', (req, res) =>
-  res.send("PP Power's backend-but-not-really-a-backend... side-end!?")
-);
+app.use(cors());
+app.use(express.json());
 
-app.get('/testInvite', async (req, res) => {
-  const RECORD_ID = 'rectNi1BOY05hXto7';
-
-  getPledgeInviteById(RECORD_ID)
-    .then(value => {
-      res.json(value);
-    })
-    .catch(bad => {
-      console.error(bad);
-      res.send(bad);
-    });
+app.post('/generate', (req, res) => {
+  const { solarProjectId } = req.body;
+  console.log('Received Generate Request with body:');
+  console.log(req.body);
+  if (solarProjectId) {
+    generateBillsForSolarProject(solarProjectId);
+  }
+  res.end();
 });
 
-app.post('/invite', (req, res) => {
+app.get('/', (req, res) => {
+  res.send(
+    'Nothing to see here. Try sending a request to one of the backend endpoints!'
+  );
+});
+
+app.post('/invite', async (req, res) => {
   /* 
 
     Sprint Task 2 (part 2/3):
 
-    1. Post to /invite with the RECORD_ID generated from AirTable on the frontend.
-    2. Pull that record given the RECORD_ID and extract email
+    ✅ 1. Post to /invite with the RECORD_ID generated from AirTable on the frontend.
+    ✅ 2. Pull that record given the RECORD_ID and extract email
     3. Send an email using nodemailer to the extracted email CONTAINING a link to onboarding carrying the RECORD_ID
   
   */
 
-  res.send('Hello World!');
+  const RECORD_ID = req.body.pledgeInviteID;
+
+  console.log('INCOMING POST:', RECORD_ID);
+
+  const pledgeInvite = await getPledgeInviteById(RECORD_ID);
+
+  const { email } = pledgeInvite;
+
+  // send email
+
+  res.send({
+    id: RECORD_ID,
+    email
+  });
 });
 
 app.listen(port, () => console.log(`aPP (Power) listening on port ${port}!`));
