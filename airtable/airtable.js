@@ -9,15 +9,18 @@
 
   If you're adding a new function: make sure you add a corresponding test (at least 1) for it in airtable.spec.js
 */
-
+import dotenv from 'dotenv-safe';
 import Airtable from 'airtable';
 import { Columns } from './schema';
+
+dotenv.config(); // Set up environment variables
 
 const BASE_ID = '0';
 const VIEW = 'Grid view';
 const ENDPOINT_URL = 'https://api.airtable.com';
 
-const apiKey = process.env.REACT_APP_AIRTABLE_API_KEY;
+const apiKey = process.env.AIRTABLE_API_KEY;
+console.log(apiKey);
 
 Airtable.configure({
   endpointUrl: ENDPOINT_URL,
@@ -119,6 +122,8 @@ function getAllRecords(table) {
 // Given a table and record ID, return the associated record object using a Promise.
 function getRecordById(table, id) {
   return new Promise(function(resolve, reject) {
+    console.log(base);
+    console.log(table, id);
     base(table).find(id, function(err, record) {
       if (err) {
         reject(err);
