@@ -11,7 +11,8 @@
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "moment": "^2.24.0",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "nodemailer": "^6.4.4"
   },
   "scripts": {
     "generate-schema": "generate-airtable-schema && pretty-quick",

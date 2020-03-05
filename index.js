@@ -1,6 +1,7 @@
 import dotenv from 'dotenv-safe';
 import express from 'express';
 import cors from 'cors';
+import nodemailer from 'nodemailer';
 import { getPledgeInviteById } from './airtable/request';
 import generateBillsForSolarProject from './utils/billgeneration';
 
@@ -47,11 +48,26 @@ app.post('/invite', async (req, res) => {
 
   const { email } = pledgeInvite;
 
-  // send email
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: '', // gmail email
+      pass: '' // gmail password
+    }
+  });
+
+  const info = await transporter.sendMail({
+    from: '"Nick Wong ⚡️🔋" <pillbeacon@gmail.com>', // sender address
+    to: email, // list of receivers
+    subject: 'PP POWER invites you!!', // Subject line
+    text: `Some link with ${RECORD_ID} embedded in it`, // plain text body
+    html: `<p>Some link with ${RECORD_ID} embedded in it</p>` // html body
+  });
 
   res.send({
-    id: RECORD_ID,
-    email
+    status: `Successfully sent an invitation to ${info.envelope.to[0]}`
   });
 });
 
