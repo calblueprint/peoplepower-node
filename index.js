@@ -30,36 +30,21 @@ app.get('/', (req, res) => {
 });
 
 app.post('/invite', async (req, res) => {
-  /* 
-
-    Sprint Task 2 (part 2/3):
-
-    ✅ 1. Post to /invite with the RECORD_ID generated from AirTable on the frontend.
-    ✅ 2. Pull that record given the RECORD_ID and extract email
-    ✅ 3. Send an email using nodemailer to the extracted email CONTAINING a link to onboarding carrying the RECORD_ID
-  
-  */
+  const MAIL_SERVER_EMAIL = ''; // this is the GMAIL you want to send emails from. "nick@gmail.com"
+  const MAIL_SERVER_PASS = ''; // this is your GMAIL password
+  const SENDER_NAME = ''; // specify the name of the person sending an email, for example: "Nick Wong ⚡️🔋"
 
   const RECORD_ID = req.body.pledgeInviteID;
-
   const pledgeInvite = await getPledgeInviteById(RECORD_ID);
-
-  const { email } = pledgeInvite;
-
-  // if (email === undefined) {
-  //   console.log('no emails')
-  //   res.send({
-  //     status: `Please specify an email.`
-  //   });
-  // }
+  const { email: recipientEmail } = pledgeInvite;
 
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: '', // gmail email
-      pass: '' // gmail password
+      user: MAIL_SERVER_EMAIL,
+      pass: MAIL_SERVER_PASS
     }
   });
 
@@ -68,15 +53,18 @@ app.post('/invite', async (req, res) => {
   const inviteLink = baseUrl + inviteParameter;
 
   const info = await transporter.sendMail({
-    from: '"Nick Wong ⚡️🔋" <pillbeacon@gmail.com>', // sender address
-    to: email, // list of receivers
+    from: `"${SENDER_NAME}" <${MAIL_SERVER_EMAIL}>`, // sender address
+    to: recipientEmail, // list of receivers
     subject: 'PP POWER invites you!!', // Subject line
     text: `Welcome to People Power Solar Cooperative! To join, you can create your account via this link: ${inviteLink}`, // plain text body
     html: `<h3>Welcome to People Power Solar Cooperative!</h3><br /><p>To join, you can create your account via this link: ${inviteLink}</p>` // html body
   });
 
+  // on email send, nodemailer returns an info obj specifiying details of the completed email send.
+  const sentEmailRecipient = info.envelope.to[0];
+
   res.send({
-    status: `Successfully sent an invitation to ${info.envelope.to[0]}`
+    status: `Successfully sent an invitation to ${sentEmailRecipient}`
   });
 });
 
