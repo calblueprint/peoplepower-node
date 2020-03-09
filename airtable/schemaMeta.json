@@ -1,0 +1,5 @@
+{
+  "Subscriber Bill": {
+    "lookupFields": ["Statement Number"]
+  }
+}

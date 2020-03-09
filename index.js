@@ -1,24 +1,30 @@
-require('dotenv-safe').config(); // Set up environment variables
-const fetch = require('node-fetch'); // Import fetch (for network requests)
-const moment = require('moment');
+import dotenv from 'dotenv-safe';
+import express from 'express';
+import cors from 'cors';
+import generateBillsForSolarProject from './utils/billgeneration';
 
-const EnphaseUtils = require('./utils/enphase.js');
-const UtilityAPI = require('./utils/utility-api.js');
+dotenv.config(); // Set up environment variables
 
-async function main() {
-  console.log('Testing Enphase Data');
-  const result = await EnphaseUtils.getEnphaseData(
-    process.env.SAMPLE_ENPHASE_USER_ID,
-    process.env.SAMPLE_ENPHASE_SYSTEM_ID,
-    moment().subtract(30, 'days'),
-    moment()
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.use(cors());
+app.use(express.json());
+
+app.post('/generate', (req, res) => {
+  const { solarProjectId } = req.body;
+  console.log('Received Generate Request with body:');
+  console.log(req.body);
+  if (solarProjectId) {
+    generateBillsForSolarProject(solarProjectId);
+  }
+  res.end();
+});
+
+app.get('/', (req, res) => {
+  res.send(
+    'Nothing to see here. Try sending a request to one of the backend endpoints!'
   );
-  console.log(result);
+});
 
-  // Testing UtilityAPI
-  const bill = await UtilityAPI.getLatestBill(541196)
-  console.log("Latest bill information:", bill)
-
-}
-
-main();
+app.listen(port, () => console.log(`Express App Listening on port ${port}!`));

@@ -5,8 +5,48 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "airtable": "^0.8.1",
+    "cors": "^2.8.5",
     "dotenv-safe": "^8.2.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
     "moment": "^2.24.0",
     "node-fetch": "^2.6.0"
+  },
+  "scripts": {
+    "generate-schema": "generate-airtable-schema && pretty-quick",
+    "start": "node -r esm index.js"
+  },
+  "devDependencies": {
+    "airtable-schema-generator": "^1.2.9",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.18.3",
+    "husky": "^3.0.9",
+    "lint-staged": "^9.4.2",
+    "prettier": "1.18.2",
+    "pretty-quick": "^2.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "pretty-quick --staged",
+      "eslint ./ --fix",
+      "git add"
+    ]
+  },
+  "airtable-schema-generator": {
+    "output": "airtable",
+    "input": "airtable",
+    "defaultView": "Grid view",
+    "baseId": "appFaOwKhMXrRIQIp"
   }
 }
