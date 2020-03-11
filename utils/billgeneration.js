@@ -29,6 +29,7 @@ const generatePdf = async (
   subscriberBillId,
   prevBillId
 ) => {
+  // Refresh information about existing bills to get the latest calculated values
   const subscriberBill = await getSubscriberBillById(subscriberBillId);
   let prevBill;
   if (prevBillId) {
