@@ -8,9 +8,6 @@ import {
   Image,
   Font
 } from '@react-pdf/renderer';
-// import fontRegular from ;
-// import fontBold from '../../assets/fonts/OpenSans-Bold.ttf';
-// import Logo from '../../assets/PPSC-logo-no-padding.png';
 
 Font.register({
   family: 'Open Sans',
