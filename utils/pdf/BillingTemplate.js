@@ -169,6 +169,8 @@ const styles = StyleSheet.create({
 export default class BillingTemplate extends React.PureComponent {
   render() {
     const { subscriber, solarProject, subscriberBill, prevBill } = this.props;
+    console.log(subscriberBill);
+    const round = x => parseFloat(x).toFixed(3);
     return (
       <Document>
         <Page style={styles.pdfContainer}>
@@ -206,9 +208,7 @@ export default class BillingTemplate extends React.PureComponent {
                     <Text style={[styles.text]}>
                       {subscriberBill.statementDate}
                     </Text>
-                    <Text style={[styles.text]}>
-                      {subscriberBill.statementDate}
-                    </Text>
+                    <Text style={[styles.text]}>{subscriberBill.dueDate}</Text>
                   </View>
                 </View>
               </View>
@@ -260,20 +260,20 @@ export default class BillingTemplate extends React.PureComponent {
                   <View style={[styles.right, styles.paddingLeft]}>
                     <Text style={[styles.text]}>
                       $
-                      {prevBill.amountDue}
+                      {round(prevBill.amountDue)}
                     </Text>
                     <Text style={[styles.text]}>
                       $
-                      {prevBill.amountReceived}
+                      {round(prevBill.amountReceived)}
                     </Text>
                     {/* <View style={border"><View/> */}
                     <Text style={[styles.text, styles.borderTop]}>
                       $
-                      {prevBill.balance}
+                      {round(prevBill.balance)}
                     </Text>
                     <Text style={[styles.text]}>
                       $
-                      {subscriberBill.currentCharges}
+                      {round(subscriberBill.currentCharges)}
                     </Text>
                   </View>
                 </View>
@@ -290,7 +290,7 @@ export default class BillingTemplate extends React.PureComponent {
                   </Text>
                   <Text style={[styles.right, styles.pinkText]}>
                     $
-                    {subscriberBill.amountDue}
+                    {round(subscriberBill.amountDue)}
                   </Text>
                 </View>
               </View>
@@ -328,11 +328,11 @@ export default class BillingTemplate extends React.PureComponent {
                 </Text>
                 <Text style={[styles.text, styles.width25]}>
                   $
-                  {subscriberBill.ppRate}
+                  {round(subscriberBill.ppRate)}
                 </Text>
                 <Text style={[styles.text, styles.width25]}>
                   $
-                  {subscriberBill.currentCharges}
+                  {round(subscriberBill.currentCharges)}
                 </Text>
               </View>
             </View>
@@ -367,7 +367,7 @@ export default class BillingTemplate extends React.PureComponent {
                 </Text>
                 <Text style={[styles.text]}>
                   $
-                  {subscriberBill.estimatedRebate}
+                  {round(subscriberBill.estimatedRebate)}
                 </Text>
                 <Text style={[styles.text]}>
                   $
@@ -375,11 +375,10 @@ export default class BillingTemplate extends React.PureComponent {
                 </Text>
                 <Text style={[styles.text]}>
                   $
-                  {subscriberBill.totalEstimatedRebate}
+                  {round(subscriberBill.totalEstimatedRebate)}
                 </Text>
               </View>
             </View>
-            <Text>chart</Text>
           </View>
         </Page>
       </Document>

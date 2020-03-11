@@ -137,7 +137,8 @@
       { "type": "formula", "name": "Total Estimated Rebate" },
       { "type": "select", "name": "Status" },
       { "type": "foreignKey", "name": "Solar Project" },
-      { "type": "multipleAttachment", "name": "Bill PDF" }
+      { "type": "multipleAttachment", "name": "Bill PDF" },
+      { "type": "date", "name": "Due Date" }
     ]
   },
   "Rate Schedule": {

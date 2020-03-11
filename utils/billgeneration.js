@@ -18,6 +18,7 @@ import getEnphaseData from './enphase';
 import getLatestBill from './utilityApi';
 import BillingTemplate from './pdf/BillingTemplate';
 
+// const ROOT_URL = 'https://1f7c24d2.ngrok.io';
 const ROOT_URL = 'https://peoplepower-node.herokuapp.com';
 
 dotenv.config();
@@ -129,6 +130,9 @@ end date: ${endDate}`
     startDate,
     endDate,
     statementDate: moment().format('MM/DD/YYYY'),
+    dueDate: moment()
+      .add(1, 'M')
+      .format('MM/DD/YYYY'),
     subscriberId: [subscriber.id],
     solarProjectId: [solarProject.id],
     rateScheduleId: [rateSchedule.id],

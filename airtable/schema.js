@@ -145,7 +145,8 @@ export const Columns = {
     totalEstimatedRebate: `Total Estimated Rebate`,
     status: `Status`,
     solarProjectId: `Solar Project`,
-    billPdf: `Bill PDF`
+    billPdf: `Bill PDF`,
+    dueDate: `Due Date`
   },
   'Rate Schedule': {
     primaryKey: `Primary Key`,
