@@ -1,19 +1,64 @@
 /* eslint-disable import/imports-first */
 import moment from 'moment';
 import dotenv from 'dotenv-safe';
+import fs from 'fs';
 
+import React from 'react';
+import ReactPDF from '@react-pdf/renderer';
 import {
   getSolarProjectById,
   getOwnerById,
   getRateScheduleById,
   createSubscriberBill,
   updateSubscriberBill,
-  getSubscriberBillsByStatementNumber
+  getSubscriberBillsByStatementNumber,
+  getSubscriberBillById
 } from '../airtable/request';
 import getEnphaseData from './enphase';
 import getLatestBill from './utilityApi';
+import BillingTemplate from './pdf/BillingTemplate';
+
+const ROOT_URL = 'https://peoplepower-node.herokuapp.com';
 
 dotenv.config();
+
+const generatePdf = async (
+  subscriber,
+  solarProject,
+  subscriberBillId,
+  prevBillId
+) => {
+  const subscriberBill = await getSubscriberBillById(subscriberBillId);
+  let prevBill;
+  if (prevBillId) {
+    prevBill = await getSubscriberBillById(prevBillId);
+  } else {
+    prevBill = {
+      amountDue: 0,
+      amountReceived: 0,
+      balance: 0
+    };
+  }
+  console.log('Creating PDF...');
+  ReactPDF.render(
+    <BillingTemplate
+      subscriber={subscriber}
+      solarProject={solarProject}
+      subscriberBill={subscriberBill}
+      prevBill={prevBill}
+    />,
+    `./temp/${subscriberBill.id}.pdf`
+  );
+  await updateSubscriberBill(subscriberBill.id, {
+    billPdf: [{ url: `${ROOT_URL}/${subscriberBill.id}.pdf` }]
+  });
+  console.log('Succesfully uploaded PDF');
+  setTimeout(() => {
+    console.log(`Deleting Temporary PDF: ${subscriberBill.id}.pdf`);
+    fs.unlinkSync(`./temp/${subscriberBill.id}.pdf`);
+  }, 20000);
+  //
+};
 
 const generateBillForSubscriber = async (subscriber, solarProject) => {
   // Get data necessary to generate bill
@@ -80,7 +125,7 @@ end date: ${endDate}`
     }`
   );
 
-  createSubscriberBill({
+  const newBillId = await createSubscriberBill({
     startDate,
     endDate,
     statementDate: moment().format('MM/DD/YYYY'),
@@ -95,6 +140,9 @@ end date: ${endDate}`
     balanceOnPreviousBill: prevBill.balance,
     status: 'Pending'
   });
+
+  // Generate PDF!
+  generatePdf(subscriber, solarProject, newBillId, prevBill.id);
 };
 
 const generateBillsForSolarProject = async solarProjectId => {

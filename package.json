@@ -17,9 +17,13 @@
   },
   "scripts": {
     "generate-schema": "generate-airtable-schema && pretty-quick",
-    "start": "node -r esm index.js"
+    "start": "babel-node -r esm index.js"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-react": "^7.8.3",
     "airtable-schema-generator": "^1.2.9",
     "eslint": "^6.5.1",
     "eslint-config-airbnb": "^18.0.1",

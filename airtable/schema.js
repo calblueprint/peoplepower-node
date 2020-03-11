@@ -57,7 +57,8 @@ export const Columns = {
     certifyPermanentAddress: `Certify Permanent Address`,
     rateScheduleId: `Rate Schedule`,
     latestBillNumber: `Latest Bill Number`,
-    meterId: `Meter ID`
+    meterId: `Meter ID`,
+    isSuperAdmin: `Is Super Admin?`
   },
   'Project Group': {
     primaryKey: `Primary Key`,
@@ -80,7 +81,8 @@ export const Columns = {
     longitude: `Longitude`,
     isDefault: `Is Default?`,
     id: `ID`,
-    address: `Address`
+    address: `Address`,
+    pledgeInviteId: `Pledge Invite`
   },
   Announcement: {
     primaryKey: `Primary Key`,
@@ -142,7 +144,8 @@ export const Columns = {
     amountReceived: `Amount Received`,
     totalEstimatedRebate: `Total Estimated Rebate`,
     status: `Status`,
-    solarProjectId: `Solar Project`
+    solarProjectId: `Solar Project`,
+    billPdf: `Bill PDF`
   },
   'Rate Schedule': {
     primaryKey: `Primary Key`,
@@ -156,7 +159,7 @@ export const Columns = {
   },
   'Pledge Invite': {
     primaryKey: `Primary Key`,
-    generalOwnerId: `General Owner`,
+    ownerId: `Owner`,
     dateCreated: `Date Created`,
     dateUpdated: `Date Updated`,
     firstName: `First Name`,
@@ -167,7 +170,7 @@ export const Columns = {
     email: `Email`,
     status: `Status`,
     id: `ID`,
-    field13: `Field 13`
+    projectGroupId: `Project Group`
   },
   Payment: {
     primaryKey: `Primary Key`,
