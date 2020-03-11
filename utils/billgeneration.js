@@ -41,7 +41,7 @@ const generatePdf = async (
       balance: 0
     };
   }
-  console.log('Creating PDF...');
+  console.log(`Creating PDF for Bill# ${subscriberBill.id} ...`);
   await ReactPDF.render(
     <BillingTemplate
       subscriber={subscriber}
