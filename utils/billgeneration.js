@@ -42,7 +42,7 @@ const generatePdf = async (
     };
   }
   console.log('Creating PDF...');
-  ReactPDF.render(
+  await ReactPDF.render(
     <BillingTemplate
       subscriber={subscriber}
       solarProject={solarProject}
