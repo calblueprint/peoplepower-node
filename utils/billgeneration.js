@@ -54,7 +54,9 @@ const generatePdf = async (
   await updateSubscriberBill(subscriberBill.id, {
     billPdf: [{ url: `${ROOT_URL}/${subscriberBill.id}.pdf` }]
   });
-  console.log('Succesfully uploaded PDF');
+  console.log(
+    `Succesfully uploaded PDF at ${ROOT_URL}/${subscriberBill.id}.pdf`
+  );
   setTimeout(() => {
     console.log(`Deleting Temporary PDF: ${subscriberBill.id}.pdf`);
     fs.unlinkSync(`./temp/${subscriberBill.id}.pdf`);
