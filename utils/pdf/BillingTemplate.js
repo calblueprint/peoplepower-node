@@ -184,7 +184,7 @@ export default class BillingTemplate extends React.PureComponent {
                 <Text style={[styles.text]}>1234 Address St.</Text>
                 <Text style={[styles.text]}>City, CA 12345</Text>
                 <Text style={[styles.boldText]}>Questions? Please Email:</Text>
-                <Text style={[styles.text]}>hello@peoplepowerolar.org</Text>
+                <Text style={[styles.text]}>hello@peoplepowersolar.org</Text>
               </View>
               <View style={[styles.right]}>
                 <View style={[styles.flex]}>
