@@ -120,7 +120,7 @@ end date: ${endDate}`
   console.log(generationData);
 
   const rateSchedule = await getRateScheduleById(subscriber.rateScheduleId);
-  const systemProduction = generationData.reduce((a, b) => a + b, 0);
+  const systemProduction = generationData.reduce((a, b) => a + b, 0) / 1000;
   console.log(
     `Saving Bill with Statement Number: ${prevBill.statementNumber + 1} for ${
       subscriber.name
