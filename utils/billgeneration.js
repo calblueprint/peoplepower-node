@@ -80,8 +80,6 @@ const generateBillForSubscriber = async (subscriber, solarProject) => {
       subscriber.latestBillNumber
     );
     [prevBill] = bills.filter(b => b.subscriberId[0] === subscriber.id);
-
-    await updateSubscriberBill(prevBill.id, { status: 'Previous' });
   } else {
     // Edge case for first bill
     prevBill = {
@@ -100,6 +98,9 @@ const generateBillForSubscriber = async (subscriber, solarProject) => {
     console.log('This PG&E bill has already been processed. Skipping!');
     return;
   }
+
+  // Set previous bill to previous
+  await updateSubscriberBill(prevBill.id, { status: 'Previous' });
 
   console.log(
     `Found PGE Data for ${subscriber.name}
