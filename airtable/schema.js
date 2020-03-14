@@ -25,7 +25,6 @@ export const Columns = {
     ownerTypes: `Owner Types`,
     id: `ID`,
     subscriberBillIds: `Subscriber Bills`,
-    pledgeInviteId: `Pledge Invite`,
     adminOfId: `Admin Of`,
     numberOfShares: `Number of Shares`,
     isReceivingDividends: `Is Receiving Dividends?`,
@@ -58,7 +57,9 @@ export const Columns = {
     rateScheduleId: `Rate Schedule`,
     latestBillNumber: `Latest Bill Number`,
     meterId: `Meter ID`,
-    isSuperAdmin: `Is Super Admin?`
+    isSuperAdmin: `Is Super Admin?`,
+    pledgeInviteId: `Pledge Invite`,
+    subscriberAccountNumber: `Subscriber Account Number`
   },
   'Project Group': {
     primaryKey: `Primary Key`,
@@ -160,7 +161,6 @@ export const Columns = {
   },
   'Pledge Invite': {
     primaryKey: `Primary Key`,
-    ownerId: `Owner`,
     dateCreated: `Date Created`,
     dateUpdated: `Date Updated`,
     firstName: `First Name`,
@@ -169,9 +169,10 @@ export const Columns = {
     wantsDividends: `Wants Dividends?`,
     phoneNumber: `Phone Number`,
     email: `Email`,
-    status: `Status`,
     id: `ID`,
-    projectGroupId: `Project Group`
+    projectGroupId: `Project Group`,
+    ownerId: `Owner`,
+    status: `Status`
   },
   Payment: {
     primaryKey: `Primary Key`,

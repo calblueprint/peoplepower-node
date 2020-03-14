@@ -17,9 +17,7 @@ import {
 import getEnphaseData from './enphase';
 import getLatestBill from './utilityApi';
 import BillingTemplate from './pdf/BillingTemplate';
-
-// const ROOT_URL = 'https://1f7c24d2.ngrok.io';
-const ROOT_URL = 'https://peoplepower-node.herokuapp.com';
+import Constants from '../Constants';
 
 dotenv.config();
 
@@ -52,10 +50,10 @@ const generatePdf = async (
     `./temp/${subscriberBill.id}.pdf`
   );
   await updateSubscriberBill(subscriberBill.id, {
-    billPdf: [{ url: `${ROOT_URL}/${subscriberBill.id}.pdf` }]
+    billPdf: [{ url: `${Constants.ROOT_URL}/${subscriberBill.id}.pdf` }]
   });
   console.log(
-    `Succesfully uploaded PDF at ${ROOT_URL}/${subscriberBill.id}.pdf`
+    `Succesfully uploaded PDF at ${Constants.ROOT_URL}/${subscriberBill.id}.pdf`
   );
   setTimeout(() => {
     console.log(`Deleting Temporary PDF: ${subscriberBill.id}.pdf`);

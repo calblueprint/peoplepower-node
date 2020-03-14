@@ -141,18 +141,6 @@
         "$$hashKey": "object:85"
       },
       {
-        "id": "fld8ACQZoxeu0Axi9",
-        "name": "Pledge Invite",
-        "type": "foreignKey",
-        "typeOptions": {
-          "relationship": "one",
-          "foreignTableId": "tblnLYnT6QW8hO7Aw",
-          "symmetricColumnId": "fldwky2RISOgVbnjw"
-        },
-        "foreignTable": "tblnLYnT6QW8hO7Aw",
-        "$$hashKey": "object:86"
-      },
-      {
         "id": "fld6X0OlfWc6EazuW",
         "name": "Admin Of",
         "type": "foreignKey",
@@ -162,7 +150,7 @@
           "symmetricColumnId": "fldBX40bRkBT4btM7"
         },
         "foreignTable": "tblLThuEdRTuqCBpR",
-        "$$hashKey": "object:87"
+        "$$hashKey": "object:86"
       },
       {
         "id": "fldT7O2NVBckB9d05",
@@ -173,7 +161,7 @@
           "negative": false,
           "validatorName": "positive"
         },
-        "$$hashKey": "object:88"
+        "$$hashKey": "object:87"
       },
       {
         "id": "fldRKt2QfRTwIiZRP",
@@ -183,7 +171,7 @@
           "color": "green",
           "icon": "check"
         },
-        "$$hashKey": "object:89"
+        "$$hashKey": "object:88"
       },
       {
         "id": "fldOyNuQy3yLyh3uD",
@@ -195,21 +183,21 @@
           "symmetricColumnId": "fld0dZJNQ86sRUXnF"
         },
         "foreignTable": "tblpppeJpGXgnbPbx",
-        "$$hashKey": "object:90"
+        "$$hashKey": "object:89"
       },
       {
         "id": "fldAYWsPSx5cXXKow",
         "name": "First Name",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:91"
+        "$$hashKey": "object:90"
       },
       {
         "id": "fldmBcJ23KF6pdMTc",
         "name": "Last Name",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:92"
+        "$$hashKey": "object:91"
       },
       {
         "id": "fldfiPj7M4nRLWBY4",
@@ -218,7 +206,7 @@
         "typeOptions": {
           "validatorName": "email"
         },
-        "$$hashKey": "object:93"
+        "$$hashKey": "object:92"
       },
       {
         "id": "fldLrnTT8ZqsCjxdB",
@@ -227,84 +215,84 @@
         "typeOptions": {
           "validatorName": "email"
         },
-        "$$hashKey": "object:94"
+        "$$hashKey": "object:93"
       },
       {
         "id": "fldkthwZsgzbDh4GA",
         "name": "Permanent Street 1",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:95"
+        "$$hashKey": "object:94"
       },
       {
         "id": "fldvQZRiEHqhGquDM",
         "name": "Permanent Street 2",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:96"
+        "$$hashKey": "object:95"
       },
       {
         "id": "fld3B8jjXTaAng5ZY",
         "name": "Permanent City",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:97"
+        "$$hashKey": "object:96"
       },
       {
         "id": "fld0cWNHAczIMb61u",
         "name": "Permanent State",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:98"
+        "$$hashKey": "object:97"
       },
       {
         "id": "fldOijiK2KXLW56Kp",
         "name": "Permanent Zipcode",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:99"
+        "$$hashKey": "object:98"
       },
       {
         "id": "fldQHYJu6mhPbMaWn",
         "name": "Mailing Street 1",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:100"
+        "$$hashKey": "object:99"
       },
       {
         "id": "fldl6tlIvOAz7qNsZ",
         "name": "Mailing Street 2",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:101"
+        "$$hashKey": "object:100"
       },
       {
         "id": "fldhl1AJMfhXzRfMv",
         "name": "Mailing City",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:102"
+        "$$hashKey": "object:101"
       },
       {
         "id": "fldmNFZMHw3z4myOT",
         "name": "Mailing State",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:103"
+        "$$hashKey": "object:102"
       },
       {
         "id": "fldIKc9lQcCJ4xT3c",
         "name": "Mailing Zipcode",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:104"
+        "$$hashKey": "object:103"
       },
       {
         "id": "fldBnV1LTl8lGHR0V",
         "name": "Phone Number",
         "type": "phone",
         "typeOptions": null,
-        "$$hashKey": "object:105"
+        "$$hashKey": "object:104"
       },
       {
         "id": "fld3UowcI3Veis2M3",
@@ -314,14 +302,14 @@
           "format": "integer",
           "negative": true
         },
-        "$$hashKey": "object:106"
+        "$$hashKey": "object:105"
       },
       {
         "id": "fldFuIrcqkQmsUs51",
         "name": "Password",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:107"
+        "$$hashKey": "object:106"
       },
       {
         "id": "fldGJ9xpyoUH8fqSm",
@@ -333,7 +321,7 @@
           "relationship": "many"
         },
         "foreignTable": "tblZouKimJQmZkzmD",
-        "$$hashKey": "object:108"
+        "$$hashKey": "object:107"
       },
       {
         "id": "fldX0crlzjJKuC8xi",
@@ -349,7 +337,7 @@
           },
           "resultType": "text"
         },
-        "$$hashKey": "object:109"
+        "$$hashKey": "object:108"
       },
       {
         "id": "fldFqac9p4j6Luxxw",
@@ -368,7 +356,7 @@
           },
           "resultType": "text"
         },
-        "$$hashKey": "object:110"
+        "$$hashKey": "object:109"
       },
       {
         "id": "fldAXFiQl3Ruou5gm",
@@ -387,7 +375,7 @@
           },
           "resultType": "text"
         },
-        "$$hashKey": "object:111"
+        "$$hashKey": "object:110"
       },
       {
         "id": "fldgSZhHEWJtGCCBn",
@@ -397,7 +385,7 @@
           "color": "green",
           "icon": "check"
         },
-        "$$hashKey": "object:112"
+        "$$hashKey": "object:111"
       },
       {
         "id": "fld9Hf8VMwLYwZZff",
@@ -407,7 +395,7 @@
           "color": "green",
           "icon": "check"
         },
-        "$$hashKey": "object:113"
+        "$$hashKey": "object:112"
       },
       {
         "id": "fldqcQOV4swElgXLo",
@@ -417,7 +405,7 @@
           "color": "green",
           "icon": "check"
         },
-        "$$hashKey": "object:114"
+        "$$hashKey": "object:113"
       },
       {
         "id": "fldax1sM2zFW7puxi",
@@ -427,7 +415,7 @@
           "color": "green",
           "icon": "check"
         },
-        "$$hashKey": "object:115"
+        "$$hashKey": "object:114"
       },
       {
         "id": "fldqJ73npDiEfsFkq",
@@ -439,7 +427,7 @@
           "relationship": "many"
         },
         "foreignTable": "tblTXzlIwQ6znEf4R",
-        "$$hashKey": "object:116"
+        "$$hashKey": "object:115"
       },
       {
         "id": "fldOUjjqzDOUt8u0I",
@@ -459,14 +447,14 @@
         },
         "foreignTableName": "Subscriber Bill",
         "foreignTableRollupColumnName": "Statement Number",
-        "$$hashKey": "object:117"
+        "$$hashKey": "object:116"
       },
       {
         "id": "fldRp249NLMVvOV4X",
         "name": "Meter ID",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:118"
+        "$$hashKey": "object:117"
       },
       {
         "id": "fldUeuNtSaetvuBZw",
@@ -476,7 +464,30 @@
           "color": "green",
           "icon": "check"
         },
+        "$$hashKey": "object:118"
+      },
+      {
+        "id": "fld8IBVMCGA0fWxzz",
+        "name": "Pledge Invite",
+        "type": "foreignKey",
+        "typeOptions": {
+          "relationship": "one",
+          "foreignTableId": "tblnLYnT6QW8hO7Aw",
+          "symmetricColumnId": "fld91yWmySR2u9jXN"
+        },
+        "foreignTable": "tblnLYnT6QW8hO7Aw",
         "$$hashKey": "object:119"
+      },
+      {
+        "id": "fld12GHolOBlXTB9g",
+        "name": "Subscriber Account Number",
+        "type": "number",
+        "typeOptions": {
+          "format": "integer",
+          "negative": false,
+          "validatorName": "positive"
+        },
+        "$$hashKey": "object:120"
       }
     ],
     "primaryColumnName": "Primary Key",
@@ -505,7 +516,7 @@
           },
           "resultType": "text"
         },
-        "$$hashKey": "object:522"
+        "$$hashKey": "object:532"
       },
       {
         "id": "fld5iPFRwYHQzQkWj",
@@ -517,7 +528,7 @@
           "relationship": "many"
         },
         "foreignTable": "tblz1dquH21O9QSle",
-        "$$hashKey": "object:523"
+        "$$hashKey": "object:533"
       },
       {
         "id": "fldEDU9VjKFtcrbND",
@@ -534,7 +545,7 @@
           },
           "resultType": "date"
         },
-        "$$hashKey": "object:524"
+        "$$hashKey": "object:534"
       },
       {
         "id": "fldSFXX0OtIJ0Maj2",
@@ -552,7 +563,7 @@
           },
           "resultType": "date"
         },
-        "$$hashKey": "object:525"
+        "$$hashKey": "object:535"
       },
       {
         "id": "fldsVYe4Ma6U9Bb96",
@@ -562,7 +573,7 @@
           "color": "green",
           "icon": "check"
         },
-        "$$hashKey": "object:526"
+        "$$hashKey": "object:536"
       },
       {
         "id": "fldvvLC1jFB8yg1tu",
@@ -572,14 +583,14 @@
           "color": "green",
           "icon": "check"
         },
-        "$$hashKey": "object:527"
+        "$$hashKey": "object:537"
       },
       {
         "id": "fldHLwymDrbli8kQq",
         "name": "Name",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:528"
+        "$$hashKey": "object:538"
       },
       {
         "id": "fldZbpB87AhZu3H0k",
@@ -591,7 +602,7 @@
           "symmetricColumnId": "fld5CGScrThLmkAct"
         },
         "foreignTable": "tblpppeJpGXgnbPbx",
-        "$$hashKey": "object:529"
+        "$$hashKey": "object:539"
       },
       {
         "id": "fldBX40bRkBT4btM7",
@@ -603,7 +614,7 @@
           "symmetricColumnId": "fld6X0OlfWc6EazuW"
         },
         "foreignTable": "tblz1dquH21O9QSle",
-        "$$hashKey": "object:530"
+        "$$hashKey": "object:540"
       },
       {
         "id": "fldhBSqsrZSN6zCfG",
@@ -615,49 +626,49 @@
           "relationship": "many"
         },
         "foreignTable": "tblZouKimJQmZkzmD",
-        "$$hashKey": "object:531"
+        "$$hashKey": "object:541"
       },
       {
         "id": "fldWYmM32s3MbRuuS",
         "name": "Street 1",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:532"
+        "$$hashKey": "object:542"
       },
       {
         "id": "fldp00nHnevxpBsGO",
         "name": "Street 2",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:533"
+        "$$hashKey": "object:543"
       },
       {
         "id": "fldgcdaQIdik2k2Zq",
         "name": "State",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:534"
+        "$$hashKey": "object:544"
       },
       {
         "id": "fldA9ssuV8AANGftF",
         "name": "Zipcode",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:535"
+        "$$hashKey": "object:545"
       },
       {
         "id": "fldOyPKTxwqmo5zE1",
         "name": "City",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:536"
+        "$$hashKey": "object:546"
       },
       {
         "id": "fldatfJZrizfXDw3b",
         "name": "Description",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:537"
+        "$$hashKey": "object:547"
       },
       {
         "id": "fld5p0tUlvvTkCSZk",
@@ -668,7 +679,7 @@
           "precision": 8,
           "negative": true
         },
-        "$$hashKey": "object:538"
+        "$$hashKey": "object:548"
       },
       {
         "id": "fldxykS4LSFtXHC9j",
@@ -679,7 +690,7 @@
           "precision": 8,
           "negative": true
         },
-        "$$hashKey": "object:539"
+        "$$hashKey": "object:549"
       },
       {
         "id": "fldf4Q7QixMWJt9A6",
@@ -689,7 +700,7 @@
           "color": "green",
           "icon": "check"
         },
-        "$$hashKey": "object:540"
+        "$$hashKey": "object:550"
       },
       {
         "id": "fldK1CiG5nEcG9SzI",
@@ -702,7 +713,7 @@
           },
           "resultType": "text"
         },
-        "$$hashKey": "object:541"
+        "$$hashKey": "object:551"
       },
       {
         "id": "fldOEEW9NnB5T7Y2u",
@@ -721,7 +732,7 @@
           },
           "resultType": "text"
         },
-        "$$hashKey": "object:542"
+        "$$hashKey": "object:552"
       },
       {
         "id": "fldZXb43vJlBtxQOO",
@@ -733,7 +744,7 @@
           "relationship": "many"
         },
         "foreignTable": "tblnLYnT6QW8hO7Aw",
-        "$$hashKey": "object:543"
+        "$$hashKey": "object:553"
       }
     ],
     "primaryColumnName": "Primary Key",
@@ -762,7 +773,7 @@
           },
           "resultType": "text"
         },
-        "$$hashKey": "object:750"
+        "$$hashKey": "object:760"
       },
       {
         "id": "fld5K559anVIAE4aj",
@@ -771,14 +782,14 @@
         "typeOptions": {
           "validatorName": "url"
         },
-        "$$hashKey": "object:751"
+        "$$hashKey": "object:761"
       },
       {
         "id": "flddDufyKDNfozCMr",
         "name": "Attachments",
         "type": "multipleAttachment",
         "typeOptions": null,
-        "$$hashKey": "object:752"
+        "$$hashKey": "object:762"
       },
       {
         "id": "flda1gW85LVGLGMNr",
@@ -790,7 +801,7 @@
           "symmetricColumnId": "fldhBSqsrZSN6zCfG"
         },
         "foreignTable": "tblLThuEdRTuqCBpR",
-        "$$hashKey": "object:753"
+        "$$hashKey": "object:763"
       },
       {
         "id": "fldyiQJezFPH8g5Wv",
@@ -802,14 +813,14 @@
           "symmetricColumnId": "fldGJ9xpyoUH8fqSm"
         },
         "foreignTable": "tblz1dquH21O9QSle",
-        "$$hashKey": "object:754"
+        "$$hashKey": "object:764"
       },
       {
         "id": "fldwISHqrHK6bkhps",
         "name": "Message",
         "type": "multilineText",
         "typeOptions": null,
-        "$$hashKey": "object:755"
+        "$$hashKey": "object:765"
       },
       {
         "id": "fldRHxmN1OFMRey1F",
@@ -831,7 +842,7 @@
           },
           "disableColors": false
         },
-        "$$hashKey": "object:756"
+        "$$hashKey": "object:766"
       },
       {
         "id": "fldJfbsvD8AzugSKJ",
@@ -844,28 +855,28 @@
           },
           "resultType": "text"
         },
-        "$$hashKey": "object:757"
+        "$$hashKey": "object:767"
       },
       {
         "id": "fldYVXaDslU5QpACk",
         "name": "Location",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:758"
+        "$$hashKey": "object:768"
       },
       {
         "id": "fld9anb8mrv2MGzsL",
         "name": "Time",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:759"
+        "$$hashKey": "object:769"
       },
       {
         "id": "fldxsvekE40DfvIh7",
         "name": "Title",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:760"
+        "$$hashKey": "object:770"
       },
       {
         "id": "fldkhXpb1ohga5Yvr",
@@ -875,7 +886,7 @@
           "color": "green",
           "icon": "check"
         },
-        "$$hashKey": "object:761"
+        "$$hashKey": "object:771"
       }
     ],
     "primaryColumnName": "Primary Key",
@@ -904,7 +915,7 @@
           },
           "resultType": "text"
         },
-        "$$hashKey": "object:899"
+        "$$hashKey": "object:909"
       },
       {
         "id": "fldTDCj2Yic3J6FBM",
@@ -921,7 +932,7 @@
           },
           "resultType": "date"
         },
-        "$$hashKey": "object:900"
+        "$$hashKey": "object:910"
       },
       {
         "id": "fldjvQrJwNpTG65vn",
@@ -939,14 +950,14 @@
           },
           "resultType": "date"
         },
-        "$$hashKey": "object:901"
+        "$$hashKey": "object:911"
       },
       {
         "id": "fldYETgS8HZQFJm9L",
         "name": "Name",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:902"
+        "$$hashKey": "object:912"
       },
       {
         "id": "fldclC1d6QuavpSws",
@@ -957,7 +968,7 @@
           "negative": false,
           "validatorName": "positive"
         },
-        "$$hashKey": "object:903"
+        "$$hashKey": "object:913"
       },
       {
         "id": "fldnJRKazRDqm7cws",
@@ -976,7 +987,7 @@
           },
           "resultType": "text"
         },
-        "$$hashKey": "object:904"
+        "$$hashKey": "object:914"
       },
       {
         "id": "fldIyleqitAOmiNcT",
@@ -1007,7 +1018,7 @@
           },
           "disableColors": false
         },
-        "$$hashKey": "object:905"
+        "$$hashKey": "object:915"
       },
       {
         "id": "fld5CGScrThLmkAct",
@@ -1019,42 +1030,42 @@
           "symmetricColumnId": "fldZbpB87AhZu3H0k"
         },
         "foreignTable": "tblLThuEdRTuqCBpR",
-        "$$hashKey": "object:906"
+        "$$hashKey": "object:916"
       },
       {
         "id": "flddBAOmDYJZuturO",
         "name": "Street 1",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:907"
+        "$$hashKey": "object:917"
       },
       {
         "id": "fld47PFvaMPWDxUrP",
         "name": "Street 2",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:908"
+        "$$hashKey": "object:918"
       },
       {
         "id": "fldCVaqHzNXwmnenp",
         "name": "City",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:909"
+        "$$hashKey": "object:919"
       },
       {
         "id": "fldr84YbqaEm87tKW",
         "name": "State",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:910"
+        "$$hashKey": "object:920"
       },
       {
         "id": "fldAcc38CbU4YvIOE",
         "name": "Zipcode",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:911"
+        "$$hashKey": "object:921"
       },
       {
         "id": "fld9OWeUPXVha5zSH",
@@ -1067,7 +1078,7 @@
           },
           "resultType": "text"
         },
-        "$$hashKey": "object:912"
+        "$$hashKey": "object:922"
       },
       {
         "id": "fld0dZJNQ86sRUXnF",
@@ -1079,21 +1090,21 @@
           "relationship": "many"
         },
         "foreignTable": "tblz1dquH21O9QSle",
-        "$$hashKey": "object:913"
+        "$$hashKey": "object:923"
       },
       {
         "id": "fldxTMLMo1lSo9V6N",
         "name": "Enphase System ID",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:914"
+        "$$hashKey": "object:924"
       },
       {
         "id": "fldtJ7bSggBjPP2lM",
         "name": "Enphase User ID",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:915"
+        "$$hashKey": "object:925"
       },
       {
         "id": "fldmTHMwr5WcCUNv2",
@@ -1105,7 +1116,7 @@
           "relationship": "many"
         },
         "foreignTable": "tblZ2eBBhNq2VEA2D",
-        "$$hashKey": "object:916"
+        "$$hashKey": "object:926"
       }
     ],
     "primaryColumnName": "Primary Key",
@@ -1128,16 +1139,17 @@
         "name": "Primary Key",
         "type": "formula",
         "typeOptions": {
-          "formulaTextParsed": "\"#\" & {column_value_fldYuP2uCUsSy0IHq} & \": $\" &  column_value_fldKPKZyNix02O7Dj ",
+          "formulaTextParsed": "{column_value_fldZAlv2G9jUIIaFh} & \"'s Bill # \" & {column_value_fldYuP2uCUsSy0IHq} & \". Balance: $\" &  ROUND(column_value_fldKPKZyNix02O7Dj, 2)",
           "dependencies": {
             "referencedColumnIdsForValue": [
+              "fldZAlv2G9jUIIaFh",
               "fldYuP2uCUsSy0IHq",
               "fldKPKZyNix02O7Dj"
             ]
           },
           "resultType": "text"
         },
-        "$$hashKey": "object:1103"
+        "$$hashKey": "object:1113"
       },
       {
         "id": "fld510BJvEy5tRLMx",
@@ -1154,7 +1166,7 @@
           },
           "resultType": "date"
         },
-        "$$hashKey": "object:1104"
+        "$$hashKey": "object:1114"
       },
       {
         "id": "flddM9v570MbHInCN",
@@ -1172,7 +1184,7 @@
           },
           "resultType": "date"
         },
-        "$$hashKey": "object:1105"
+        "$$hashKey": "object:1115"
       },
       {
         "id": "fldZAlv2G9jUIIaFh",
@@ -1185,7 +1197,7 @@
           "viewIdForRecordSelection": "viwIG34fV3VkyaGNu"
         },
         "foreignTable": "tblz1dquH21O9QSle",
-        "$$hashKey": "object:1106"
+        "$$hashKey": "object:1116"
       },
       {
         "id": "fldaCQEu0kyVsEzbe",
@@ -1195,7 +1207,7 @@
           "isDateTime": false,
           "dateFormat": "Local"
         },
-        "$$hashKey": "object:1107"
+        "$$hashKey": "object:1117"
       },
       {
         "id": "fldm22m48pUFtnK78",
@@ -1205,7 +1217,7 @@
           "isDateTime": false,
           "dateFormat": "Local"
         },
-        "$$hashKey": "object:1108"
+        "$$hashKey": "object:1118"
       },
       {
         "id": "fldgUZjJarfroZEr0",
@@ -1215,7 +1227,7 @@
           "isDateTime": false,
           "dateFormat": "Local"
         },
-        "$$hashKey": "object:1109"
+        "$$hashKey": "object:1119"
       },
       {
         "id": "fldLAlePnIpFMEO7T",
@@ -1227,7 +1239,7 @@
           "symmetricColumnId": "fldxGLtkhooiAcymW"
         },
         "foreignTable": "tblTXzlIwQ6znEf4R",
-        "$$hashKey": "object:1110"
+        "$$hashKey": "object:1120"
       },
       {
         "id": "fldp3TUKBPEyJHf3A",
@@ -1246,7 +1258,7 @@
           },
           "resultType": "number"
         },
-        "$$hashKey": "object:1111"
+        "$$hashKey": "object:1121"
       },
       {
         "id": "fldTVSLX8JYHgUpTz",
@@ -1259,7 +1271,7 @@
           "negative": false,
           "validatorName": "positive"
         },
-        "$$hashKey": "object:1112"
+        "$$hashKey": "object:1122"
       },
       {
         "id": "fldedgm72gXhGhoIL",
@@ -1272,7 +1284,7 @@
           "negative": false,
           "validatorName": "positive"
         },
-        "$$hashKey": "object:1113"
+        "$$hashKey": "object:1123"
       },
       {
         "id": "fldzXjOiOkPw3CcfW",
@@ -1284,7 +1296,7 @@
           "symmetricColumnId": "fldpTSKzGrMKpqStb"
         },
         "foreignTable": "tbl1W7ArDUv9zzmq0",
-        "$$hashKey": "object:1114"
+        "$$hashKey": "object:1124"
       },
       {
         "id": "fldPuCd1AT1tOzGmY",
@@ -1304,7 +1316,7 @@
           },
           "resultType": "number"
         },
-        "$$hashKey": "object:1115"
+        "$$hashKey": "object:1125"
       },
       {
         "id": "fldu7oIiWkN5c1jtn",
@@ -1317,7 +1329,7 @@
           },
           "resultType": "text"
         },
-        "$$hashKey": "object:1116"
+        "$$hashKey": "object:1126"
       },
       {
         "id": "fldYuP2uCUsSy0IHq",
@@ -1328,7 +1340,7 @@
           "negative": false,
           "validatorName": "positive"
         },
-        "$$hashKey": "object:1117"
+        "$$hashKey": "object:1127"
       },
       {
         "id": "fldvxCsxJ0JaNLpfj",
@@ -1339,7 +1351,7 @@
           "precision": 5,
           "negative": true
         },
-        "$$hashKey": "object:1118"
+        "$$hashKey": "object:1128"
       },
       {
         "id": "fldKafwmqqbJtw0Nh",
@@ -1351,7 +1363,7 @@
           "precision": 3,
           "negative": true
         },
-        "$$hashKey": "object:1119"
+        "$$hashKey": "object:1129"
       },
       {
         "id": "fldBEkjfzvO1As6Rw",
@@ -1362,7 +1374,7 @@
           "precision": 5,
           "negative": true
         },
-        "$$hashKey": "object:1120"
+        "$$hashKey": "object:1130"
       },
       {
         "id": "fldUNaLmqVA8yIirI",
@@ -1383,7 +1395,7 @@
         },
         "foreignTableName": "Rate Schedule",
         "foreignTableRollupColumnName": "Rate",
-        "$$hashKey": "object:1121"
+        "$$hashKey": "object:1131"
       },
       {
         "id": "fldaMr7y16vNAfomo",
@@ -1404,7 +1416,7 @@
         },
         "foreignTableName": "Rate Schedule",
         "foreignTableRollupColumnName": "Rebate Rate",
-        "$$hashKey": "object:1122"
+        "$$hashKey": "object:1132"
       },
       {
         "id": "fld3xckqBg5DwoP01",
@@ -1423,7 +1435,7 @@
           },
           "resultType": "number"
         },
-        "$$hashKey": "object:1123"
+        "$$hashKey": "object:1133"
       },
       {
         "id": "fldKPKZyNix02O7Dj",
@@ -1442,7 +1454,7 @@
           },
           "resultType": "number"
         },
-        "$$hashKey": "object:1124"
+        "$$hashKey": "object:1134"
       },
       {
         "id": "fldls380U2xYGHsEq",
@@ -1465,7 +1477,7 @@
         },
         "foreignTableName": "Payment",
         "foreignTableRollupColumnName": "Amount",
-        "$$hashKey": "object:1125"
+        "$$hashKey": "object:1135"
       },
       {
         "id": "fld3XqRKGSb0osXjW",
@@ -1481,7 +1493,7 @@
           },
           "resultType": "number"
         },
-        "$$hashKey": "object:1126"
+        "$$hashKey": "object:1136"
       },
       {
         "id": "fld9FxNUg7LZwVXIc",
@@ -1512,7 +1524,7 @@
           },
           "disableColors": false
         },
-        "$$hashKey": "object:1127"
+        "$$hashKey": "object:1137"
       },
       {
         "id": "fldPbPkHINBGdYwwK",
@@ -1524,14 +1536,14 @@
           "symmetricColumnId": "fldmTHMwr5WcCUNv2"
         },
         "foreignTable": "tblpppeJpGXgnbPbx",
-        "$$hashKey": "object:1128"
+        "$$hashKey": "object:1138"
       },
       {
         "id": "fldIWMxIFMyuDJQX8",
         "name": "Bill PDF",
         "type": "multipleAttachment",
         "typeOptions": null,
-        "$$hashKey": "object:1129"
+        "$$hashKey": "object:1139"
       },
       {
         "id": "fldaRQSNQjBQqQJzl",
@@ -1541,7 +1553,7 @@
           "isDateTime": false,
           "dateFormat": "Local"
         },
-        "$$hashKey": "object:1130"
+        "$$hashKey": "object:1140"
       }
     ],
     "primaryColumnName": "Primary Key",
@@ -1573,7 +1585,7 @@
           },
           "resultType": "text"
         },
-        "$$hashKey": "object:1370"
+        "$$hashKey": "object:1451"
       },
       {
         "id": "fldxGLtkhooiAcymW",
@@ -1585,7 +1597,7 @@
           "relationship": "many"
         },
         "foreignTable": "tblZ2eBBhNq2VEA2D",
-        "$$hashKey": "object:1371"
+        "$$hashKey": "object:1452"
       },
       {
         "id": "fldgf9LRHipp0MQAC",
@@ -1602,7 +1614,7 @@
           },
           "resultType": "date"
         },
-        "$$hashKey": "object:1372"
+        "$$hashKey": "object:1453"
       },
       {
         "id": "fld5VhlRCKLW7ETtK",
@@ -1620,7 +1632,7 @@
           },
           "resultType": "date"
         },
-        "$$hashKey": "object:1373"
+        "$$hashKey": "object:1454"
       },
       {
         "id": "fldpz4vRjy848JohJ",
@@ -1633,7 +1645,7 @@
           "negative": false,
           "validatorName": "positive"
         },
-        "$$hashKey": "object:1374"
+        "$$hashKey": "object:1455"
       },
       {
         "id": "fldLOUHrAiktwKYsJ",
@@ -1646,7 +1658,7 @@
           "negative": false,
           "validatorName": "positive"
         },
-        "$$hashKey": "object:1375"
+        "$$hashKey": "object:1456"
       },
       {
         "id": "fld1smVM7wbm4tH8v",
@@ -1659,7 +1671,7 @@
           },
           "resultType": "text"
         },
-        "$$hashKey": "object:1376"
+        "$$hashKey": "object:1457"
       },
       {
         "id": "fldyFLnN6E2XBk0Gl",
@@ -1672,7 +1684,7 @@
           "symmetricColumnId": "fldqJ73npDiEfsFkq"
         },
         "foreignTable": "tblz1dquH21O9QSle",
-        "$$hashKey": "object:1377"
+        "$$hashKey": "object:1458"
       }
     ],
     "primaryColumnName": "Primary Key",
@@ -1704,19 +1716,7 @@
           },
           "resultType": "text"
         },
-        "$$hashKey": "object:1468"
-      },
-      {
-        "id": "fldwky2RISOgVbnjw",
-        "name": "Owner",
-        "type": "foreignKey",
-        "typeOptions": {
-          "relationship": "one",
-          "foreignTableId": "tblz1dquH21O9QSle",
-          "symmetricColumnId": "fld8ACQZoxeu0Axi9"
-        },
-        "foreignTable": "tblz1dquH21O9QSle",
-        "$$hashKey": "object:1469"
+        "$$hashKey": "object:1549"
       },
       {
         "id": "fldJMzE99cMaXp38k",
@@ -1733,7 +1733,7 @@
           },
           "resultType": "date"
         },
-        "$$hashKey": "object:1470"
+        "$$hashKey": "object:1550"
       },
       {
         "id": "fldNKTdVtVsk9LQeb",
@@ -1751,21 +1751,21 @@
           },
           "resultType": "date"
         },
-        "$$hashKey": "object:1471"
+        "$$hashKey": "object:1551"
       },
       {
         "id": "fldAZDkGy86GQOKXe",
         "name": "First Name",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:1472"
+        "$$hashKey": "object:1552"
       },
       {
         "id": "fldDZfNOG9dCA3BWN",
         "name": "Last Name",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:1473"
+        "$$hashKey": "object:1553"
       },
       {
         "id": "fldrEwcdnE1BVArxC",
@@ -1776,7 +1776,7 @@
           "negative": false,
           "validatorName": "positive"
         },
-        "$$hashKey": "object:1474"
+        "$$hashKey": "object:1554"
       },
       {
         "id": "fldjiRryJXxs0J4zD",
@@ -1786,14 +1786,14 @@
           "color": "green",
           "icon": "check"
         },
-        "$$hashKey": "object:1475"
+        "$$hashKey": "object:1555"
       },
       {
         "id": "fldRQfqpMTmJRG2fj",
         "name": "Phone Number",
         "type": "phone",
         "typeOptions": null,
-        "$$hashKey": "object:1476"
+        "$$hashKey": "object:1556"
       },
       {
         "id": "fld8JZB5wWfKe2ZpH",
@@ -1802,14 +1802,7 @@
         "typeOptions": {
           "validatorName": "email"
         },
-        "$$hashKey": "object:1477"
-      },
-      {
-        "id": "fldMxRJlvfsSHZF4d",
-        "name": "Status",
-        "type": "text",
-        "typeOptions": null,
-        "$$hashKey": "object:1478"
+        "$$hashKey": "object:1557"
       },
       {
         "id": "fld1xJfDTXl1W5lo1",
@@ -1822,7 +1815,7 @@
           },
           "resultType": "text"
         },
-        "$$hashKey": "object:1479"
+        "$$hashKey": "object:1558"
       },
       {
         "id": "fld1bJ8MBIKuGO0Ez",
@@ -1834,7 +1827,50 @@
           "symmetricColumnId": "fldZXb43vJlBtxQOO"
         },
         "foreignTable": "tblLThuEdRTuqCBpR",
-        "$$hashKey": "object:1480"
+        "$$hashKey": "object:1559"
+      },
+      {
+        "id": "fld91yWmySR2u9jXN",
+        "name": "Owner",
+        "type": "foreignKey",
+        "typeOptions": {
+          "foreignTableId": "tblz1dquH21O9QSle",
+          "relationship": "one",
+          "symmetricColumnId": "fld8IBVMCGA0fWxzz"
+        },
+        "foreignTable": "tblz1dquH21O9QSle",
+        "$$hashKey": "object:1560"
+      },
+      {
+        "id": "fldU6p0VXz8tZQZHs",
+        "name": "Status",
+        "type": "select",
+        "typeOptions": {
+          "choiceOrder": [
+            "selPx1veN5Y4FAeCZ",
+            "selY7B5IVglCjC5Xr",
+            "sel1ekVlnsnrl5fos"
+          ],
+          "choices": {
+            "selPx1veN5Y4FAeCZ": {
+              "id": "selPx1veN5Y4FAeCZ",
+              "color": "cyan",
+              "name": "Sent"
+            },
+            "sel1ekVlnsnrl5fos": {
+              "id": "sel1ekVlnsnrl5fos",
+              "color": "green",
+              "name": "Used"
+            },
+            "selY7B5IVglCjC5Xr": {
+              "id": "selY7B5IVglCjC5Xr",
+              "color": "yellow",
+              "name": "Opened"
+            }
+          },
+          "disableColors": false
+        },
+        "$$hashKey": "object:1561"
       }
     ],
     "primaryColumnName": "Primary Key",
@@ -1863,7 +1899,7 @@
           },
           "resultType": "text"
         },
-        "$$hashKey": "object:1632"
+        "$$hashKey": "object:1722"
       },
       {
         "id": "fldIT8wK8SyqiibSd",
@@ -1880,7 +1916,7 @@
           },
           "resultType": "date"
         },
-        "$$hashKey": "object:1633"
+        "$$hashKey": "object:1723"
       },
       {
         "id": "fldCsBRW1D1NY8GK8",
@@ -1898,7 +1934,7 @@
           },
           "resultType": "date"
         },
-        "$$hashKey": "object:1634"
+        "$$hashKey": "object:1724"
       },
       {
         "id": "fld6ZCGI0afrN8qrY",
@@ -1910,14 +1946,14 @@
           "symmetricColumnId": "fldt69IlRNBMhXRsX"
         },
         "foreignTable": "tblz1dquH21O9QSle",
-        "$$hashKey": "object:1635"
+        "$$hashKey": "object:1725"
       },
       {
         "id": "fldyxafmf03pNebzG",
         "name": "Status",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:1636"
+        "$$hashKey": "object:1726"
       },
       {
         "id": "fldj0zlTfovxhHwtP",
@@ -1939,7 +1975,7 @@
           },
           "disableColors": false
         },
-        "$$hashKey": "object:1637"
+        "$$hashKey": "object:1727"
       },
       {
         "id": "fldfg1BuzowPi6tjH",
@@ -1950,7 +1986,7 @@
           "negative": false,
           "validatorName": "positive"
         },
-        "$$hashKey": "object:1638"
+        "$$hashKey": "object:1728"
       },
       {
         "id": "fldpTSKzGrMKpqStb",
@@ -1962,77 +1998,77 @@
           "symmetricColumnId": "fldzXjOiOkPw3CcfW"
         },
         "foreignTable": "tblZ2eBBhNq2VEA2D",
-        "$$hashKey": "object:1639"
+        "$$hashKey": "object:1729"
       },
       {
         "id": "fld5ZwiPI5lcQTnsI",
         "name": "Order ID",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:1640"
+        "$$hashKey": "object:1730"
       },
       {
         "id": "fldN3NCtzXNeZkF3n",
         "name": "Payer ID",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:1641"
+        "$$hashKey": "object:1731"
       },
       {
         "id": "fld90XbMC46tLjBZX",
         "name": "Currency Code",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:1642"
+        "$$hashKey": "object:1732"
       },
       {
         "id": "fldF3Ler4fBxfMdxl",
         "name": "Address",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:1643"
+        "$$hashKey": "object:1733"
       },
       {
         "id": "fldpsfSDrffSq5JTu",
         "name": "Payer Full Name",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:1644"
+        "$$hashKey": "object:1734"
       },
       {
         "id": "fldWZ6j026pbFJmL0",
         "name": "Intent",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:1645"
+        "$$hashKey": "object:1735"
       },
       {
         "id": "fldIpts0JZXbRgJaq",
         "name": "Payment Create Time",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:1646"
+        "$$hashKey": "object:1736"
       },
       {
         "id": "fldKTbJ7uYualyNKT",
         "name": "Payment Update Time",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:1647"
+        "$$hashKey": "object:1737"
       },
       {
         "id": "fldoiyvM4ju3z3Avn",
         "name": "Notes",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:1648"
+        "$$hashKey": "object:1738"
       },
       {
         "id": "fldlPjfnI9DzSDb0V",
         "name": "Payer Email",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:1649"
+        "$$hashKey": "object:1739"
       },
       {
         "id": "fldVXLvkkBEtMhirP",
@@ -2045,7 +2081,7 @@
           },
           "resultType": "text"
         },
-        "$$hashKey": "object:1650"
+        "$$hashKey": "object:1740"
       }
     ],
     "primaryColumnName": "Primary Key",
@@ -2068,14 +2104,14 @@
         "name": "Name",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:1880"
+        "$$hashKey": "object:1970"
       },
       {
         "id": "fldJclgmu194rPRlJ",
         "name": "Tag",
         "type": "text",
         "typeOptions": null,
-        "$$hashKey": "object:1881"
+        "$$hashKey": "object:1971"
       },
       {
         "id": "fldYGdJCg7s42qKEL",
@@ -2088,7 +2124,7 @@
           },
           "resultType": "text"
         },
-        "$$hashKey": "object:1882"
+        "$$hashKey": "object:1972"
       }
     ],
     "primaryColumnName": "Name",
