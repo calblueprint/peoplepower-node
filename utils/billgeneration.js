@@ -58,7 +58,7 @@ const generatePdf = async (
   setTimeout(() => {
     console.log(`Deleting Temporary PDF: ${subscriberBill.id}.pdf`);
     fs.unlinkSync(`./temp/${subscriberBill.id}.pdf`);
-  }, 20000);
+  }, Constants.PDF_DELETE_DELAY * 1000);
 };
 
 const generateBillForSubscriber = async (subscriber, solarProject) => {
