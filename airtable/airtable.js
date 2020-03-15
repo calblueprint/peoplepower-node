@@ -9,11 +9,11 @@
 
   If you're adding a new function: make sure you add a corresponding test (at least 1) for it in airtable.spec.js
 */
-
+import dotenv from 'dotenv-safe';
 import Airtable from 'airtable';
 import { Columns } from './schema';
 
-require('dotenv-safe').config();
+dotenv.config();
 
 const BASE_ID = 'appFaOwKhMXrRIQIp';
 const VIEW = 'Grid view';

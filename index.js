@@ -2,6 +2,7 @@ import dotenv from 'dotenv-safe';
 import express from 'express';
 import cors from 'cors';
 import generateBillsForSolarProject from './utils/billgeneration';
+import sendInviteEmail from './utils/email';
 
 dotenv.config(); // Set up environment variables
 
@@ -28,4 +29,19 @@ app.get('/', (req, res) => {
   );
 });
 
-app.listen(port, () => console.log(`Express App Listening on port ${port}!`));
+app.post('/invite', async (req, res) => {
+  const RECORD_ID = req.body.pledgeInviteId;
+  const confirmSend = await sendInviteEmail(RECORD_ID);
+
+  if (confirmSend === '') {
+    res.send({
+      status: `An error occured when sending an invitation.`
+    });
+  }
+
+  res.send({
+    status: `Successfully sent an invitation to ${confirmSend}`
+  });
+});
+
+app.listen(port, () => console.log(`aPP (Power) listening on port ${port}!`));
