@@ -1,10 +1,9 @@
 import dotenv from 'dotenv-safe';
 import nodemailer from 'nodemailer';
 import { getPledgeInviteById } from '../airtable/request';
+import Constants from '../Constants';
 
 dotenv.config(); // Set up environment variables
-
-const SENDER_NAME = ''; // specify the name of the person sending an email, for example: "Nick Wong ⚡️🔋"
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -27,7 +26,7 @@ const sendEmail = async email => {
   const { to, subject, text, html } = email;
 
   const info = await transporter.sendMail({
-    from: `"${SENDER_NAME}" <${process.env.MAIL_SERVER_EMAIL}>`,
+    from: `"${Constants.SENDER_NAME}" <${process.env.MAIL_SERVER_EMAIL}>`,
     to,
     subject,
     text,
@@ -39,9 +38,8 @@ const sendEmail = async email => {
 };
 
 const sendInviteEmail = async RECORD_ID => {
-  const baseUrl = 'https://peoplepower.netlify.com/onboarding';
-  const inviteParameter = `?token=${RECORD_ID}`;
-  const inviteLink = baseUrl + inviteParameter;
+  const inviteParameter = `?${Constants.INVITE_BASE_URL}=${RECORD_ID}`;
+  const inviteLink = Constants.INVITE_BASE_URL + inviteParameter;
 
   const inviteEmail = {
     to: await retrieveRecipientEmail(RECORD_ID),

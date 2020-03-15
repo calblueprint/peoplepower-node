@@ -23,7 +23,7 @@ app.post('/generate', (req, res) => {
   res.end();
 });
 
-app.get('/', (req, res) => {
+app.get('/', (_, res) => {
   res.send(
     'Nothing to see here. Try sending a request to one of the backend endpoints!'
   );

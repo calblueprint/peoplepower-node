@@ -6,16 +6,14 @@ A set of low-level functions that gives us the details we need from the Utility 
 
 import fetch from 'node-fetch';
 import moment from 'moment';
+import Constants from '../Constants';
 
-const API_KEY = process.env.UTILITY_API_KEY;
-const EBCERebateString = 'Credited to (Debited from) NEM Balance';
-
-// Base URL for Utility API BILLS
-const billsBaseUrl = 'https://utilityapi.com/api/v2/bills';
+const meterURL = `?meters=${meterId}`;
+const latest = '&limit=1&order=latest_first';
 
 const options = {
   headers: {
-    Authorization: `Bearer ${API_KEY}`
+    Authorization: `Bearer ${process.env.UTILITY_API_KEY}`
   }
 };
 
@@ -28,10 +26,7 @@ const options = {
 	}
 */
 const getLatestBill = async meterId => {
-  const meterURL = `?meters=${meterId}`;
-  const latest = '&limit=1&order=latest_first';
-
-  const url = billsBaseUrl + meterURL + latest;
+  const url = Constants.BILLS_BASE_URL + meterURL + latest;
   const response = await fetch(url, options);
   const latestBill = await response.json();
   const billBase = latestBill.bills[0].base;
@@ -43,7 +38,7 @@ const getLatestBill = async meterId => {
 
   const lineItems = latestBill.bills[0].line_items;
   const rebateItem = lineItems.filter(
-    element => element.name === EBCERebateString
+    element => element.name === Constants.EBCE_REBATE_STRING
   );
   const ebceRebate = rebateItem[0].cost;
 
