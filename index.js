@@ -11,6 +11,7 @@ const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static('temp')); // Make PDFs accessible
 
 app.post('/generate', (req, res) => {
   const { solarProjectId } = req.body;
