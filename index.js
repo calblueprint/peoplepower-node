@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/invite', async (req, res) => {
-  const RECORD_ID = req.body.pledgeInviteID;
+  const RECORD_ID = req.body.pledgeInviteId;
   const confirmSend = await sendInviteEmail(RECORD_ID);
 
   if (confirmSend === '') {
