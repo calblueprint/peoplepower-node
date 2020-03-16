@@ -1,8 +1,11 @@
 import dotenv from 'dotenv-safe';
 import express from 'express';
 import cors from 'cors';
-import generateBillsForSolarProject from './utils/billgeneration';
-import sendInviteEmail from './utils/email';
+import {
+  generateBillsForSolarProject,
+  approveSubscriberBill
+} from './utils/billgeneration';
+import sendInviteEmail from './utils/pledgeInvite';
 
 dotenv.config(); // Set up environment variables
 
@@ -12,6 +15,12 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use(express.static('temp')); // Make PDFs accessible
+
+app.get('/', (req, res) => {
+  res.send(
+    'Nothing to see here. Try sending a request to one of the backend endpoints!'
+  );
+});
 
 app.post('/generate', (req, res) => {
   const { solarProjectId } = req.body;
@@ -23,15 +32,10 @@ app.post('/generate', (req, res) => {
   res.end();
 });
 
-app.get('/', (req, res) => {
-  res.send(
-    'Nothing to see here. Try sending a request to one of the backend endpoints!'
-  );
-});
-
 app.post('/invite', async (req, res) => {
-  const RECORD_ID = req.body.pledgeInviteId;
-  const confirmSend = await sendInviteEmail(RECORD_ID);
+  console.log('Received Invite Request with body:');
+  console.log(req.body);
+  const confirmSend = await sendInviteEmail(req.body.pledgeInviteId);
 
   if (confirmSend === '') {
     res.send({
@@ -44,4 +48,20 @@ app.post('/invite', async (req, res) => {
   });
 });
 
-app.listen(port, () => console.log(`aPP (Power) listening on port ${port}!`));
+app.get('/approve', async (req, res) => {
+  console.log('Received Approve Request with query:');
+  console.log(req.query);
+  const billId = req.query.id;
+  try {
+    await approveSubscriberBill(billId);
+    res.end();
+  } catch (e) {
+    res
+      .status(400)
+      .send(
+        'Request Approval Failed, likely due to malformed request or nonexistent subscriber ID.'
+      );
+  }
+});
+
+app.listen(port, () => console.log(`PP (Power) listening on port ${port}!`));

@@ -18,17 +18,28 @@ import getEnphaseData from './enphase';
 import getLatestBill from './utilityApi';
 import BillingTemplate from './pdf/BillingTemplate';
 import Constants from '../Constants';
+import sendEmail from './email';
+import EmailGenerators from './emailCopy';
 
 dotenv.config();
+const {
+  genericBillError,
+  pdfBillError,
+  stalePGEBillError,
+  missingEnphaseDataError,
+  billSuccess
+} = EmailGenerators;
 
+export const approveSubscriberBill = async subscriberBillId => {
+  await updateSubscriberBill(subscriberBillId, { status: 'Active' });
+};
 const generatePdf = async (
   subscriber,
   solarProject,
-  subscriberBillId,
+  subscriberBill,
   prevBillId
 ) => {
-  // Refresh information about existing bills to get the latest calculated values
-  const subscriberBill = await getSubscriberBillById(subscriberBillId);
+  // Refresh information about previous bill to get the latest calculated values
   let prevBill;
   if (prevBillId) {
     prevBill = await getSubscriberBillById(prevBillId);
@@ -50,10 +61,10 @@ const generatePdf = async (
     `./temp/${subscriberBill.id}.pdf`
   );
   await updateSubscriberBill(subscriberBill.id, {
-    billPdf: [{ url: `${Constants.ROOT_URL}/${subscriberBill.id}.pdf` }]
+    billPdf: [{ url: `${Constants.SERVER_URL}/${subscriberBill.id}.pdf` }]
   });
   console.log(
-    `Succesfully uploaded PDF at ${Constants.ROOT_URL}/${subscriberBill.id}.pdf`
+    `Succesfully uploaded PDF at ${Constants.SERVER_URL}/${subscriberBill.id}.pdf`
   );
   setTimeout(() => {
     console.log(`Deleting Temporary PDF: ${subscriberBill.id}.pdf`);
@@ -64,13 +75,15 @@ const generatePdf = async (
 const generateBillForSubscriber = async (subscriber, solarProject) => {
   // Get data necessary to generate bill
   console.log(`Generating Bill for ${subscriber.name}`);
+
+  const latestBill = await getLatestBill(subscriber.meterId);
+
   const {
     netPgeUsage,
     ebceRebate,
     startDate: startMoment,
     endDate: endMoment
-  } = await getLatestBill(subscriber.meterId);
-
+  } = latestBill;
   const startDate = startMoment.format('MM/DD/YYYY');
   const endDate = endMoment.format('MM/DD/YYYY');
 
@@ -95,7 +108,10 @@ const generateBillForSubscriber = async (subscriber, solarProject) => {
     startDate === moment(prevBill.startDate).format('MM/DD/YYYY') ||
     endDate === moment(prevBill.endDate).format('MM/DD/YYYY')
   ) {
-    console.log('This PG&E bill has already been processed. Skipping!');
+    console.log(
+      'This PG&E bill has already been processed. Reporting error...'
+    );
+    sendEmail(stalePGEBillError(subscriber, solarProject));
     return;
   }
 
@@ -118,6 +134,13 @@ end date: ${endDate}`
   );
   console.log(`Found Enphase Data for ${subscriber.name}`);
   console.log(generationData);
+
+  if (generationData.length === 0) {
+    console.log('Enphase returned empty array. Reporting error...');
+    sendEmail(
+      missingEnphaseDataError(subscriber, solarProject, startDate, endDate)
+    );
+  }
 
   const rateSchedule = await getRateScheduleById(subscriber.rateScheduleId);
   const systemProduction = generationData.reduce((a, b) => a + b, 0) / 1000;
@@ -146,19 +169,37 @@ end date: ${endDate}`
     status: 'Pending'
   });
 
+  // Get computed Fields
+  const newBill = await getSubscriberBillById(newBillId);
+
   // Generate PDF!
-  generatePdf(subscriber, solarProject, newBillId, prevBill.id);
+  try {
+    await generatePdf(subscriber, solarProject, newBill, prevBill.id);
+  } catch (e) {
+    sendEmail(pdfBillError(subscriber, solarProject));
+  }
+
+  // Report Success
+  const approveLink = `${Constants.SERVER_URL}/approve?id=${newBill.id}`;
+  sendEmail(billSuccess(subscriber, solarProject, newBill, approveLink));
+
+  //
 };
 
-const generateBillsForSolarProject = async solarProjectId => {
+export const generateBillsForSolarProject = async solarProjectId => {
   const solarProject = await getSolarProjectById(solarProjectId);
+
   console.log(`Generating bills for ${solarProject.name}`);
   const subscribers = await Promise.all(
     solarProject.subscriberIds.map(id => getOwnerById(id))
   );
-  subscribers.forEach(subscriber => {
-    generateBillForSubscriber(subscriber, solarProject);
+
+  subscribers.forEach(async subscriber => {
+    try {
+      await generateBillForSubscriber(subscriber, solarProject);
+    } catch (e) {
+      console.log(`Error generating bill for subscriber: ${subscriber.name}`);
+      sendEmail(genericBillError(subscriber, solarProject, e.message));
+    }
   });
 };
-
-export default generateBillsForSolarProject;
