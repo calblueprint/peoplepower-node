@@ -54,8 +54,10 @@ app.get('/approve', async (req, res) => {
   const billId = req.query.id;
   try {
     await approveSubscriberBill(billId);
-    res.end();
+    res.send('Subscriber Bill Approved!');
   } catch (e) {
+    console.log(e);
+    console.log('Request Approval Failed.');
     res
       .status(400)
       .send(

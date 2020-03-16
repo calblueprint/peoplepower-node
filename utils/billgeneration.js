@@ -70,6 +70,7 @@ const generatePdf = async (
     console.log(`Deleting Temporary PDF: ${subscriberBill.id}.pdf`);
     fs.unlinkSync(`./temp/${subscriberBill.id}.pdf`);
   }, Constants.PDF_DELETE_DELAY * 1000);
+  return `./temp/${subscriberBill.id}.pdf`;
 };
 
 const generateBillForSubscriber = async (subscriber, solarProject) => {
@@ -111,12 +112,14 @@ const generateBillForSubscriber = async (subscriber, solarProject) => {
     console.log(
       'This PG&E bill has already been processed. Reporting error...'
     );
-    sendEmail(stalePGEBillError(subscriber, solarProject));
+    sendEmail(stalePGEBillError(subscriber, solarProject, startDate, endDate));
     return;
   }
 
-  // Set previous bill to previous
-  await updateSubscriberBill(prevBill.id, { status: 'Previous' });
+  if (prevBill.id) {
+    // Set previous bill to previous
+    await updateSubscriberBill(prevBill.id, { status: 'Previous' });
+  }
 
   console.log(
     `Found PGE Data for ${subscriber.name}
@@ -140,6 +143,7 @@ end date: ${endDate}`
     sendEmail(
       missingEnphaseDataError(subscriber, solarProject, startDate, endDate)
     );
+    return;
   }
 
   const rateSchedule = await getRateScheduleById(subscriber.rateScheduleId);
@@ -173,17 +177,26 @@ end date: ${endDate}`
   const newBill = await getSubscriberBillById(newBillId);
 
   // Generate PDF!
+  let localPdfPath;
   try {
-    await generatePdf(subscriber, solarProject, newBill, prevBill.id);
+    localPdfPath = await generatePdf(
+      subscriber,
+      solarProject,
+      newBill,
+      prevBill.id
+    );
   } catch (e) {
-    sendEmail(pdfBillError(subscriber, solarProject));
+    console.log(e);
+    console.log('Run into error in PDF Generation process. Reporting...');
+    sendEmail(pdfBillError(subscriber, solarProject, e.message));
+    return;
   }
 
   // Report Success
   const approveLink = `${Constants.SERVER_URL}/approve?id=${newBill.id}`;
-  sendEmail(billSuccess(subscriber, solarProject, newBill, approveLink));
-
-  //
+  sendEmail(
+    billSuccess(subscriber, solarProject, newBill, approveLink, localPdfPath)
+  );
 };
 
 export const generateBillsForSolarProject = async solarProjectId => {
@@ -198,7 +211,10 @@ export const generateBillsForSolarProject = async solarProjectId => {
     try {
       await generateBillForSubscriber(subscriber, solarProject);
     } catch (e) {
-      console.log(`Error generating bill for subscriber: ${subscriber.name}`);
+      console.log(e);
+      console.log(
+        `Error generating bill for subscriber: ${subscriber.name}. Reporting...`
+      );
       sendEmail(genericBillError(subscriber, solarProject, e.message));
     }
   });

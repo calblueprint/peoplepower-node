@@ -6,8 +6,8 @@ dotenv.config(); // Set up environment variables
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
-  port: 587,
-  secure: false, // true for 465, false for other ports
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.MAIL_SERVER_EMAIL,
     pass: process.env.MAIL_SERVER_PASS
@@ -15,15 +15,12 @@ const transporter = nodemailer.createTransport({
 });
 
 // accepts an email object, sends the email, and returns the recipient's email
-const sendEmail = async ({ to, subject, text, html }) => {
+const sendEmail = async email => {
   const info = await transporter.sendMail({
     from: `"${Constants.SENDER_NAME}" <${process.env.MAIL_SERVER_EMAIL}>`,
-    to,
-    subject,
-    text,
-    html
+    ...email
   });
-  console.log(`Sent email to ${to} with subject ${subject}`);
+  console.log(`Sent email to ${email.to} with subject ${email.subject}`);
 
   const sentEmailRecipient = info.envelope.to[0];
   return sentEmailRecipient;
