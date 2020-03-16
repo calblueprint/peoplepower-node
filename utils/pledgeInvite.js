@@ -10,7 +10,7 @@ export const retrieveRecipientEmail = async inviteId => {
 };
 
 export const sendInviteEmail = async inviteId => {
-  const inviteLink = `${Constants.INVITE_BASE_URL}?token=${inviteId}`;
+  const inviteLink = `${Constants.INVITE_BASE_URL}?${Constants.INVITE_PARAM}=${inviteId}`;
   const inviteEmail = await retrieveRecipientEmail(inviteId);
   const result = await sendEmail(
     EmailGenerators.invite(inviteLink, inviteEmail)

@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('temp')); // Make PDFs accessible
 
-app.get('/', (req, res) => {
+app.get('/', (_, res) => {
   res.send(
     'Nothing to see here. Try sending a request to one of the backend endpoints!'
   );

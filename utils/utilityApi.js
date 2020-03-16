@@ -7,15 +7,13 @@ A set of low-level functions that gives us the details we need from the Utility 
 import fetch from 'node-fetch';
 import moment from 'moment';
 
-const API_KEY = process.env.UTILITY_API_KEY;
-const EBCERebateString = 'Credited to (Debited from) NEM Balance';
-
-// Base URL for Utility API BILLS
+// Constants
 const billsBaseUrl = 'https://utilityapi.com/api/v2/bills';
+const EBCERebateString = 'Credited to (Debited from) NEM Balance';
 
 const options = {
   headers: {
-    Authorization: `Bearer ${API_KEY}`
+    Authorization: `Bearer ${process.env.UTILITY_API_KEY}`
   }
 };
 
