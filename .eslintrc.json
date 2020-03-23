@@ -8,7 +8,9 @@
     "import/newline-after-import": "error",
     "jsx-a11y/label-has-associated-control": 0,
     "react/jsx-filename-extension": 0,
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "func-names": 0,
+    "no-console": 0
   },
   "globals": {
     "window": true,
