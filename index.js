@@ -5,7 +5,7 @@ import {
   generateBillsForSolarProject,
   approveSubscriberBill
 } from './utils/billgeneration';
-import sendInviteEmail from './utils/pledgeInvite';
+import { sendInviteEmail } from './utils/pledgeInvite';
 
 dotenv.config(); // Set up environment variables
 
