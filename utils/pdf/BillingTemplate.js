@@ -5,10 +5,6 @@ import styles from './PDFStyles';
 export default class BillingTemplate extends React.PureComponent {
   render() {
     const { subscriber, solarProject, subscriberBill, prevBill } = this.props;
-    console.log(subscriber);
-    console.log(solarProject);
-    console.log(subscriberBill);
-    console.log(prevBill);
     const round = x => parseFloat(x).toFixed(3);
     return (
       <Document>

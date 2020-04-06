@@ -20,6 +20,8 @@ import BillingTemplate from './pdf/BillingTemplate';
 import Constants from '../Constants';
 import sendEmail from './email';
 import EmailGenerators from './emailCopy';
+import generateBarChartForData from './charts/barChart';
+import saveChartToFile from './charts/charts';
 
 dotenv.config();
 const {
@@ -32,6 +34,17 @@ const {
 
 export const approveSubscriberBill = async subscriberBillId => {
   await updateSubscriberBill(subscriberBillId, { status: 'Active' });
+};
+
+const enumerateDates = (startMoment, endMoment) => {
+  const endString = endMoment.format('MM/DD/YYYY');
+  const dateArray = [];
+  while (startMoment.format('MM/DD/YYYY') !== endString) {
+    dateArray.push(startMoment.format('MM/DD/YYYY'));
+    startMoment.add(1, 'days');
+  }
+  dateArray.push(endString);
+  return dateArray;
 };
 const generatePdf = async (
   subscriber,
@@ -67,8 +80,9 @@ const generatePdf = async (
     `Succesfully uploaded PDF at ${Constants.SERVER_URL}/${subscriberBill.id}.pdf`
   );
   setTimeout(() => {
-    console.log(`Deleting Temporary PDF: ${subscriberBill.id}.pdf`);
+    console.log(`Deleting Temporary PDF: ${subscriberBill.id}.pdf and charts`);
     fs.unlinkSync(`./temp/${subscriberBill.id}.pdf`);
+    fs.unlinkSync(`./temp/${subscriber.id}_chart.png`);
   }, Constants.PDF_DELETE_DELAY * 1000);
   return `./temp/${subscriberBill.id}.pdf`;
 };
@@ -118,7 +132,9 @@ const generateBillForSubscriber = async (subscriber, solarProject) => {
 
   if (prevBill.id) {
     // Set previous bill to previous
-    await updateSubscriberBill(prevBill.id, { status: 'Previous' });
+    await updateSubscriberBill(prevBill.id, {
+      status: 'Previous'
+    });
   }
 
   console.log(
@@ -140,6 +156,19 @@ end date: ${endDate}`
 
   if (generationData.length === 0) {
     console.log('Enphase returned empty array. Reporting error...');
+    sendEmail(
+      missingEnphaseDataError(subscriber, solarProject, startDate, endDate)
+    );
+    return;
+  }
+
+  // Get array of date strings for chart generation
+  const dateArray = enumerateDates(startMoment, endMoment);
+
+  if (dateArray.length !== generationData.length) {
+    console.log(
+      'Mismatch between date array length and generation data length. Reporting error...'
+    );
     sendEmail(
       missingEnphaseDataError(subscriber, solarProject, startDate, endDate)
     );
@@ -176,6 +205,14 @@ end date: ${endDate}`
   // Get computed Fields
   const newBill = await getSubscriberBillById(newBillId);
 
+  console.log(`Generating Generation Data Bar Chart for ${subscriber.name}`);
+  const energyChart = generateBarChartForData(
+    dateArray,
+    generationData.map(v => v / 1000)
+  );
+  await saveChartToFile(energyChart, `${subscriber.id}_chart`);
+  console.log(`Finished generating charts for ${subscriber.name}`);
+
   // Generate PDF!
   let localPdfPath;
   try {
@@ -207,7 +244,9 @@ export const generateBillsForSolarProject = async solarProjectId => {
     solarProject.subscriberIds.map(id => getOwnerById(id))
   );
 
-  subscribers.forEach(async subscriber => {
+  // Generate bills for subscriber one by one using fancy reduce syntax
+  await subscribers.reduce(async (previousPromise, subscriber) => {
+    await previousPromise;
     try {
       await generateBillForSubscriber(subscriber, solarProject);
     } catch (e) {
@@ -217,5 +256,5 @@ export const generateBillsForSolarProject = async solarProjectId => {
       );
       sendEmail(genericBillError(subscriber, solarProject, e.message));
     }
-  });
+  }, Promise.resolve());
 };
