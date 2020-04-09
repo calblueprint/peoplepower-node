@@ -214,6 +214,12 @@ export default class BillingTemplate extends React.PureComponent {
                 </Text>
               </View>
             </View>
+            <Image
+              src=""
+              alt="Timeline of energy production during bill period"
+              safePath="./assets"
+              style={[styles.firstChart]}
+            />
           </View>
         </Page>
       </Document>

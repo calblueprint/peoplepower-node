@@ -134,7 +134,7 @@ export default class BillingTemplate2 extends React.PureComponent {
               src=""
               alt="Chart of what pou've paid versus what you would be charge from PGE"
               safePath="./assets"
-              style={[styles.paddingTop]}
+              style={[styles.secondChart]}
             />
             <Text style={[[styles.smallText]]}>
               * Your &quot;Would-Be&quot; Charge from PG&amp;E is calculated as
