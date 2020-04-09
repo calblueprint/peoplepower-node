@@ -36,57 +36,6 @@ export const approveSubscriberBill = async subscriberBillId => {
   await updateSubscriberBill(subscriberBillId, { status: 'Active' });
 };
 
-const enumerateDates = (startMoment, endMoment) => {
-  const endString = endMoment.format('MM/DD/YYYY');
-  const dateArray = [];
-  while (startMoment.format('MM/DD/YYYY') !== endString) {
-    dateArray.push(startMoment.format('MM/DD/YYYY'));
-    startMoment.add(1, 'days');
-  }
-  dateArray.push(endString);
-  return dateArray;
-};
-const generatePdf = async (
-  subscriber,
-  solarProject,
-  subscriberBill,
-  prevBillId
-) => {
-  // Refresh information about previous bill to get the latest calculated values
-  let prevBill;
-  if (prevBillId) {
-    prevBill = await getSubscriberBillById(prevBillId);
-  } else {
-    prevBill = {
-      amountDue: 0,
-      amountReceived: 0,
-      balance: 0
-    };
-  }
-  console.log(`Creating PDF for Bill# ${subscriberBill.id} ...`);
-  await ReactPDF.render(
-    <BillingTemplate
-      subscriber={subscriber}
-      solarProject={solarProject}
-      subscriberBill={subscriberBill}
-      prevBill={prevBill}
-    />,
-    `./temp/${subscriberBill.id}.pdf`
-  );
-  await updateSubscriberBill(subscriberBill.id, {
-    billPdf: [{ url: `${Constants.SERVER_URL}/${subscriberBill.id}.pdf` }]
-  });
-  console.log(
-    `Succesfully uploaded PDF at ${Constants.SERVER_URL}/${subscriberBill.id}.pdf`
-  );
-  setTimeout(() => {
-    console.log(`Deleting Temporary PDF: ${subscriberBill.id}.pdf and charts`);
-    fs.unlinkSync(`./temp/${subscriberBill.id}.pdf`);
-    fs.unlinkSync(`./temp/${subscriber.id}_chart.png`);
-  }, Constants.PDF_DELETE_DELAY * 1000);
-  return `./temp/${subscriberBill.id}.pdf`;
-};
-
 const generateBillForSubscriber = async (subscriber, solarProject) => {
   // Get data necessary to generate bill
   console.log(`Generating Bill for ${subscriber.name}`);
