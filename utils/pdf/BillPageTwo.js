@@ -2,7 +2,7 @@ import React from 'react';
 import { Page, Text, View, Image } from '@react-pdf/renderer';
 import styles from './PDFStyles';
 
-export default class BillingTemplate2 extends React.PureComponent {
+export default class BillPageTwo extends React.PureComponent {
   render() {
     const { subscriber, solarProject, subscriberBill, prevBill } = this.props;
 
@@ -21,8 +21,9 @@ export default class BillingTemplate2 extends React.PureComponent {
       10: 'November',
       11: 'December'
     };
-    const amountPaid = 537.38;
-    const wouldBeCost = 662.89;
+    const totalPaid = 537.38;
+    const totalWouldBeCost = 662.89;
+    const percentSavings = 1 - totalWouldBeCost / totalPaid;
     return (
       <Page style={styles.pdfContainer}>
         <View style={styles.pdf}>
@@ -40,7 +41,11 @@ export default class BillingTemplate2 extends React.PureComponent {
               if you weren&apos;t with People Power. All costs from
             </Text>
             <Text style={[styles.inline, styles.boldText]}>
-              {months[startDate.getMonth()]} {startDate.getFullYear()} -
+              {months[startDate.getMonth()]} 
+              {' '}
+              {startDate.getFullYear()}
+              {' '}
+              -
               Present.
             </Text>
           </View>
@@ -70,7 +75,8 @@ export default class BillingTemplate2 extends React.PureComponent {
                   styles.bigTextPink
                 ]}
               >
-                ${amountPaid}
+                $
+                {totalPaid}
               </Text>
             </View>
             <View style={[styles.width30]}>
@@ -91,7 +97,8 @@ export default class BillingTemplate2 extends React.PureComponent {
                   styles.bigTextGray
                 ]}
               >
-                ${wouldBeCost}
+                $
+                {totalWouldBeCost}
               </Text>
             </View>
             <View style={[styles.width30]}>
@@ -112,16 +119,36 @@ export default class BillingTemplate2 extends React.PureComponent {
                   styles.bigTextPink
                 ]}
               >
-                {1 - wouldBeCost / amountPaid}%
+                {percentSavings}
+                %
               </Text>
             </View>
           </View>
           <Text style={[styles.midTextBlue, styles.paddingTopLarge]}>
-            Here&apos;s how we we calculated your ${amountPaid} cost of energy:
+            Here&apos;s how we we calculated your $
+            {totalPaid}
+            {' '}
+            cost of energy:
           </Text>
           <View style={[styles.paddingTop]}>
             <Text style={[styles.midTextBoldPink, styles.textCenter]}>
-              $0.00 + $115.51 + $1,105.35 - $369.31 - $314.17 = ${amountPaid}
+              $
+              {totalEbceCharges}
+              {' '}
+              + $
+              {totalPgeCharges}
+              {' '}
+              + $
+              {totalPPCharges}
+              {' '}
+              - $
+              {totalEbceCredits}
+              {' '}
+              - $
+              {totalRebates}
+              {' '}
+              = $
+              {totalPaid}
             </Text>
             <Text style={[styles.smallTextBlue, styles.textCenter]}>
               EBCE charges + PGE Charges + People Power Charges - EBCE NEM
@@ -135,7 +162,7 @@ export default class BillingTemplate2 extends React.PureComponent {
             <Image
               src=""
               alt="Chart of what pou've paid versus what you would be charge from PGE"
-              safePath="./assets"
+              safePath="./temp"
               style={[styles.paddingTop]}
             />
             <Text style={[[styles.smallText]]}>

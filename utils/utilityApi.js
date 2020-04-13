@@ -25,7 +25,7 @@ const options = {
 		EBCERebate:
 	}
 */
-const getLatestBill = async meterId => {
+const getLatestPGEBill = async meterId => {
   const meterURL = `?meters=${meterId}`;
   const latest = '&limit=1&order=latest_first';
 
@@ -48,4 +48,4 @@ const getLatestBill = async meterId => {
   return { startDate, endDate, netPgeUsage, ebceRebate };
 };
 
-export default getLatestBill;
+export default getLatestPGEBill;

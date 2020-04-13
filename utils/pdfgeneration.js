@@ -7,12 +7,9 @@ import React from 'react';
 import ReactPDF from '@react-pdf/renderer';
 import {
   getSolarProjectById,
-  getOwnerById,
-  getRateScheduleById,
-  createSubscriberBill,
+  getSubscriberById,
   updateSubscriberBill,
-  getSubscriberBillsByStatementNumber,
-  getSubscriberBillById
+  getSubscriberBillsByIds
 } from '../airtable/request';
 import getEnphaseData from './enphase';
 import getLatestBill from './utilityApi';
@@ -20,8 +17,8 @@ import BillingTemplate from './pdf/BillingTemplate';
 import Constants from '../Constants';
 import sendEmail from './email';
 import EmailGenerators from './emailCopy';
-import generateBarChartForData from './charts/barChart';
 import saveChartToFile from './charts/charts';
+import { generateGenerationDataChart } from './chartGeneration';
 
 dotenv.config();
 const {
@@ -32,59 +29,92 @@ const {
   billSuccess
 } = EmailGenerators;
 
-const enumerateDates = (startMoment, endMoment) => {
-  const endString = endMoment.format('MM/DD/YYYY');
-  const dateArray = [];
-  while (startMoment.format('MM/DD/YYYY') !== endString) {
-    dateArray.push(startMoment.format('MM/DD/YYYY'));
-    startMoment.add(1, 'days');
+// Get latest subscriber data
+const getLatestSubscriberData = async subscriberId => {
+  const subscriber = await getSubscriberById(subscriberId);
+  const solarProject = await getSolarProjectById(subscriber.solarProjectId);
+
+  if (!subscriber.subscriberBillIds) {
+    throw new Error(
+      `Could not find Bill for subscriber with ID ${subscriberId}`
+    );
   }
-  dateArray.push(endString);
-  return dateArray;
+
+  const bills = await getSubscriberBillsByIds(subscriber.subscriberBillIds);
+  const latestBill = bills[bills.length - 1];
+  const previousBills = bills.slice(0, bills.length - 1);
+  return { subscriber, solarProject, latestBill, previousBills };
 };
 
-// Get Previous Bill by ID (and return dummy data if none)
-const getPreviousBills = (subscriber) => {
-    return await 
-    if (prevBillId) {
-        return await getSubscriberBillById(prevBillId);
-    } else {
-        return {
-            amountDue: 0,
-            amountReceived: 0,
-            balance: 0
-        };
-    }
-}
+// Generate charts for both subscriber bills based on bill data
 
-const generatePdf = async (
+const generateChartsForSubscriberBill = async (
   subscriber,
-  solarProject,
-  subscriberBill,
-  prevBillId
+  latestBill,
+  previousBills
 ) => {
-  // Refresh information about previous bill to get the latest calculated values
-  
-  console.log(`Creating PDF for Bill# ${subscriberBill.id} ...`);
+  console.log(`Generating Generation Data Bar Chart for ${subscriber.name}`);
+  const generationChart = generateGenerationDataChart(latestBill);
+  await saveChartToFile(generationChart, `${latestBill.id}_chart1`);
+
+  console.log(`Finished generating charts for ${subscriber.name}`);
+};
+
+// Generate PDF for subscriber's latest bill
+const generatePdfForSubscriber = async (
+  subscriberId,
+  freshBillGeneration = false
+) => {
+  // Refresh information about subscriber
+  const {
+    subscriber,
+    solarProject,
+    latestBill,
+    previousBills
+  } = await getLatestSubscriberData(subscriberId);
+
+  // Generate Charts (images saved locally)
+  await generateChartsForSubscriberBill(subscriber, latestBill, previousBills);
+
+  // Generate PDF for latest bill
+  console.log(`Creating PDF for Bill# ${latestBill.id} ...`);
   await ReactPDF.render(
     <BillingTemplate
       subscriber={subscriber}
       solarProject={solarProject}
-      subscriberBill={subscriberBill}
-      prevBill={prevBill}
+      subscriberBill={latestBill}
+      previousBills={previousBills}
     />,
-    `./temp/${subscriberBill.id}.pdf`
+    `./temp/${latestBill.id}.pdf`
   );
-  await updateSubscriberBill(subscriberBill.id, {
-    billPdf: [{ url: `${Constants.SERVER_URL}/${subscriberBill.id}.pdf` }]
+
+  // Update latest bill on server with PDF
+  await updateSubscriberBill(latestBill.id, {
+    billPdf: [{ url: `${Constants.SERVER_URL}/${latestBill.id}.pdf` }],
+    status: 'Pending'
   });
   console.log(
-    `Succesfully uploaded PDF at ${Constants.SERVER_URL}/${subscriberBill.id}.pdf`
+    `Succesfully uploaded PDF at ${Constants.SERVER_URL}/${latestBill.id}.pdf`
   );
+
+  // Report Success
+  if (freshBillGeneration) {
+    // Differ emails
+  }
+
+  const approveLink = `${Constants.SERVER_URL}/approve?id=${newBillId}`;
+  sendEmail(
+    billSuccess(subscriber, solarProject, newBill, approveLink, localPdfPath)
+  );
+
+  // Clean up extraneous files
   setTimeout(() => {
-    console.log(`Deleting Temporary PDF: ${subscriberBill.id}.pdf and charts`);
-    fs.unlinkSync(`./temp/${subscriberBill.id}.pdf`);
-    fs.unlinkSync(`./temp/${subscriber.id}_chart.png`);
+    console.log(`Deleting Temporary PDF: ${latestBill.id}.pdf and charts`);
+    fs.unlinkSync(`./temp/${latestBill.id}.pdf`);
+    fs.unlinkSync(`./temp/${latestBill.id}_chart1.png`);
+    fs.unlinkSync(`./temp/${latestBill.id}_chart2.png`);
   }, Constants.PDF_DELETE_DELAY * 1000);
-  return `./temp/${subscriberBill.id}.pdf`;
+  return `./temp/${latestBillBill.id}.pdf`;
 };
+
+export default generatePdfForSubscriber;

@@ -1,6 +1,6 @@
 // Include the exporter module
 
-const generateBarChartForData = (dates, data) => {
+const getBarChartForData = (dates, data) => {
   return {
     chart: {
       type: 'column'
@@ -34,4 +34,4 @@ const generateBarChartForData = (dates, data) => {
   };
 };
 
-export default generateBarChartForData;
+export default getBarChartForData;
