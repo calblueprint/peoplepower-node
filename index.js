@@ -4,7 +4,7 @@ import cors from 'cors';
 import {
   generateBillsForSolarProject,
   approveSubscriberBill
-} from './utils/billgeneration';
+} from './utils/billGeneration';
 import { sendInviteEmail } from './utils/pledgeInvite';
 
 dotenv.config(); // Set up environment variables
@@ -31,6 +31,8 @@ app.post('/generate', (req, res) => {
   }
   res.end();
 });
+
+// TODO: add generate PDF route
 
 app.post('/invite', async (req, res) => {
   console.log('Received Invite Request with body:');

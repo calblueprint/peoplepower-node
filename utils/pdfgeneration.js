@@ -1,5 +1,4 @@
 /* eslint-disable import/imports-first */
-import moment from 'moment';
 import dotenv from 'dotenv-safe';
 import fs from 'fs';
 
@@ -7,31 +6,26 @@ import React from 'react';
 import ReactPDF from '@react-pdf/renderer';
 import {
   getSolarProjectById,
-  getSubscriberById,
   updateSubscriberBill,
-  getSubscriberBillsByIds
+  getSubscriberBillsByIds,
+  getOwnerById
 } from '../airtable/request';
-import getEnphaseData from './enphase';
-import getLatestBill from './utilityApi';
-import BillingTemplate from './pdf/BillingTemplate';
 import Constants from '../Constants';
 import sendEmail from './email';
 import EmailGenerators from './emailCopy';
 import saveChartToFile from './charts/charts';
-import { generateGenerationDataChart } from './chartGeneration';
+import {
+  generateGenerationDataChart,
+  generateCostOverTimeChart
+} from './chartGeneration';
+import BillTemplate from './pdf/BillTemplate';
 
 dotenv.config();
-const {
-  genericBillError,
-  pdfBillError,
-  stalePGEBillError,
-  missingEnphaseDataError,
-  billSuccess
-} = EmailGenerators;
+const { billSuccess } = EmailGenerators;
 
 // Get latest subscriber data
 const getLatestSubscriberData = async subscriberId => {
-  const subscriber = await getSubscriberById(subscriberId);
+  const subscriber = await getOwnerById(subscriberId);
   const solarProject = await getSolarProjectById(subscriber.solarProjectId);
 
   if (!subscriber.subscriberBillIds) {
@@ -57,6 +51,13 @@ const generateChartsForSubscriberBill = async (
   const generationChart = generateGenerationDataChart(latestBill);
   await saveChartToFile(generationChart, `${latestBill.id}_chart1`);
 
+  console.log(`Generating Cost Over Time chart for ${subscriber.name}`);
+  const costOverTimeChart = generateCostOverTimeChart(
+    latestBill,
+    previousBills
+  );
+  await saveChartToFile(costOverTimeChart, `${latestBill.id}_chart2`);
+
   console.log(`Finished generating charts for ${subscriber.name}`);
 };
 
@@ -79,7 +80,7 @@ const generatePdfForSubscriber = async (
   // Generate PDF for latest bill
   console.log(`Creating PDF for Bill# ${latestBill.id} ...`);
   await ReactPDF.render(
-    <BillingTemplate
+    <BillTemplate
       subscriber={subscriber}
       solarProject={solarProject}
       subscriberBill={latestBill}
@@ -98,23 +99,39 @@ const generatePdfForSubscriber = async (
   );
 
   // Report Success
+  const approveLink = `${Constants.SERVER_URL}/approve?id=${latestBill.id}`;
+  const localPdfPath = `./temp/${latestBill.id}.pdf`;
   if (freshBillGeneration) {
-    // Differ emails
+    sendEmail(
+      billSuccess(
+        subscriber,
+        solarProject,
+        latestBill,
+        approveLink,
+        localPdfPath
+      )
+    );
+  } else {
+    // TODO: Custom email for fresh PDF generation
+    sendEmail(
+      billSuccess(
+        subscriber,
+        solarProject,
+        latestBill,
+        approveLink,
+        localPdfPath
+      )
+    );
   }
 
-  const approveLink = `${Constants.SERVER_URL}/approve?id=${newBillId}`;
-  sendEmail(
-    billSuccess(subscriber, solarProject, newBill, approveLink, localPdfPath)
-  );
-
-  // Clean up extraneous files
+  // Clean up extraneous files 20 seconds after all is said and done
+  // Delay allows for Airtable to copy over PDF
   setTimeout(() => {
     console.log(`Deleting Temporary PDF: ${latestBill.id}.pdf and charts`);
     fs.unlinkSync(`./temp/${latestBill.id}.pdf`);
     fs.unlinkSync(`./temp/${latestBill.id}_chart1.png`);
     fs.unlinkSync(`./temp/${latestBill.id}_chart2.png`);
   }, Constants.PDF_DELETE_DELAY * 1000);
-  return `./temp/${latestBillBill.id}.pdf`;
 };
 
 export default generatePdfForSubscriber;

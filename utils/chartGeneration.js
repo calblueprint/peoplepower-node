@@ -14,8 +14,8 @@ const enumerateDates = (startMoment, endMoment) => {
 
 const generateGenerationDataChart = bill => {
   // Get array of date strings for chart generation
-  const startMoment = moment(bill.startDate).format('YYYY-MM-DD');
-  const endMoment = moment(bill.endDate).format('YYYY-MM-DD');
+  const startMoment = moment(bill.startDate, 'YYYY-MM-DD');
+  const endMoment = moment(bill.endDate, 'YYYY-MM-DD');
   const dateArray = enumerateDates(startMoment, endMoment);
 
   // Generate bar chart

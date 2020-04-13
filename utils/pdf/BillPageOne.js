@@ -1,13 +1,18 @@
 import React from 'react';
-import { Page, Text, View, Document, Image } from '@react-pdf/renderer';
+import { Page, Text, View, Image } from '@react-pdf/renderer';
 import styles from './PDFStyles';
 
 export default class BillPageOne extends React.PureComponent {
   render() {
-    const { subscriber, solarProject, subscriberBill, prevBills } = this.props;
+    const {
+      subscriber,
+      solarProject,
+      subscriberBill,
+      previousBills
+    } = this.props;
     const prevBill =
-      prevBills.length > 0
-        ? prevBills[prevBills.length - 1]
+      previousBills.length > 0
+        ? previousBills[previousBills.length - 1]
         : {
             amountDue: 0,
             amountReceived: 0,
@@ -59,10 +64,7 @@ export default class BillPageOne extends React.PureComponent {
             <Text style={[styles.header, styles.paddingTop]}>Bill</Text>
             <Text style={[styles.midText]}>For Service during:</Text>
             <Text style={[styles.midTextBoldBlue]}>
-              {subscriberBill.startDate}
-              {' '}
-              -
-              {subscriberBill.endDate}
+              {subscriberBill.startDate} -{subscriberBill.endDate}
             </Text>
           </View>
           <View style={[styles.flex, styles.paddingTop]}>
@@ -70,16 +72,10 @@ export default class BillPageOne extends React.PureComponent {
               <Text style={[styles.boldText]}>Service For:</Text>
               <Text style={[styles.text]}>{subscriber.name}</Text>
               <Text style={[styles.text]}>
-                {solarProject.street1} 
-                {' '}
-                {solarProject.street2}
+                {solarProject.street1} {solarProject.street2}
               </Text>
               <Text style={[styles.text]}>
-                {solarProject.city}
-                ,
-                {solarProject.state} 
-                {' '}
-                {solarProject.zipcode}
+                {solarProject.city},{solarProject.state} {solarProject.zipcode}
               </Text>
             </View>
             <View style={styles.right}>
@@ -101,21 +97,17 @@ export default class BillPageOne extends React.PureComponent {
                 </View>
                 <View style={[styles.right, styles.paddingLeft]}>
                   <Text style={[styles.text]}>
-                    $
-                    {round(prevBill.amountDue)}
+                    ${round(prevBill.amountDue)}
                   </Text>
                   <Text style={[styles.text]}>
-                    $
-                    {round(prevBill.amountReceived)}
+                    ${round(prevBill.amountReceived)}
                   </Text>
                   {/* <View style={border"><View/> */}
                   <Text style={[styles.text, styles.borderTop]}>
-                    $
-                    {round(prevBill.balance)}
+                    ${round(prevBill.balance)}
                   </Text>
                   <Text style={[styles.text]}>
-                    $
-                    {round(subscriberBill.currentCharges)}
+                    ${round(subscriberBill.currentCharges)}
                   </Text>
                 </View>
               </View>
@@ -131,8 +123,7 @@ export default class BillPageOne extends React.PureComponent {
                   Total Amount Due
                 </Text>
                 <Text style={[styles.right, styles.pinkText]}>
-                  $
-                  {round(subscriberBill.amountDue)}
+                  ${round(subscriberBill.amountDue)}
                 </Text>
               </View>
             </View>
@@ -158,17 +149,13 @@ export default class BillPageOne extends React.PureComponent {
                 Energy Production
               </Text>
               <Text style={[styles.text, styles.width25]}>
-                {subscriberBill.systemProduction}
-                {' '}
-                kWh
+                {subscriberBill.systemProduction} kWh
               </Text>
               <Text style={[styles.text, styles.width25]}>
-                $
-                {round(subscriberBill.ppRate)}
+                ${round(subscriberBill.ppRate)}
               </Text>
               <Text style={[styles.text, styles.width25]}>
-                $
-                {round(subscriberBill.currentCharges)}
+                ${round(subscriberBill.currentCharges)}
               </Text>
             </View>
           </View>
@@ -197,21 +184,14 @@ export default class BillPageOne extends React.PureComponent {
             </View>
             <View style={styles.right}>
               <Text style={[styles.text]}>
-                {subscriberBill.netPgeUsage}
-                {' '}
-                kWh
+                {subscriberBill.netPgeUsage} kWh
               </Text>
               <Text style={[styles.text]}>
-                $
-                {round(subscriberBill.estimatedRebate)}
+                ${round(subscriberBill.estimatedRebate)}
               </Text>
+              <Text style={[styles.text]}>${subscriberBill.ebceRebate}</Text>
               <Text style={[styles.text]}>
-                $
-                {subscriberBill.ebceRebate}
-              </Text>
-              <Text style={[styles.text]}>
-                $
-                {round(subscriberBill.totalEstimatedRebate)}
+                ${round(subscriberBill.totalEstimatedRebate)}
               </Text>
             </View>
           </View>

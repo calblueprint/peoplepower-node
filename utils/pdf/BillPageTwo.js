@@ -1,28 +1,29 @@
 import React from 'react';
 import { Page, Text, View, Image } from '@react-pdf/renderer';
+import moment from 'moment';
 import styles from './PDFStyles';
 
 export default class BillPageTwo extends React.PureComponent {
   render() {
-    const { subscriber, solarProject, subscriberBill, prevBill } = this.props;
+    const {
+      subscriber,
+      solarProject,
+      subscriberBill,
+      previousBills
+    } = this.props;
 
-    const startDate = new Date(subscriberBill.startDate);
-    const months = {
-      0: 'January',
-      1: 'February',
-      2: 'March',
-      3: 'April',
-      4: 'May',
-      5: 'June',
-      6: 'July',
-      7: 'August',
-      8: 'September',
-      9: 'October',
-      10: 'November',
-      11: 'December'
-    };
+    console.log('log data to silence errors');
+    console.log(subscriber.id, solarProject.id, previousBills.length);
+    // TODO: Need to add formatting to account for commas in both here and Bill Page One
+    const startMoment = moment(subscriberBill.startDate, 'YYYY-MM-DD');
     const totalPaid = 537.38;
     const totalWouldBeCost = 662.89;
+    const totalEbceCharges = 0;
+    const totalPgeCharges = 115.51;
+    const totalPPCharges = 1105.35;
+    const totalEbceCredits = 369.31;
+    const totalRebates = 314.17;
+
     const percentSavings = 1 - totalWouldBeCost / totalPaid;
     return (
       <Page style={styles.pdfContainer}>
@@ -41,11 +42,7 @@ export default class BillPageTwo extends React.PureComponent {
               if you weren&apos;t with People Power. All costs from
             </Text>
             <Text style={[styles.inline, styles.boldText]}>
-              {months[startDate.getMonth()]} 
-              {' '}
-              {startDate.getFullYear()}
-              {' '}
-              -
+              {startMoment.format('MMMM')} {startMoment.format('YYYY')} -
               Present.
             </Text>
           </View>
@@ -75,8 +72,7 @@ export default class BillPageTwo extends React.PureComponent {
                   styles.bigTextPink
                 ]}
               >
-                $
-                {totalPaid}
+                ${totalPaid}
               </Text>
             </View>
             <View style={[styles.width30]}>
@@ -97,8 +93,7 @@ export default class BillPageTwo extends React.PureComponent {
                   styles.bigTextGray
                 ]}
               >
-                $
-                {totalWouldBeCost}
+                ${totalWouldBeCost}
               </Text>
             </View>
             <View style={[styles.width30]}>
@@ -119,36 +114,17 @@ export default class BillPageTwo extends React.PureComponent {
                   styles.bigTextPink
                 ]}
               >
-                {percentSavings}
-                %
+                {percentSavings}%
               </Text>
             </View>
           </View>
           <Text style={[styles.midTextBlue, styles.paddingTopLarge]}>
-            Here&apos;s how we we calculated your $
-            {totalPaid}
-            {' '}
-            cost of energy:
+            Here&apos;s how we we calculated your ${totalPaid} cost of energy:
           </Text>
           <View style={[styles.paddingTop]}>
             <Text style={[styles.midTextBoldPink, styles.textCenter]}>
-              $
-              {totalEbceCharges}
-              {' '}
-              + $
-              {totalPgeCharges}
-              {' '}
-              + $
-              {totalPPCharges}
-              {' '}
-              - $
-              {totalEbceCredits}
-              {' '}
-              - $
-              {totalRebates}
-              {' '}
-              = $
-              {totalPaid}
+              ${totalEbceCharges} + ${totalPgeCharges} + ${totalPPCharges} - $
+              {totalEbceCredits} - ${totalRebates} = ${totalPaid}
             </Text>
             <Text style={[styles.smallTextBlue, styles.textCenter]}>
               EBCE charges + PGE Charges + People Power Charges - EBCE NEM

@@ -11,8 +11,6 @@
 import Airtable from 'airtable';
 import { Columns } from './schema';
 
-require('dotenv-safe').config();
-
 const BASE_ID = 'appFaOwKhMXrRIQIp';
 const VIEW = 'Grid view';
 const ENDPOINT_URL = 'https://api.airtable.com';
