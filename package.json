@@ -2,7 +2,6 @@
   "name": "peoplepower-node",
   "version": "1.0.0",
   "description": "People Power Node Scripts",
-  "type": "module",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
@@ -14,7 +13,6 @@
     "airtable": "^0.8.1",
     "cors": "^2.8.5",
     "dotenv-safe": "^8.2.0",
-    "esm": "^3.2.25",
     "express": "^4.17.1",
     "highcharts-export-server": "^2.0.24",
     "moment": "^2.24.0",
@@ -25,7 +23,7 @@
   },
   "scripts": {
     "generate-schema": "generate-airtable-schema && pretty-quick",
-    "start": "babel-node -r esm index.js"
+    "start": "babel-node index.js"
   },
   "devDependencies": {
     "airtable-schema-generator": "^1.3.4",
