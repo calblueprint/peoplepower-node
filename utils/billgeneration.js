@@ -139,7 +139,7 @@ const generateBillForSubscriber = async (subscriber, solarProject) => {
     endDate,
     statementDate: moment().format('MM/DD/YYYY'),
     dueDate: moment()
-      .add(30, 'D')
+      .add(30, 'days')
       .format('MM/DD/YYYY'),
     subscriberId: subscriber.id,
     solarProjectId: solarProject.id,
