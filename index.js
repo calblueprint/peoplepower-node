@@ -4,9 +4,9 @@ import cors from 'cors';
 import {
   generateBillsForSolarProject,
   approveSubscriberBill
-} from './utils/billGeneration';
+} from './utils/billgeneration';
 import { sendInviteEmail } from './utils/pledgeInvite';
-import generatePdfForSubscriber from './utils/pdfGeneration';
+import generatePdfForSubscriber from './utils/pdfgeneration';
 import EmailGenerators from './utils/emailCopy';
 import sendEmail from './utils/email';
 
