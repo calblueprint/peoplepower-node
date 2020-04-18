@@ -1,5 +1,6 @@
 import React from 'react';
 import { Page, Text, View, Image } from '@react-pdf/renderer';
+import moment from 'moment';
 import styles from './PDFStyles';
 
 export default class BillPageOne extends React.PureComponent {
@@ -19,6 +20,8 @@ export default class BillPageOne extends React.PureComponent {
             balance: 0
           };
     const round = x => parseFloat(x).toFixed(3);
+    const formatAirtableDate = d =>
+      moment(d, 'YYYY-MM-DD').format('MM/DD/YYYY');
     return (
       <Page style={styles.pdfContainer}>
         <View style={styles.pdf}>
@@ -53,9 +56,11 @@ export default class BillPageOne extends React.PureComponent {
                     {subscriberBill.statementNumber}
                   </Text>
                   <Text style={[styles.text]}>
-                    {subscriberBill.statementDate}
+                    {formatAirtableDate(subscriberBill.statementDate)}
                   </Text>
-                  <Text style={[styles.text]}>{subscriberBill.dueDate}</Text>
+                  <Text style={[styles.text]}>
+                    {formatAirtableDate(subscriberBill.dueDate)}
+                  </Text>
                 </View>
               </View>
             </View>
@@ -64,7 +69,8 @@ export default class BillPageOne extends React.PureComponent {
             <Text style={[styles.header, styles.paddingTop]}>Bill</Text>
             <Text style={[styles.midText]}>For Service during:</Text>
             <Text style={[styles.midTextBoldBlue]}>
-              {subscriberBill.startDate} -{subscriberBill.endDate}
+              {formatAirtableDate(subscriberBill.startDate)} -
+              {formatAirtableDate(subscriberBill.endDate)}
             </Text>
           </View>
           <View style={[styles.flex, styles.paddingTop]}>
@@ -94,6 +100,7 @@ export default class BillPageOne extends React.PureComponent {
                   <Text style={[styles.text]}>
                     Current People Power Charges:
                   </Text>
+                  <Text style={[styles.text]}>Excess Energy Rebates:</Text>
                 </View>
                 <View style={[styles.right, styles.paddingLeft]}>
                   <Text style={[styles.text]}>
@@ -108,6 +115,9 @@ export default class BillPageOne extends React.PureComponent {
                   </Text>
                   <Text style={[styles.text]}>
                     ${round(subscriberBill.currentCharges)}
+                  </Text>
+                  <Text style={[styles.text]}>
+                    -${round(subscriberBill.estimatedRebate)}
                   </Text>
                 </View>
               </View>
@@ -178,21 +188,15 @@ export default class BillPageOne extends React.PureComponent {
               <Text style={[styles.text]}>
                 East Bay Community Energy (NEM) Credits for Bill Period:
               </Text>
-              <Text style={[styles.text]}>
-                Your Total People Power Excess Energy Rebate Balance:
-              </Text>
             </View>
             <View style={styles.right}>
               <Text style={[styles.text]}>
-                {subscriberBill.netPgeUsage} kWh
+                {-subscriberBill.netPgeUsage} kWh
               </Text>
               <Text style={[styles.text]}>
                 ${round(subscriberBill.estimatedRebate)}
               </Text>
               <Text style={[styles.text]}>${subscriberBill.ebceRebate}</Text>
-              <Text style={[styles.text]}>
-                ${round(subscriberBill.totalEstimatedRebate)}
-              </Text>
             </View>
           </View>
           <View>
