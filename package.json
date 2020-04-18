@@ -2,6 +2,7 @@
   "name": "peoplepower-node",
   "version": "1.0.0",
   "description": "People Power Node Scripts",
+  "type": "module",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
