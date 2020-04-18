@@ -1,7 +1,6 @@
 export default {
   // Bill Generation
-  // SERVER_URL: 'https://peoplepower-node.herokuapp.com',
-  SERVER_URL: 'https://860ff4a9.ngrok.io',
+  SERVER_URL: 'https://peoplepower-node.herokuapp.com',
   PDF_DELETE_DELAY: 20,
 
   // Mailing
