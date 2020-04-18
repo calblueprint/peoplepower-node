@@ -21,11 +21,13 @@ import {
 import BillTemplate from './pdf/BillTemplate';
 
 dotenv.config();
-const { billSuccess } = EmailGenerators;
+const { billSuccess, pdfSuccess } = EmailGenerators;
 
 // Get latest subscriber data
 const getLatestSubscriberData = async subscriberId => {
+  console.log(`Get latest data for Subscriber with ID: ${subscriberId}`);
   const subscriber = await getOwnerById(subscriberId);
+  console.log('Getting solar project data...');
   const solarProject = await getSolarProjectById(subscriber.solarProjectId);
 
   if (!subscriber.subscriberBillIds) {
@@ -34,6 +36,9 @@ const getLatestSubscriberData = async subscriberId => {
     );
   }
 
+  console.log(
+    `Getting subscriber bill data for IDs: ${subscriber.subscriberBillIds}`
+  );
   const bills = await getSubscriberBillsByIds(subscriber.subscriberBillIds);
   const latestBill = bills[bills.length - 1];
   const previousBills = bills.slice(0, bills.length - 1);
@@ -53,8 +58,8 @@ const generateChartsForSubscriberBill = async (
 
   console.log(`Generating Cost Over Time chart for ${subscriber.name}`);
   const costOverTimeChart = generateCostOverTimeChart(
-    latestBill,
-    previousBills
+    previousBills,
+    latestBill
   );
   await saveChartToFile(costOverTimeChart, `${latestBill.id}_chart2`);
 
@@ -100,6 +105,7 @@ const generatePdfForSubscriber = async (
 
   // Report Success
   const approveLink = `${Constants.SERVER_URL}/approve?id=${latestBill.id}`;
+  const regenerateLink = `${Constants.SERVER_URL}/regenerate?subscriberId=${subscriber.id}`;
   const localPdfPath = `./temp/${latestBill.id}.pdf`;
   if (freshBillGeneration) {
     sendEmail(
@@ -108,17 +114,18 @@ const generatePdfForSubscriber = async (
         solarProject,
         latestBill,
         approveLink,
+        regenerateLink,
         localPdfPath
       )
     );
   } else {
-    // TODO: Custom email for fresh PDF generation
     sendEmail(
-      billSuccess(
+      pdfSuccess(
         subscriber,
         solarProject,
         latestBill,
         approveLink,
+        regenerateLink,
         localPdfPath
       )
     );

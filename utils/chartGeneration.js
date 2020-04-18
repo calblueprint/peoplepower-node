@@ -1,5 +1,6 @@
 import moment from 'moment';
 import getBarChartForData from './charts/barChart';
+import generateLineChartForData from './charts/lineChart';
 
 const enumerateDates = (startMoment, endMoment) => {
   const endString = endMoment.format('MM/DD/YYYY');
@@ -32,6 +33,20 @@ const generateGenerationDataChart = bill => {
   return getBarChartForData(dateArray, generationData);
 };
 
-const generateCostOverTimeChart = () => {};
+const generateCostOverTimeChart = (prevBills, latestBill) => {
+  console.log(`Latest bill ID is: ${latestBill.id}`);
+  // Combine the bills and take the latest 12 and order them least to greatest
+  const bills = [...prevBills, latestBill]
+    .sort((a, b) => b.statementNumber - a.statementNumber)
+    .filter((_, i) => i < 12)
+    .reverse();
+  const monthData = bills.map(b => b.startDate);
+  // TODO: account for pge charges + ebce charges
+  const trueCosts = bills.map(
+    b => b.currentCharges - b.ebceRebate - b.estimatedRebate
+  );
+  const wouldBeCosts = bills.map(b => b.wouldBeCharges);
+  return generateLineChartForData(monthData, trueCosts, wouldBeCosts);
+};
 
 export { generateCostOverTimeChart, generateGenerationDataChart };

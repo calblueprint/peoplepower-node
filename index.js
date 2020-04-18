@@ -6,6 +6,7 @@ import {
   approveSubscriberBill
 } from './utils/billGeneration';
 import { sendInviteEmail } from './utils/pledgeInvite';
+import generatePdfForSubscriber from './utils/pdfGeneration';
 
 dotenv.config(); // Set up environment variables
 
@@ -32,7 +33,15 @@ app.post('/generate', (req, res) => {
   res.end();
 });
 
-// TODO: add generate PDF route
+app.get('/regenerate', (req, res) => {
+  const { subscriberId } = req.query;
+  console.log('Received regenerate request with body:');
+  console.log(req.body);
+  if (subscriberId) {
+    generatePdfForSubscriber(subscriberId);
+  }
+  res.end();
+});
 
 app.post('/invite', async (req, res) => {
   console.log('Received Invite Request with body:');

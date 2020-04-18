@@ -5,26 +5,28 @@ import styles from './PDFStyles';
 
 export default class BillPageTwo extends React.PureComponent {
   render() {
-    const {
-      subscriber,
-      solarProject,
-      subscriberBill,
-      previousBills
-    } = this.props;
+    const { subscriberBill, previousBills } = this.props;
 
-    console.log('log data to silence errors');
-    console.log(subscriber.id, solarProject.id, previousBills.length);
+    // Combine the bills and take the latest 12 and order them least to greatest
+    const bills = [...previousBills, subscriberBill]
+      .sort((a, b) => b.statementNumber - a.statementNumber)
+      .filter((_, i) => i < 12)
+      .reverse();
+    const round = (x, y = 3) => x.toFixed(y);
+    const sum = arr => round(arr.reduce((a, b) => a + b, 0), 2);
+
     // TODO: Need to add formatting to account for commas in both here and Bill Page One
-    const startMoment = moment(subscriberBill.startDate, 'YYYY-MM-DD');
-    const totalPaid = 537.38;
-    const totalWouldBeCost = 662.89;
-    const totalEbceCharges = 0;
-    const totalPgeCharges = 115.51;
-    const totalPPCharges = 1105.35;
-    const totalEbceCredits = 369.31;
-    const totalRebates = 314.17;
-
-    const percentSavings = 1 - totalWouldBeCost / totalPaid;
+    const startMoment = moment(bills[bills.length - 1].startDate, 'YYYY-MM-DD');
+    const totalEbceCharges = 0; // TODO: Need to figure out what the heck this is
+    const totalPgeCharges = 0; // TODO: Need to figure out what the heck this is
+    const totalPPCharges = sum(bills.map(b => b.currentCharges));
+    const totalEbceCredits = sum(bills.map(b => b.ebceRebate));
+    const totalRebates = sum(bills.map(b => b.estimatedRebate));
+    const totalWouldBeCost = sum(bills.map(b => b.wouldBeCharges));
+    const totalPaid = sum(
+      bills.map(b => b.currentCharges - b.ebceRebate - b.estimatedRebate)
+    );
+    const percentSavings = round((1 - totalPaid / totalWouldBeCost) * 100, 1);
     return (
       <Page style={styles.pdfContainer}>
         <View style={styles.pdf}>
@@ -131,16 +133,18 @@ export default class BillPageTwo extends React.PureComponent {
               Credits - People Power Rebates = What you&apos;ve paid for energy
             </Text>
           </View>
-          <View style={[styles.paddingTopLarge]}>
+          <View style={[styles.paddingTopLarge, styles.textCenter]}>
             <Text style={[styles.headerThisBlue, styles.textCenter]}>
               Your Costs Over Time
             </Text>
-            <Image
-              src=""
-              alt="Chart of what pou've paid versus what you would be charge from PGE"
-              safePath="./temp"
-              style={[styles.paddingTop]}
-            />
+            <View>
+              <Image
+                src={`./temp/${subscriberBill.id}_chart2.png`}
+                alt="Chart of what pou've paid versus what you would be charge from PGE"
+                safePath="./temp"
+                style={[styles.secondChart]}
+              />
+            </View>
             <Text style={[[styles.smallText]]}>
               * Your &quot;Would-Be&quot; Charge from PG&amp;E is calculated as
               though you had been paying the current E-1 Residential Rate from

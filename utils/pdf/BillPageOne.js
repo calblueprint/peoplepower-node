@@ -195,6 +195,14 @@ export default class BillPageOne extends React.PureComponent {
               </Text>
             </View>
           </View>
+          <View>
+            <Image
+              src={`./temp/${subscriberBill.id}_chart1.png`}
+              alt="Power Generation Chart"
+              safePath="./temp"
+              style={[styles.firstChart]}
+            />
+          </View>
         </View>
       </Page>
     );

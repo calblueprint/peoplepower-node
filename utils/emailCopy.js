@@ -68,6 +68,7 @@ export default {
     solarProject,
     subscriberBill,
     approveLink,
+    regenerateLink,
     localPdfPath
   ) => ({
     to: ADMIN_EMAIL,
@@ -80,10 +81,11 @@ Please look over the details below and click the link to approve. Sample Bill PD
 New Bill Object: 
 ${JSON.stringify(subscriberBill, undefined, 4)}
 
-Note: Approval will let the user make payments on the bill on the portal and will send them an email with the bill attached (Not Implemented).
-If there are issues, visit Airtable to either adjust values or delete bill (for retrying).
+Note: Approval will let the user make payments on the bill on the portal and will send them an email with the bill attached (Not Implemented). Until this bill is approved or deleted, the user will not see any bill on their portal.
+If there are issues, visit Airtable to either adjust values and regenerate or delete bill (for retrying).
 
-Click Here To Approve: ${approveLink}${PLAINTEXT_ADMIN_EMAIL_CLOSER}`,
+Click Here To Approve: ${approveLink}
+Click Here to Regenerate: ${regenerateLink}${PLAINTEXT_ADMIN_EMAIL_CLOSER}`,
 
     // HTML Version
     html: `${HTML_ADMIN_EMAIL_OPENER}A bill has been successfully generated for Account #${
@@ -96,13 +98,61 @@ New Bill Object:
 <br/>
 <pre>${JSON.stringify(subscriberBill, undefined, 2)}</pre>
 <br/><br/>
-Note: Approval will let the user make payments on the bill on the portal and will send them an email with the bill attached (Not Implemented).
+Note: Approval will let the user make payments on the bill on the portal and will send them an email with the bill attached (Not Implemented). Until this bill is approved or deleted, the user will not see any bill on their portal.
 <br/>
-If there are issues, visit Airtable to either adjust values or delete bill (for retrying).
+If there are issues, visit Airtable to either adjust values and regenerate or delete bill (for retrying).
 <br/><br/>
 <a href="${approveLink}">Click Here to Approve Bill</a>
-<br/>
+<a href="${regenerateLink}">Click Here to Regenerate Bill</a>
 Alternatively, copy the following into a browser: ${approveLink}${HTML_ADMIN_EMAIL_CLOSER}`,
+    attachments: [
+      {
+        path: localPdfPath
+      }
+    ]
+  }),
+  pdfSuccess: (
+    subscriber,
+    solarProject,
+    subscriberBill,
+    approveLink,
+    regenerateLink,
+    localPdfPath
+  ) => ({
+    to: ADMIN_EMAIL,
+    subject: 'Successfully Regenerated PF',
+    text: `${PLAINTEXT_ADMIN_EMAIL_OPENER}A new PDF has been generated for Account #${
+      subscriber.subscriberAccountNumber
+    }, belonging to ${subscriber.name} under the ${solarProject.name} project. 
+Please look over the details below and click the link to approve. New Bill PDF is attached.
+    
+New Bill Object: 
+${JSON.stringify(subscriberBill, undefined, 4)}
+
+Note: Approval will let the user make payments on the bill on the portal and will send them an email with the bill attached (Not Implemented). Until this bill is approved or deleted, the user will not see any bill on their portal.
+If there are issues, visit Airtable to either adjust values and regenerate or delete bill (for retrying).
+
+Click Here To Approve: ${approveLink}
+Click Here to Regenerate: ${regenerateLink}${PLAINTEXT_ADMIN_EMAIL_CLOSER}`,
+
+    // HTML Version
+    html: `${HTML_ADMIN_EMAIL_OPENER}A new PDF has been generated for Account #${
+      subscriber.subscriberAccountNumber
+    }, belonging to ${subscriber.name} under the ${solarProject.name} project. 
+<br/>
+Please look over the details below and click the link to approve. New Bill PDF is attached.
+<br/><br/>
+New Bill Object: 
+<br/>
+<pre>${JSON.stringify(subscriberBill, undefined, 2)}</pre>
+<br/><br/>
+Note: Approval will let the user make payments on the bill on the portal and will send them an email with the bill attached (Not Implemented). Until this bill is approved or deleted, the user will not see any bill on their portal.
+<br/>
+If there are issues, visit Airtable to either adjust values and regenerate or delete bill (for retrying).
+<br/><br/>
+<a href="${approveLink}">Click Here to Approve Bill</a>
+<a href="${regenerateLink}">Click Here to Regenerate Bill</a>
+${HTML_ADMIN_EMAIL_CLOSER}`,
     attachments: [
       {
         path: localPdfPath

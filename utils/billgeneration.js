@@ -157,6 +157,7 @@ const generateBillForSubscriber = async (subscriber, solarProject) => {
   // Generate PDF!
   try {
     // Pulls latest bill and generates PDF. Will send success email
+    console.log(`Generating PDF for ${subscriber.name}`);
     await generatePdfForSubscriber(subscriber.id, true);
   } catch (e) {
     console.log(e);
