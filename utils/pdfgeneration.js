@@ -84,6 +84,9 @@ const generatePdfForSubscriber = async (
 
   // Generate PDF for latest bill
   console.log(`Creating PDF for Bill# ${latestBill.id} ...`);
+
+  // Create a unique timestamp to ensure unique URL for pdf
+  const pdfStamp = new Date().getTime();
   await ReactPDF.render(
     <BillTemplate
       subscriber={subscriber}
@@ -91,22 +94,24 @@ const generatePdfForSubscriber = async (
       subscriberBill={latestBill}
       previousBills={previousBills}
     />,
-    `./temp/${latestBill.id}.pdf`
+    `./temp/${latestBill.id}_${pdfStamp}.pdf`
   );
 
   // Update latest bill on server with PDF
   await updateSubscriberBill(latestBill.id, {
-    billPdf: [{ url: `${Constants.SERVER_URL}/${latestBill.id}.pdf` }],
+    billPdf: [
+      { url: `${Constants.SERVER_URL}/${latestBill.id}_${pdfStamp}.pdf` }
+    ],
     status: 'Pending'
   });
   console.log(
-    `Succesfully uploaded PDF at ${Constants.SERVER_URL}/${latestBill.id}.pdf`
+    `Succesfully uploaded PDF at ${Constants.SERVER_URL}/${latestBill.id}_${pdfStamp}.pdf`
   );
 
   // Report Success
   const approveLink = `${Constants.SERVER_URL}/approve?id=${latestBill.id}`;
   const regenerateLink = `${Constants.SERVER_URL}/regenerate?subscriberId=${subscriber.id}`;
-  const localPdfPath = `./temp/${latestBill.id}.pdf`;
+  const localPdfPath = `./temp/${latestBill.id}_${pdfStamp}.pdf`;
   if (freshBillGeneration) {
     sendEmail(
       billSuccess(
@@ -134,10 +139,18 @@ const generatePdfForSubscriber = async (
   // Clean up extraneous files 20 seconds after all is said and done
   // Delay allows for Airtable to copy over PDF
   setTimeout(() => {
-    console.log(`Deleting Temporary PDF: ${latestBill.id}.pdf and charts`);
-    fs.unlinkSync(`./temp/${latestBill.id}.pdf`);
-    fs.unlinkSync(`./temp/${latestBill.id}_chart1.png`);
-    fs.unlinkSync(`./temp/${latestBill.id}_chart2.png`);
+    try {
+      console.log(
+        `Deleting Temporary PDF: ${latestBill.id}_${pdfStamp}.pdf and charts`
+      );
+      fs.unlinkSync(`./temp/${latestBill.id}_${pdfStamp}.pdf`);
+      fs.unlinkSync(`./temp/${latestBill.id}_chart1.png`);
+      fs.unlinkSync(`./temp/${latestBill.id}_chart2.png`);
+    } catch (e) {
+      console.log(
+        'ERROR deleting files from temp folder. Failing gracefully...'
+      );
+    }
   }, Constants.PDF_DELETE_DELAY * 1000);
 };
 

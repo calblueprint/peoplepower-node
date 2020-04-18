@@ -31,6 +31,15 @@ export default {
     // HTML Version
     html: `${HTML_ADMIN_EMAIL_OPENER}Bill Generation failed when generating bill for ${subscriber.name}. Their Subscriber ID in Airtable is ${subscriber.id}. They belong to the ${solarProject.name} project. Please check the server logs for issues and try again!<br/><br/>Error Message: ${errorMessage}${HTML_ADMIN_EMAIL_CLOSER}`
   }),
+  // Generic Bill Error
+  pdfRegenerationError: errorMessage => ({
+    to: ADMIN_EMAIL,
+    subject: 'PDF Re-Generation Failed',
+    text: `${PLAINTEXT_ADMIN_EMAIL_OPENER}PDF Regeneration failed. This is most likely due to malformatted data on airtable. Please check the server logs for issues and try again!\n\nError Message: ${errorMessage}${PLAINTEXT_ADMIN_EMAIL_CLOSER}`,
+
+    // HTML Version
+    html: `${HTML_ADMIN_EMAIL_OPENER}PDF Regeneration failed. This is most likely due to malformatted data on airtable. Please check the server logs for issues and try again!<br/><br/>Error Message: ${errorMessage}${HTML_ADMIN_EMAIL_CLOSER}`
+  }),
 
   // PDF Bill Error
   pdfBillError: (subscriber, solarProject, errorMessage) => ({
@@ -102,9 +111,8 @@ Note: Approval will let the user make payments on the bill on the portal and wil
 <br/>
 If there are issues, visit Airtable to either adjust values and regenerate or delete bill (for retrying).
 <br/><br/>
-<a href="${approveLink}">Click Here to Approve Bill</a>
-<a href="${regenerateLink}">Click Here to Regenerate Bill</a>
-Alternatively, copy the following into a browser: ${approveLink}${HTML_ADMIN_EMAIL_CLOSER}`,
+<a href="${approveLink}">Click Here to Approve Bill</a><br/>
+<a href="${regenerateLink}">Click Here to Regenerate Bill</a>${HTML_ADMIN_EMAIL_CLOSER}`,
     attachments: [
       {
         path: localPdfPath
@@ -120,7 +128,7 @@ Alternatively, copy the following into a browser: ${approveLink}${HTML_ADMIN_EMA
     localPdfPath
   ) => ({
     to: ADMIN_EMAIL,
-    subject: 'Successfully Regenerated PF',
+    subject: 'Successfully Regenerated PDF',
     text: `${PLAINTEXT_ADMIN_EMAIL_OPENER}A new PDF has been generated for Account #${
       subscriber.subscriberAccountNumber
     }, belonging to ${subscriber.name} under the ${solarProject.name} project. 
@@ -150,7 +158,7 @@ Note: Approval will let the user make payments on the bill on the portal and wil
 <br/>
 If there are issues, visit Airtable to either adjust values and regenerate or delete bill (for retrying).
 <br/><br/>
-<a href="${approveLink}">Click Here to Approve Bill</a>
+<a href="${approveLink}">Click Here to Approve Bill</a><br/>
 <a href="${regenerateLink}">Click Here to Regenerate Bill</a>
 ${HTML_ADMIN_EMAIL_CLOSER}`,
     attachments: [

@@ -7,6 +7,10 @@ import {
 } from './utils/billGeneration';
 import { sendInviteEmail } from './utils/pledgeInvite';
 import generatePdfForSubscriber from './utils/pdfGeneration';
+import EmailGenerators from './utils/emailCopy';
+import sendEmail from './utils/email';
+
+const { pdfRegenerationError } = EmailGenerators;
 
 dotenv.config(); // Set up environment variables
 
@@ -35,12 +39,18 @@ app.post('/generate', (req, res) => {
 
 app.get('/regenerate', (req, res) => {
   const { subscriberId } = req.query;
-  console.log('Received regenerate request with body:');
-  console.log(req.body);
+  console.log('Received regenerate request with query:');
+  console.log(req.query);
   if (subscriberId) {
-    generatePdfForSubscriber(subscriberId);
+    generatePdfForSubscriber(subscriberId).catch(e => {
+      console.log(e);
+      console.log('Run into error in PDF Generation process. Reporting...');
+      sendEmail(pdfRegenerationError(e.message));
+    });
   }
-  res.end();
+  res.send(
+    'Regenerating bill from latest data on Airtable... Wait for an email and check airtable'
+  );
 });
 
 app.post('/invite', async (req, res) => {
