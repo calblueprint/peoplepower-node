@@ -15,16 +15,22 @@ export default class BillPageTwo extends React.PureComponent {
     const round = (x, y = 3) => x.toFixed(y);
     const sum = arr => round(arr.reduce((a, b) => a + b, 0), 2);
 
-    // TODO: Need to add formatting to account for commas in both here and Bill Page One
     const startMoment = moment(bills[bills.length - 1].startDate, 'YYYY-MM-DD');
-    const totalEbceCharges = 0; // TODO: Need to figure out what the heck this is
-    const totalPgeCharges = 0; // TODO: Need to figure out what the heck this is
+    const totalEbceCharges = sum(bills.map(b => b.ebceCharges));
+    const totalPgeCharges = sum(bills.map(b => b.pgeCharges));
     const totalPPCharges = sum(bills.map(b => b.currentCharges));
     const totalEbceCredits = sum(bills.map(b => b.ebceRebate));
     const totalRebates = sum(bills.map(b => b.estimatedRebate));
-    const totalWouldBeCost = sum(bills.map(b => b.wouldBeCharges));
+    const totalWouldBeCost = sum(bills.map(b => b.wouldBeCosts));
     const totalPaid = sum(
-      bills.map(b => b.currentCharges - b.ebceRebate - b.estimatedRebate)
+      bills.map(
+        b =>
+          b.ebceCharges +
+          b.pgeCharges +
+          b.currentCharges -
+          b.ebceRebate -
+          b.estimatedRebate
+      )
     );
     const percentSavings = round((1 - totalPaid / totalWouldBeCost) * 100, 1);
     return (

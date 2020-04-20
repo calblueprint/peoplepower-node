@@ -41,11 +41,15 @@ const generateCostOverTimeChart = (prevBills, latestBill) => {
     .filter((_, i) => i < 12)
     .reverse();
   const monthData = bills.map(b => b.startDate);
-  // TODO: account for pge charges + ebce charges
   const trueCosts = bills.map(
-    b => b.currentCharges - b.ebceRebate - b.estimatedRebate
+    b =>
+      b.ebceCharges +
+      b.pgeCharges +
+      b.currentCharges -
+      b.ebceRebate -
+      b.estimatedRebate
   );
-  const wouldBeCosts = bills.map(b => b.wouldBeCharges);
+  const wouldBeCosts = bills.map(b => b.wouldBeCosts);
   return generateLineChartForData(monthData, trueCosts, wouldBeCosts);
 };
 

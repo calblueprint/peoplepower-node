@@ -41,7 +41,6 @@ const getPreviousSubscriberBill = async subscriber => {
     // Edge case for first bill
     return {
       statementNumber: 0,
-      totalEstimatedRebate: 0,
       balance: 0,
       startDate: '',
       endDate: ''
@@ -65,6 +64,9 @@ const generateBillForSubscriber = async (subscriber, solarProject) => {
   const {
     netPgeUsage,
     ebceRebate,
+    pgeCharges,
+    ebceCharges,
+    wouldBeCosts,
     startDate: startMoment,
     endDate: endMoment
   } = latestBill;
@@ -146,10 +148,12 @@ const generateBillForSubscriber = async (subscriber, solarProject) => {
     rateScheduleId: subscriber.rateScheduleId,
     netPgeUsage,
     ebceRebate,
+    pgeCharges,
+    ebceCharges,
+    wouldBeCosts,
     chartGenerationData,
     systemProduction,
     statementNumber: prevBill.statementNumber + 1,
-    previousTotalEstimatedRebate: prevBill.totalEstimatedRebate,
     balanceOnPreviousBill: prevBill.balance,
     status: 'Pending'
   });
