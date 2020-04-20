@@ -1,7 +1,6 @@
 export default {
   // Bill Generation
-  // SERVER_URL: 'https://peoplepower-node.herokuapp.com',
-  SERVER_URL: 'https://fa97702c.ngrok.io',
+  SERVER_URL: 'https://peoplepower-node.herokuapp.com',
   PDF_DELETE_DELAY: 20,
 
   // Mailing
@@ -10,5 +9,10 @@ export default {
 
   // Pledge Invites
   INVITE_BASE_URL: 'https://peoplepower.netlify.com/onboarding',
-  INVITE_PARAM: 'invite'
+  INVITE_PARAM: 'invite',
+
+  // PGE Constants
+  PGE_CONSUMPTION_COST: 0.07217,
+  EBCE_GENERATION_COST: 0.13733,
+  PCIA_COST: 0.03401
 };

@@ -99,7 +99,7 @@ const generateBillForSubscriber = async (subscriber, solarProject) => {
   }
 
   console.log(
-    `Found PGE Data for ${subscriber.name}\nNet Usage: ${netPgeUsage}\nebce Rebate: ${ebceRebate}\nstart date: ${startDate}\nend date: ${endDate}`
+    `Found PGE Data for ${subscriber.name}\nNet Usage: ${netPgeUsage}\nebce Rebate: ${ebceRebate}\nstart date: ${startDate}\nend date: ${endDate}\nWould Be Costs: ${wouldBeCosts}`
   );
 
   // Get Enphase data for date-range found in PG&E Bill
