@@ -36,26 +36,27 @@ const getEBCERebate = latestBill => {
   return rebateItem[0].cost;
 };
 
-// sum of all charges under supplier_line_items section (except EBCE Rebate)
+// sum of all charges under supplier_line_items section
 const getEBCECharges = latestBill => {
   const supplier = latestBill.suppliers.filter(
     s => s.supplier_name === EBCESupplierName
   )[0];
 
   return supplier.supplier_line_items.reduce((total, item) => {
-    // Only add up non EBCE Rebate charges
-    if (item.name !== EBCERebateString) {
-      return total + item.cost;
-    }
-    return total;
+    return total + item.cost;
   }, 0);
 };
 
-// sum of all charges under line_items section (except EBCE Rebate)
+// sum of all charges under line_items section that don't appear in supplier_line_items
 const getPGECharges = latestBill => {
+  const supplier = latestBill.suppliers.filter(
+    s => s.supplier_name === EBCESupplierName
+  )[0];
+  const supplierLineItems = supplier.line_items.map(item => item.name);
+
   return latestBill.line_items.reduce((total, item) => {
-    // Only add up non EBCE Rebate charges
-    if (item.name !== EBCERebateString) {
+    // Only add up items that don't appear in supplier line items
+    if (!supplierLineItems.includes(item.name)) {
       return total + item.cost;
     }
     return total;
