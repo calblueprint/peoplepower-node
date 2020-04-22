@@ -20,8 +20,7 @@ export default class BillPageOne extends React.PureComponent {
             balance: 0
           };
     const round = (x, y = 2) => parseFloat(x).toFixed(y);
-    const roundAndCut = (x, y = 2) =>
-      Math.floor(x * Math.pow(10, y)) / Math.pow(10, y);
+    const roundAndCut = (x, y = 2) => Math.floor(x * 10 ** y) / 10 ** y;
     const formatAirtableDate = d =>
       moment(d, 'YYYY-MM-DD').format('MM/DD/YYYY');
     return (
