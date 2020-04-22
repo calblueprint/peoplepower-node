@@ -19,7 +19,9 @@ export default class BillPageOne extends React.PureComponent {
             amountReceived: 0,
             balance: 0
           };
-    const round = x => parseFloat(x).toFixed(3);
+    const round = (x, y = 2) => parseFloat(x).toFixed(y);
+    const roundAndCut = (x, y = 2) =>
+      Math.floor(x * Math.pow(10, y)) / Math.pow(10, y);
     const formatAirtableDate = d =>
       moment(d, 'YYYY-MM-DD').format('MM/DD/YYYY');
     return (
@@ -162,7 +164,7 @@ export default class BillPageOne extends React.PureComponent {
                 {subscriberBill.systemProduction} kWh
               </Text>
               <Text style={[styles.text, styles.width25]}>
-                ${round(subscriberBill.ppRate)}
+                ${roundAndCut(subscriberBill.ppRate, 5)}
               </Text>
               <Text style={[styles.text, styles.width25]}>
                 ${round(subscriberBill.currentCharges)}

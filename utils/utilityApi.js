@@ -52,7 +52,7 @@ const getPGECharges = latestBill => {
   const supplier = latestBill.suppliers.filter(
     s => s.supplier_name === EBCESupplierName
   )[0];
-  const supplierLineItems = supplier.line_items.map(item => item.name);
+  const supplierLineItems = supplier.supplier_line_items.map(item => item.name);
 
   return latestBill.line_items.reduce((total, item) => {
     // Only add up items that don't appear in supplier line items
@@ -111,7 +111,7 @@ const getLatestPGEBill = async meterId => {
   const billData = await response.json();
   const latestBill = billData.bills[0];
 
-  const roundDecimals = x => parseFloat(x.toFixed(2));
+  const roundDecimals = x => Math.floor(x * 100) / 100;
 
   // Get data using helper functions
   const startDate = getStartDate(latestBill);
