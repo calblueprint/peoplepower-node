@@ -2,6 +2,7 @@ export default {
   // Bill Generation
   SERVER_URL: 'https://peoplepower-node.herokuapp.com',
   PDF_DELETE_DELAY: 20,
+  TEMP_BILL_SAVE_FOLDER_NAME: 'temp',
 
   // Mailing
   SENDER_NAME: 'People Power Solar',
