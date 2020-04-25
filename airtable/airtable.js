@@ -10,14 +10,12 @@
 */
 import Airtable from 'airtable';
 import { Columns } from './schema';
+import Constants from '../Constants';
+
+const { BASE_ID, VIEW, ENDPOINT_URL } = Constants;
+const apiKey = process.env.REACT_APP_AIRTABLE_API_KEY;
 
 require('dotenv-safe').config();
-
-const BASE_ID = 'appFaOwKhMXrRIQIp';
-const VIEW = 'Grid view';
-const ENDPOINT_URL = 'https://api.airtable.com';
-
-const apiKey = process.env.REACT_APP_AIRTABLE_API_KEY;
 
 Airtable.configure({
   endpointUrl: ENDPOINT_URL,
@@ -196,8 +194,6 @@ function deleteRecord(table, id) {
 }
 
 export {
-  BASE_ID,
-  apiKey,
   createRecord,
   getAllRecords,
   getRecordById,

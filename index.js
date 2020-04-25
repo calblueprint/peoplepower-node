@@ -12,8 +12,10 @@ import EmailGenerators from './utils/emailCopy';
 import sendEmail from './utils/email';
 import { getEnphaseDataForMonth } from './utils/enphase';
 import { getSolarProjectById, updateSolarProject } from './airtable/request';
-import { BASE_ID, apiKey } from './airtable/airtable';
 import Constants from './Constants';
+
+const { BASE_ID, TEMP_BILL_SAVE_FOLDER_NAME } = Constants;
+const apiKey = process.env.REACT_APP_AIRTABLE_API_KEY;
 
 const { pdfRegenerationError } = EmailGenerators;
 
@@ -34,7 +36,7 @@ new Airlock({
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(Constants.TEMP_BILL_SAVE_FOLDER_NAME)); // Make PDFs accessible
+app.use(express.static(TEMP_BILL_SAVE_FOLDER_NAME)); // Make PDFs accessible
 
 app.get('/', (_, res) => {
   res.send(
