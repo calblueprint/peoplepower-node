@@ -94,7 +94,7 @@ const generatePdfForSubscriber = async (
       subscriberBill={latestBill}
       previousBills={previousBills}
     />,
-    `./temp/${latestBill.id}_${pdfStamp}.pdf`
+    `./${Constants.TEMP_BILL_SAVE_FOLDER_NAME}/${latestBill.id}_${pdfStamp}.pdf`
   );
 
   // Update latest bill on server with PDF
@@ -111,7 +111,7 @@ const generatePdfForSubscriber = async (
   // Report Success
   const approveLink = `${Constants.SERVER_URL}/approve?id=${latestBill.id}`;
   const regenerateLink = `${Constants.SERVER_URL}/regenerate?subscriberId=${subscriber.id}`;
-  const localPdfPath = `./temp/${latestBill.id}_${pdfStamp}.pdf`;
+  const localPdfPath = `./${Constants.TEMP_BILL_SAVE_FOLDER_NAME}/${latestBill.id}_${pdfStamp}.pdf`;
   if (freshBillGeneration) {
     sendEmail(
       billSuccess(
@@ -143,12 +143,18 @@ const generatePdfForSubscriber = async (
       console.log(
         `Deleting Temporary PDF: ${latestBill.id}_${pdfStamp}.pdf and charts`
       );
-      fs.unlinkSync(`./temp/${latestBill.id}_${pdfStamp}.pdf`);
-      fs.unlinkSync(`./temp/${latestBill.id}_chart1.png`);
-      fs.unlinkSync(`./temp/${latestBill.id}_chart2.png`);
+      fs.unlinkSync(
+        `./${Constants.TEMP_BILL_SAVE_FOLDER_NAME}/${latestBill.id}_${pdfStamp}.pdf`
+      );
+      fs.unlinkSync(
+        `./${Constants.TEMP_BILL_SAVE_FOLDER_NAME}/${latestBill.id}_chart1.png`
+      );
+      fs.unlinkSync(
+        `./${Constants.TEMP_BILL_SAVE_FOLDER_NAME}/${latestBill.id}_chart2.png`
+      );
     } catch (e) {
       console.log(
-        'ERROR deleting files from temp folder. Failing gracefully...'
+        `ERROR deleting files from ${Constants.TEMP_BILL_SAVE_FOLDER_NAME} folder. Failing gracefully...`
       );
     }
   }, Constants.PDF_DELETE_DELAY * 1000);

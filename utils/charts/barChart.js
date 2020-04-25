@@ -1,3 +1,7 @@
+import Colors from '../../Colors';
+
+const { PP_PINK } = Colors;
+
 // Include the exporter module
 
 const getBarChartForData = (dates, data) => {
@@ -23,7 +27,7 @@ const getBarChartForData = (dates, data) => {
 
     plotOptions: {
       column: {
-        color: '#cd6795',
+        color: PP_PINK,
         pointPadding: 0.2,
         borderWidth: 0
       }

@@ -2,6 +2,7 @@ import React from 'react';
 import { Page, Text, View, Image } from '@react-pdf/renderer';
 import moment from 'moment';
 import styles from './PDFStyles';
+import Constants from '../../Constants';
 
 export default class BillPageTwo extends React.PureComponent {
   render() {
@@ -145,9 +146,9 @@ export default class BillPageTwo extends React.PureComponent {
             </Text>
             <View>
               <Image
-                src={`./temp/${subscriberBill.id}_chart2.png`}
+                src={`./${Constants.TEMP_BILL_SAVE_FOLDER_NAME}/${subscriberBill.id}_chart2.png`}
                 alt="Chart of what pou've paid versus what you would be charge from PGE"
-                safePath="./temp"
+                safePath={`./${Constants.TEMP_BILL_SAVE_FOLDER_NAME}`}
                 style={[styles.secondChart]}
               />
             </View>

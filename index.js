@@ -1,6 +1,7 @@
 import dotenv from 'dotenv-safe';
 import express from 'express';
 import cors from 'cors';
+import Airlock from 'airlock-server';
 import {
   generateBillsForSolarProject,
   approveSubscriberBill
@@ -11,6 +12,8 @@ import EmailGenerators from './utils/emailCopy';
 import sendEmail from './utils/email';
 import { getEnphaseDataForMonth } from './utils/enphase';
 import { getSolarProjectById, updateSolarProject } from './airtable/request';
+import { BASE_ID, apiKey } from './airtable/airtable';
+import Constants from './Constants';
 
 const { pdfRegenerationError } = EmailGenerators;
 
@@ -19,9 +22,19 @@ dotenv.config(); // Set up environment variables
 const app = express();
 const port = process.env.PORT || 3000;
 
+/* eslint-disable no-new */
+new Airlock({
+  server: app,
+  airtableApiKey: [apiKey],
+  airtableBaseId: BASE_ID,
+  airtableUserTableName: 'Owner',
+  airtableUsernameColumn: 'Email',
+  airtablePasswordColumn: 'Password'
+});
+
 app.use(cors());
 app.use(express.json());
-app.use(express.static('temp')); // Make PDFs accessible
+app.use(express.static(Constants.TEMP_BILL_SAVE_FOLDER_NAME)); // Make PDFs accessible
 
 app.get('/', (_, res) => {
   res.send(

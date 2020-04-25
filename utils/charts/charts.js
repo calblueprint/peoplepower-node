@@ -1,6 +1,7 @@
 // Include the exporter module
 import exporter from 'highcharts-export-server';
 import { writeFile } from 'fs';
+import Constants from '../../Constants';
 
 const saveChartToFile = (chart, fileName) => {
   return new Promise((resolve, reject) => {
@@ -24,11 +25,14 @@ const saveChartToFile = (chart, fileName) => {
           reject(err);
         } else {
           console.log('Saving chart to file...');
-          writeFile(`temp/${fileName}.png`, res.data, 'base64', function(
-            error
-          ) {
-            reject(error);
-          });
+          writeFile(
+            `${Constants.TEMP_BILL_SAVE_FOLDER_NAME}/${fileName}.png`,
+            res.data,
+            'base64',
+            function(error) {
+              reject(error);
+            }
+          );
 
           resolve();
         }

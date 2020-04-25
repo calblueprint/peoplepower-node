@@ -196,6 +196,8 @@ function deleteRecord(table, id) {
 }
 
 export {
+  BASE_ID,
+  apiKey,
   createRecord,
   getAllRecords,
   getRecordById,

@@ -2,6 +2,7 @@ import React from 'react';
 import { Page, Text, View, Image } from '@react-pdf/renderer';
 import moment from 'moment';
 import styles from './PDFStyles';
+import Constants from '../../Constants';
 
 export default class BillPageOne extends React.PureComponent {
   render() {
@@ -202,9 +203,9 @@ export default class BillPageOne extends React.PureComponent {
           </View>
           <View>
             <Image
-              src={`./temp/${subscriberBill.id}_chart1.png`}
+              src={`./${Constants.TEMP_BILL_SAVE_FOLDER_NAME}/${subscriberBill.id}_chart1.png`}
               alt="Power Generation Chart"
-              safePath="./temp"
+              safePath={`./${Constants.TEMP_BILL_SAVE_FOLDER_NAME}`}
               style={[styles.firstChart]}
             />
           </View>
