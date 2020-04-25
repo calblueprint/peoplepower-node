@@ -9,6 +9,8 @@ import { sendInviteEmail } from './utils/pledgeInvite';
 import generatePdfForSubscriber from './utils/pdfgeneration';
 import EmailGenerators from './utils/emailCopy';
 import sendEmail from './utils/email';
+import { getEnphaseDataForMonth } from './utils/enphase';
+import { getSolarProjectById, updateSolarProject } from './airtable/request';
 
 const { pdfRegenerationError } = EmailGenerators;
 
@@ -83,6 +85,46 @@ app.get('/approve', async (req, res) => {
       .status(400)
       .send(
         'Request Approval Failed, likely due to malformed request or nonexistent subscriber ID.'
+      );
+  }
+});
+
+app.get('/refreshSolarProjectData', async (req, res) => {
+  console.log('Received Solar Project Refresh Request with query');
+  console.log(req.query);
+  const { month, year, solarProjectId } = req.query;
+  try {
+    const solarProject = await getSolarProjectById(solarProjectId);
+    const enphaseData = await getEnphaseDataForMonth(
+      solarProject.enphaseUserId,
+      solarProject.enphaseSystemId,
+      year,
+      month
+    );
+    let { monthlyProductionData } = solarProject;
+    if (!monthlyProductionData) {
+      monthlyProductionData = {};
+    } else {
+      monthlyProductionData = JSON.parse(monthlyProductionData);
+    }
+    monthlyProductionData[`${month}/${year}`] = enphaseData;
+    await updateSolarProject(solarProjectId, {
+      monthlyProductionData: JSON.stringify(monthlyProductionData)
+    });
+    res.send(
+      `Updated monthly production data: ${JSON.stringify(
+        monthlyProductionData,
+        null,
+        2
+      )}`
+    );
+  } catch (e) {
+    console.log('Error getting monthly production data');
+    console.log(e);
+    res
+      .status(400)
+      .send(
+        'Request Failed, likely due to malformed request or nonexistent Solar Project ID.'
       );
   }
 });

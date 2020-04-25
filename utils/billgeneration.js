@@ -8,7 +8,7 @@ import {
   updateSubscriberBill,
   getSubscriberBillsByIds
 } from '../airtable/request';
-import getEnphaseData from './enphase';
+import { getEnphaseDataForSubscriber } from './enphase';
 
 import sendEmail from './email';
 import EmailGenerators from './emailCopy';
@@ -103,7 +103,7 @@ const generateBillForSubscriber = async (subscriber, solarProject) => {
   );
 
   // Get Enphase data for date-range found in PG&E Bill
-  let generationData = await getEnphaseData(
+  let generationData = await getEnphaseDataForSubscriber(
     subscriber.id,
     solarProject.enphaseUserId,
     solarProject.enphaseSystemId,
