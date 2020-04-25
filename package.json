@@ -22,7 +22,8 @@
     "react-dom": "^16.13.1"
   },
   "scripts": {
-    "generate-schema": "generate-airtable-schema && pretty-quick",
+    "add-require-to-airtable": "(echo \"require('dotenv-safe').config();\" && cat airtable/airtable.js) > temp.js && mv temp.js airtable/airtable.js",
+    "generate-schema": "generate-airtable-schema && pretty-quick && yarn add-require-to-airtable",
     "start": "babel-node index.js"
   },
   "devDependencies": {

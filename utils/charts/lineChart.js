@@ -3,6 +3,9 @@ const generateLineChartForData = (months, trueCosts, wouldBeCosts) => {
     title: {
       text: ''
     },
+    credits: {
+      enabled: false
+    },
     yAxis: {
       title: {
         text: ''

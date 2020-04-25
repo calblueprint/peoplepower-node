@@ -8,7 +8,7 @@ import {
   updateSubscriberBill,
   getSubscriberBillsByIds
 } from '../airtable/request';
-import getEnphaseData from './enphase';
+import { getEnphaseDataForSubscriber } from './enphase';
 
 import sendEmail from './email';
 import EmailGenerators from './emailCopy';
@@ -41,7 +41,6 @@ const getPreviousSubscriberBill = async subscriber => {
     // Edge case for first bill
     return {
       statementNumber: 0,
-      totalEstimatedRebate: 0,
       balance: 0,
       startDate: '',
       endDate: ''
@@ -65,6 +64,9 @@ const generateBillForSubscriber = async (subscriber, solarProject) => {
   const {
     netPgeUsage,
     ebceRebate,
+    pgeCharges,
+    ebceCharges,
+    wouldBeCosts,
     startDate: startMoment,
     endDate: endMoment
   } = latestBill;
@@ -97,11 +99,11 @@ const generateBillForSubscriber = async (subscriber, solarProject) => {
   }
 
   console.log(
-    `Found PGE Data for ${subscriber.name}\nNet Usage: ${netPgeUsage}\nebce Rebate: ${ebceRebate}\nstart date: ${startDate}\nend date: ${endDate}`
+    `Found PGE Data for ${subscriber.name}\nNet Usage: ${netPgeUsage}\nebce Rebate: ${ebceRebate}\nstart date: ${startDate}\nend date: ${endDate}\nWould Be Costs: ${wouldBeCosts}`
   );
 
   // Get Enphase data for date-range found in PG&E Bill
-  let generationData = await getEnphaseData(
+  let generationData = await getEnphaseDataForSubscriber(
     subscriber.id,
     solarProject.enphaseUserId,
     solarProject.enphaseSystemId,
@@ -146,10 +148,12 @@ const generateBillForSubscriber = async (subscriber, solarProject) => {
     rateScheduleId: subscriber.rateScheduleId,
     netPgeUsage,
     ebceRebate,
+    pgeCharges,
+    ebceCharges,
+    wouldBeCosts,
     chartGenerationData,
     systemProduction,
     statementNumber: prevBill.statementNumber + 1,
-    previousTotalEstimatedRebate: prevBill.totalEstimatedRebate,
     balanceOnPreviousBill: prevBill.balance,
     status: 'Pending'
   });

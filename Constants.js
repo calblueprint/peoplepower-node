@@ -9,5 +9,10 @@ export default {
 
   // Pledge Invites
   INVITE_BASE_URL: 'https://peoplepower.netlify.com/onboarding',
-  INVITE_PARAM: 'invite'
+  INVITE_PARAM: 'invite',
+
+  // PGE Constants
+  PGE_CONSUMPTION_COST: 0.07217,
+  EBCE_GENERATION_COST: 0.13733,
+  PCIA_COST: 0.03401
 };
