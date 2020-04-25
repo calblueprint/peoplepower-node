@@ -1,3 +1,7 @@
+import Colors from '../../Colors';
+
+const { PP_PINK, PP_GRAY } = Colors;
+
 const generateLineChartForData = (months, trueCosts, wouldBeCosts) => {
   return {
     title: {
@@ -21,12 +25,12 @@ const generateLineChartForData = (months, trueCosts, wouldBeCosts) => {
       {
         name: "What You've Paid",
         data: trueCosts,
-        color: '#cd6795'
+        color: PP_PINK
       },
       {
         name: '"Would-be" costs',
         data: wouldBeCosts,
-        color: '#747474'
+        color: PP_GRAY
       }
     ],
 
@@ -34,7 +38,7 @@ const generateLineChartForData = (months, trueCosts, wouldBeCosts) => {
       layout: 'horizontal',
       align: 'center',
       horizontalAlign: 'middle',
-      color: '#747474'
+      color: PP_GRAY
     },
 
     responsive: {

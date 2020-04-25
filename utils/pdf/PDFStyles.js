@@ -1,4 +1,7 @@
 import { StyleSheet, Font } from '@react-pdf/renderer';
+import Colors from '../../Colors';
+
+const { PP_LIGHT_GRAY, PP_GRAY, PP_BLUE, PP_PINK, PP_DAVYS_GRAY } = Colors;
 
 Font.register({
   family: 'Open Sans',
@@ -17,7 +20,7 @@ export default StyleSheet.create({
     border: '1px solid black'
   },
   backgroundGray: {
-    backgroundColor: '#f3f3f3'
+    backgroundColor: PP_LIGHT_GRAY
   },
   pdfContainer: {
     height: '100%',
@@ -61,13 +64,13 @@ export default StyleSheet.create({
   text: {
     fontSize: 12,
     lineHeight: 1.5,
-    color: '#747474',
+    color: PP_GRAY,
     fontFamily: 'Open Sans'
   },
   boldText: {
     fontSize: 12,
     lineHeight: 1.5,
-    color: '#555',
+    color: PP_DAVYS_GRAY,
     fontFamily: 'Open Sans Bold'
   },
   lineHeight24: {
@@ -77,7 +80,7 @@ export default StyleSheet.create({
     paddingTop: '16px'
   },
   pinkText: {
-    color: '#cd6795',
+    color: PP_PINK,
     fontSize: 14,
     padding: 3,
     fontFamily: 'Open Sans Bold'
@@ -85,31 +88,31 @@ export default StyleSheet.create({
   midText: {
     fontSize: 14,
     lineHeight: 1.5,
-    color: '#555',
+    color: PP_DAVYS_GRAY,
     fontFamily: 'Open Sans'
   },
   midTextBold: {
     fontSize: 14,
     lineHeight: 1.5,
-    color: '#555',
+    color: PP_DAVYS_GRAY,
     fontFamily: 'Open Sans Bold'
   },
   midTextBoldBlue: {
     fontSize: 14,
     lineHeight: 1.5,
-    color: '#555',
+    color: PP_DAVYS_GRAY,
     fontFamily: 'Open Sans Bold'
   },
   largeTextBold: {
     fontSize: 16,
     lineHeight: 1.5,
-    color: '#555',
+    color: PP_DAVYS_GRAY,
     fontFamily: 'Open Sans Bold'
   },
   header: {
     fontFamily: 'Open Sans Bold',
     fontSize: 24,
-    color: '#395578'
+    color: PP_BLUE
   },
   paddingBottom: {
     paddingBottom: 5
@@ -135,41 +138,41 @@ export default StyleSheet.create({
   bigTextPink: {
     fontFamily: 'Open Sans Bold',
     fontSize: 24,
-    color: '#cd6795'
+    color: PP_PINK
   },
   bigTextGray: {
     fontFamily: 'Open Sans Bold',
     fontSize: 24,
-    color: '#747474'
+    color: PP_GRAY
   },
   textBoldBlue: {
     fontSize: 12,
     lineHeight: 1.5,
-    color: '#395578',
+    color: PP_BLUE,
     fontFamily: 'Open Sans Bold'
   },
   midTextBlue: {
     fontSize: 14,
     lineHeight: 1.5,
-    color: '#395578',
+    color: PP_BLUE,
     fontFamily: 'Open Sans'
   },
   midTextBoldPink: {
     fontSize: 14,
     lineHeight: 1.5,
-    color: '#cd6795',
+    color: PP_PINK,
     fontFamily: 'Open Sans Bold'
   },
   smallTextBold: {
     fontSize: 8,
     lineHeight: 1.5,
-    color: '#747474',
+    color: PP_GRAY,
     fontFamily: 'Open Sans Bold'
   },
   smallText: {
     fontSize: 8,
     lineHeight: 1.5,
-    color: '#747474',
+    color: PP_GRAY,
     fontFamily: 'Open Sans'
   },
   textCenter: {
@@ -181,13 +184,13 @@ export default StyleSheet.create({
   smallTextBlue: {
     fontSize: 8,
     lineHeight: 1.5,
-    color: '#395578',
+    color: PP_BLUE,
     fontFamily: 'Open Sans'
   },
   headerThisBlue: {
     fontFamily: 'Open Sans',
     fontSize: 24,
-    color: '#395578'
+    color: PP_BLUE
   },
   cardHeader: {
     padding: '15px',
