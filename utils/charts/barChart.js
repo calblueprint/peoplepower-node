@@ -5,6 +5,9 @@ const getBarChartForData = (dates, data) => {
     chart: {
       type: 'column'
     },
+    credits: {
+      enabled: false
+    },
     title: {
       text: 'Energy Production During Bill Period'
     },
