@@ -14,9 +14,6 @@ import { getEnphaseDataForMonth } from './utils/enphase';
 import { getSolarProjectById, updateSolarProject } from './airtable/request';
 import Constants from './Constants';
 
-const { BASE_ID, TEMP_BILL_SAVE_FOLDER_NAME } = Constants;
-const apiKey = process.env.REACT_APP_AIRTABLE_API_KEY;
-
 const { pdfRegenerationError } = EmailGenerators;
 
 dotenv.config(); // Set up environment variables
@@ -24,11 +21,17 @@ dotenv.config(); // Set up environment variables
 const app = express();
 const port = process.env.PORT || 3000;
 
+const apiKey = process.env.REACT_APP_AIRTABLE_API_KEY;
 /* eslint-disable no-new */
+/* 
+  Airlock is Calblueprint's platform solution to authentication
+  and access control. It's an intermediate server between clients 
+  and Airtable: https://www.npmjs.com/package/airlock-server
+ */
 new Airlock({
   server: app,
   airtableApiKey: [apiKey],
-  airtableBaseId: BASE_ID,
+  airtableBaseId: Constants.BASE_ID,
   airtableUserTableName: 'Owner',
   airtableUsernameColumn: 'Email',
   airtablePasswordColumn: 'Password'
@@ -36,7 +39,7 @@ new Airlock({
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(TEMP_BILL_SAVE_FOLDER_NAME)); // Make PDFs accessible
+app.use(express.static(Constants.TEMP_BILL_SAVE_FOLDER_NAME)); // Make PDFs accessible
 
 app.get('/', (_, res) => {
   res.send(
