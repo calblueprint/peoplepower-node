@@ -1094,10 +1094,10 @@ aggregate-error@^3.0.0:
     clean-stack "^2.0.0"
     indent-string "^4.0.0"
 
-airlock-server@^0.2.8:
-  version "0.2.8"
-  resolved "https://registry.yarnpkg.com/airlock-server/-/airlock-server-0.2.8.tgz#561337b76188578396b234466d269d896dde1520"
-  integrity sha512-o6PX7+XoAQCbYlERcA1ObjgTsTCSOqNyTsdISjHPtDpa7JWZZpW2BXlyeQfatFPOHpuDQOXmayKq7UKE4k15lg==
+airlock-server@^0.2.9:
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/airlock-server/-/airlock-server-0.2.9.tgz#8f8236c739789e7ef08ebe8287a881dd0801b926"
+  integrity sha512-1EeHri6hCOCWIUBp8EsBC1fPbLP6burhKwFn6kHsGboMEPc0wG+egUoNI+jowaSnEk63cIzfsIGTj6Kux0Ra5Q==
   dependencies:
     "@types/airtable" "^0.5.7"
     "@types/bcrypt" "^3.0.0"
