@@ -61,6 +61,6 @@ ssh-keygen -t rsa -b 4096 -m PEM -f jwt.key
 openssl rsa -in jwt.key -pubout -outform PEM -out jwt.key.pub
 ```
 
-After running these commands, the private key will be in `jwt.key` and public key will be in `jwt.key.pub`. DELETE these files after setting them on the server.
+After running these commands, the private key will be in `jwt.key` and public key will be in `jwt.key.pub`
 
 Note: regenerating the keys will invalidate all sessions
