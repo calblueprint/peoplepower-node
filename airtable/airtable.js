@@ -16,6 +16,8 @@ require('dotenv-safe').config();
 
 const apiKey = process.env.REACT_APP_AIRTABLE_API_KEY;
 
+require('dotenv-safe').config();
+
 Airtable.configure({
   endpointUrl: Constants.ENDPOINT_URL,
   apiKey

@@ -24,12 +24,13 @@ const port = process.env.PORT || 3000;
 const apiKey = process.env.REACT_APP_AIRTABLE_API_KEY;
 /* eslint-disable no-new */
 /* 
-  Airlock is Calblueprint's platform solution to authentication
-  and access control. It's an intermediate server between clients 
+  Airlock is @calblueprint's platform solution to authentication
+  and access control. It's an intermediate server between client apps 
   and Airtable: https://www.npmjs.com/package/airlock-server
  */
 new Airlock({
   server: app,
+  allowedOrigins: [Constants.PRODUCTION_WEB_URL, Constants.DEVELOPMENT_WEB_URL],
   airtableApiKey: [apiKey],
   airtableBaseId: Constants.BASE_ID,
   airtableUserTableName: 'Owner',

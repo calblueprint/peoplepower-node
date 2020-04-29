@@ -1,8 +1,10 @@
 export default {
-  // Airlock
+  // Airtable
   BASE_ID: 'appFaOwKhMXrRIQIp',
   VIEW: 'Grid view',
   ENDPOINT_URL: 'https://api.airtable.com',
+  PRODUCTION_WEB_URL: 'https://peoplepower.netlify.app',
+  DEVELOPMENT_WEB_URL: 'http://localhost:3001',
 
   // Bill Generation
   SERVER_URL: 'https://peoplepower-node.herokuapp.com',
