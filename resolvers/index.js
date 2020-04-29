@@ -75,23 +75,19 @@ module.exports = {
         )
       );
     }
-    // write: (announcement, authedUser) => {
-    //   // console.log('WHAT WE GOT');
-    //   // console.log(authedUser.fields[Columns[Tables.Owner].adminOfId.name]);
-    //   // console.log(
-    //   //   announcement.fields[Columns[Tables.Announcement].projectGroupId.name][0]
-    //   // );
-    //   return (
-    //     authedUser &&
-    //     authedUser.fields[Columns[Tables.Owner].adminOfId.name] && // is in a project group
-    //     announcement.fields[Columns[Tables.Announcement].projectGroupId.name] &&
-    //     authedUser.fields[Columns[Tables.Owner].adminOfId.name].includes(
-    //       announcement.fields[
-    //         // Columns[Tables.Announcement].projectGroupId.name
-    //         'Project Group'
-    //       ][0] // ASSUMES announcements only ever belong to 1 project group
-    //     )
-    //   );
-    // }
+    // TODO: write rules for announcements
+    // only project group admins should be able to write to the Announcements table
+    //   write: (announcement, authedUser) => {
+    //     return (
+    //       authedUser &&
+    //       authedUser.fields[Columns[Tables.Owner].adminOfId.name] && // is in a project group
+    //       announcement.fields[Columns[Tables.Announcement].projectGroupId.name] &&
+    //       authedUser.fields[Columns[Tables.Owner].adminOfId.name].includes(
+    //         announcement.fields[
+    //           Columns[Tables.Announcement].projectGroupId.name
+    //         ][0] // ASSUMES announcements only ever belong to 1 project group
+    //       )
+    //     );
+    //   }
   }
 };
