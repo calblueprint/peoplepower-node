@@ -10,7 +10,7 @@
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-react": "^7.8.3",
     "@react-pdf/renderer": "^1.6.8",
-    "airlock-server": "^0.2.8",
+    "airlock-server": "^0.2.9",
     "airtable": "^0.8.1",
     "cors": "^2.8.5",
     "dotenv-safe": "^8.2.0",
@@ -20,7 +20,8 @@
     "node-fetch": "^2.6.0",
     "nodemailer": "^6.4.4",
     "react": "^16.13.0",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "tslib": "^1.11.1"
   },
   "scripts": {
     "add-require-to-airtable": "(echo \"require('dotenv-safe').config();\" && cat airtable/airtable.js) > temp.js && mv temp.js airtable/airtable.js",

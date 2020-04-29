@@ -51,3 +51,16 @@ SAMPLE_USER_ID=
 ```
 
 Make sure you don't commit your API keys! When in doubt, ask in slack :)
+
+### Airlock Keys
+
+If you need to regenerate the Public/Private Keypair for Airlock, use the following commands and store the resulting public and private key in environment variables called PUBLIC_KEY and PRIVATE_KEY
+
+```
+ssh-keygen -t rsa -b 4096 -m PEM -f jwt.key
+openssl rsa -in jwt.key -pubout -outform PEM -out jwt.key.pub
+```
+
+After running these commands, the private key will be in `jwt.key` and public key will be in `jwt.key.pub`
+
+Note: regenerating the keys will invalidate all sessions
