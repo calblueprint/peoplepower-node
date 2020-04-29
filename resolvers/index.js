@@ -90,4 +90,5 @@ module.exports = {
     //     );
     //   }
   }
+  // TODO: Access control rules for Solar Project
 };
