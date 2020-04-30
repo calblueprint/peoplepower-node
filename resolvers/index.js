@@ -27,17 +27,17 @@ module.exports = {
         ))
     );
   },
-
+  // TODO: adding rules for Payment and Project Group breaks Onboarding
   // can only see payments that are associated with you
-  [Tables.Payment]: {
-    read: (payment, authedUser) => {
-      return (
-        authedUser &&
-        authedUser.fields.Payments &&
-        authedUser.fields.Payments.includes(payment.id)
-      );
-    }
-  },
+  // [Tables.Payment]: {
+  //   read: (payment, authedUser) => {
+  //     return (
+  //       authedUser &&
+  //       authedUser.fields.Payments &&
+  //       authedUser.fields.Payments.includes(payment.id)
+  //     );
+  //   }
+  // },
 
   // can only see subscriber bills that are associated with you
   [Tables.SubscriberBill]: (subscriberBill, authedUser) => {
