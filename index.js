@@ -30,7 +30,7 @@ const apiKey = process.env.REACT_APP_AIRTABLE_API_KEY;
  */
 new Airlock({
   server: app,
-  allowedOrigins: [Constants.PRODUCTION_WEB_URL, ...Constants.DEVELOPMENT_WEB_URL],
+  allowedOrigins: [Constants.PRODUCTION_WEB_URL, ...Constants.DEVELOPMENT_WEB_URLS],
   airtableApiKey: [apiKey],
   airtableBaseId: Constants.BASE_ID,
   airtableUserTableName: 'Owner',
