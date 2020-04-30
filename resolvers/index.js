@@ -29,12 +29,14 @@ module.exports = {
   },
 
   // can only see payments that are associated with you
-  [Tables.Payment]: (Payment, authedUser) => {
-    return (
-      authedUser &&
-      authedUser.fields.Payments &&
-      authedUser.fields.Payments.includes(Payment.id)
-    );
+  [Tables.Payment]: {
+    read: (payment, authedUser) => {
+      return (
+        authedUser &&
+        authedUser.fields.Payments &&
+        authedUser.fields.Payments.includes(payment.id)
+      );
+    }
   },
 
   // can only see subscriber bills that are associated with you
