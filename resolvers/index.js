@@ -2,13 +2,6 @@ import { Tables, Columns } from '../airtable/schema';
 
 module.exports = {
   [Tables.ProjectGroup]: {
-    read: (projectGroup, authedUser) => {
-      return (
-        authedUser &&
-        authedUser.fields['Project Group'] &&
-        authedUser.fields['Project Group'].includes(projectGroup.id)
-      );
-    },
     write: (projectGroup, authedUser) => {
       return (
         authedUser &&
