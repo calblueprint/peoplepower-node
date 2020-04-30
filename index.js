@@ -14,6 +14,24 @@ import { getEnphaseDataForMonth } from './utils/enphase';
 import { getSolarProjectById, updateSolarProject } from './airtable/request';
 import Constants from './Constants';
 
+const AppConfigurations = [
+  'ENPHASE_KEY',
+  'REACT_APP_AIRTABLE_API_KEY',
+  'UTILITY_API_KEY',
+  'MAIL_SERVER_EMAIL',
+  'MAIL_SERVER_PASS',
+  'ADMIN_EMAIL'
+];
+
+// Fails explicitly if the environment is improperly configured
+AppConfigurations.forEach(param => {
+  if (!process.env[param]) {
+    throw new Error(
+      `Required configuration variable ${param} is ${process.env[param]}. Do you have a .env file and is it setup correctly?`
+    );
+  }
+});
+
 const { pdfRegenerationError } = EmailGenerators;
 
 dotenv.config(); // Set up environment variables
@@ -30,7 +48,10 @@ const apiKey = process.env.REACT_APP_AIRTABLE_API_KEY;
  */
 new Airlock({
   server: app,
-  allowedOrigins: [Constants.PRODUCTION_WEB_URL, ...Constants.DEVELOPMENT_WEB_URLS],
+  allowedOrigins: [
+    Constants.PRODUCTION_WEB_URL,
+    ...Constants.DEVELOPMENT_WEB_URLS
+  ],
   airtableApiKey: [apiKey],
   airtableBaseId: Constants.BASE_ID,
   airtableUserTableName: 'Owner',
