@@ -20,7 +20,12 @@ const AppConfigurations = [
   'UTILITY_API_KEY',
   'MAIL_SERVER_EMAIL',
   'MAIL_SERVER_PASS',
-  'ADMIN_EMAIL'
+  'ADMIN_EMAIL',
+  'AIRTABLE_BASE_ID',
+  'AIRTABLE_ENDPOINT_URL',
+  'PRODUCTION_WEB_URL',
+  'SERVER_URL',
+  'SENDER_NAME'
 ];
 
 // Fails explicitly if the environment is improperly configured
