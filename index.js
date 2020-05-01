@@ -25,7 +25,8 @@ const AppConfigurations = [
   'AIRTABLE_ENDPOINT_URL',
   'PRODUCTION_WEB_URL',
   'SERVER_URL',
-  'SENDER_NAME'
+  'SENDER_NAME',
+  'ACCEPT_HIGHCHARTS_LICENSE'
 ];
 
 // Fails explicitly if the environment is improperly configured
