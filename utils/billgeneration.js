@@ -105,11 +105,11 @@ const generateBillForSubscriber = async (subscriber, solarProject) => {
 
   // Get Enphase data for date-range found in PG&E Bill
   let generationData = await getEnphaseDataForSubscriber(
-    subscriber.id,
     solarProject.enphaseUserId,
     solarProject.enphaseSystemId,
     startMoment,
-    endMoment
+    endMoment,
+    subscriber.id
   );
 
   // Convert to Kilowatt Hours
