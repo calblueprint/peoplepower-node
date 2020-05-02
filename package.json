@@ -9,6 +9,7 @@
     "@babel/node": "^7.8.7",
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-react": "^7.8.3",
+    "@calblueprint/airlock": "^0.7.3",
     "@react-pdf/renderer": "^1.6.8",
     "airlock-server": "^0.2.14",
     "airtable": "^0.8.1",
