@@ -12,21 +12,21 @@ module.exports = {
       );
     }
   },
-  [Tables.Owner]: (owner, authedUser) => {
-    return (
-      // either you are trying to access your own record ...
-      (authedUser && authedUser.fields.ID === owner.id) ||
-      // or you're an admin and you're trying to access the record of owners
-      // in a project group you're in
-      (authedUser &&
-        authedUser.fields['Admin Of'] &&
-        owner.fields['Project Group'] &&
-        owner.fields['Project Group'].length > 0 &&
-        authedUser.fields['Admin Of'].includes(
-          owner.fields['Project Group'][0] // ASSUMES Owners only ever belong to 1 project group
-        ))
-    );
-  },
+  // [Tables.Owner]: (owner, authedUser) => {
+  //   return (
+  //     // either you are trying to access your own record ...
+  //     (authedUser && authedUser.fields.ID === owner.id) ||
+  //     // or you're an admin and you're trying to access the record of owners
+  //     // in a project group you're in
+  //     (authedUser &&
+  //       authedUser.fields['Admin Of'] &&
+  //       owner.fields['Project Group'] &&
+  //       owner.fields['Project Group'].length > 0 &&
+  //       authedUser.fields['Admin Of'].includes(
+  //         owner.fields['Project Group'][0] // ASSUMES Owners only ever belong to 1 project group
+  //       ))
+  //   );
+  // },
   // TODO: adding rules for Payment and Project Group breaks Onboarding
   // can only see payments that are associated with you
   // [Tables.Payment]: {
