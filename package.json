@@ -25,8 +25,7 @@
     "tslib": "^1.11.1"
   },
   "scripts": {
-    "add-require-to-airtable": "(echo \"require('dotenv-safe').config();\" && cat airtable/airtable.js) > temp.js && mv temp.js airtable/airtable.js",
-    "generate-schema": "generate-airtable-schema && pretty-quick && yarn add-require-to-airtable",
+    "generate-schema": "generate-airtable-schema && pretty-quick",
     "start": "babel-node index.js"
   },
   "devDependencies": {
@@ -57,6 +56,7 @@
   "airtable-schema-generator": {
     "output": "airtable",
     "mode": "auto-headless",
+    "overwrite": false,
     "schemaMeta": {
       "Owner": {
         "lookupFields": [
