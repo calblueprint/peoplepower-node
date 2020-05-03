@@ -17,6 +17,9 @@ const getDataForSubscriber = (subscriberId, data) => {
   if (process) {
     return process(data);
   }
+  console.log(
+    'Could not find data function for subscriber! Reporting error...'
+  );
   return [];
 };
 
