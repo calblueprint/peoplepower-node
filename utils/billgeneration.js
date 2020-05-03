@@ -6,7 +6,8 @@ import {
   getOwnerById,
   createSubscriberBill,
   updateSubscriberBill,
-  getSubscriberBillsByIds
+  getSubscriberBillsByIds,
+  getRateScheduleById
 } from '../airtable/request';
 import { getEnphaseDataForSubscriber } from './enphase';
 
@@ -104,11 +105,11 @@ const generateBillForSubscriber = async (subscriber, solarProject) => {
 
   // Get Enphase data for date-range found in PG&E Bill
   let generationData = await getEnphaseDataForSubscriber(
-    subscriber.id,
     solarProject.enphaseUserId,
     solarProject.enphaseSystemId,
     startMoment,
-    endMoment
+    endMoment,
+    subscriber.id
   );
 
   // Convert to Kilowatt Hours
@@ -135,6 +136,13 @@ const generateBillForSubscriber = async (subscriber, solarProject) => {
     }`
   );
 
+  // Compute bill costs
+  const round = (x, y = 2) => Number(parseFloat(x).toFixed(y));
+  const rateSchedule = await getRateScheduleById(subscriber.rateScheduleId);
+  const estimatedRebate = round(-1 * netPgeUsage * rateSchedule.rebateRate);
+  const currentCharges = round(systemProduction * rateSchedule.rate);
+  const amountDue = round(currentCharges + prevBill.balance - estimatedRebate);
+
   // Create subscriber bill
   await createSubscriberBill({
     startDate,
@@ -145,12 +153,15 @@ const generateBillForSubscriber = async (subscriber, solarProject) => {
       .format('MM/DD/YYYY'),
     subscriberId: subscriber.id,
     solarProjectId: solarProject.id,
-    rateScheduleId: subscriber.rateScheduleId,
+    rateScheduleId: rateSchedule.id,
     netPgeUsage,
     ebceRebate,
     pgeCharges,
     ebceCharges,
     wouldBeCosts,
+    estimatedRebate,
+    currentCharges,
+    amountDue,
     chartGenerationData,
     systemProduction,
     statementNumber: prevBill.statementNumber + 1,
