@@ -11,7 +11,11 @@ import generatePdfForSubscriber from './utils/pdfgeneration';
 import EmailGenerators from './utils/emailCopy';
 import sendEmail from './utils/email';
 import { getEnphaseDataForMonth } from './utils/enphase';
-import { getSolarProjectById, updateSolarProject } from './airtable/request';
+import {
+  getSolarProjectById,
+  updateSolarProject,
+  getOwnersByEmail
+} from './airtable/request';
 import Constants from './Constants';
 
 const { pdfRegenerationError } = EmailGenerators;
@@ -30,7 +34,10 @@ const apiKey = process.env.REACT_APP_AIRTABLE_API_KEY;
  */
 new Airlock({
   server: app,
-  allowedOrigins: [Constants.PRODUCTION_WEB_URL, ...Constants.DEVELOPMENT_WEB_URLS],
+  allowedOrigins: [
+    Constants.PRODUCTION_WEB_URL,
+    ...Constants.DEVELOPMENT_WEB_URLS
+  ],
   airtableApiKey: [apiKey],
   airtableBaseId: Constants.BASE_ID,
   airtableUserTableName: 'Owner',
@@ -146,6 +153,15 @@ app.get('/refreshSolarProjectData', async (req, res) => {
         'Request Failed, likely due to malformed request or nonexistent Solar Project ID.'
       );
   }
+});
+
+app.get('/uniqueEmail', async (req, res) => {
+  console.log('Received Email Uniqueness Request with query');
+  console.log(req.query);
+  const { email } = req.query;
+  const owners = await getOwnersByEmail(email);
+  console.log(`Found ${owners.length} owners with email: ${email}`);
+  res.json({ unique: owners.length === 0 });
 });
 
 app.listen(port, () => console.log(`PP (Power) listening on port ${port}!`));

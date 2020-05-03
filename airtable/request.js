@@ -86,6 +86,15 @@ export const getAllOwners = async (filterByFormula = '', sort = []) => {
   return getAllRecords(Tables.Owner, filterByFormula, sort);
 };
 
+export const getOwnersByEmail = async (value, sort = []) => {
+  return getRecordsByAttribute(
+    Tables.Owner,
+    Columns[Tables.Owner].email.name,
+    value,
+    sort
+  );
+};
+
 export const getProjectGroupById = async id => {
   return getRecordById(Tables.ProjectGroup, id);
 };
