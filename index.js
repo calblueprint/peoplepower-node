@@ -20,17 +20,16 @@ import Constants from './Constants';
 
 const AppConfigurations = [
   'ENPHASE_KEY',
-  'REACT_APP_AIRTABLE_API_KEY',
   'UTILITY_API_KEY',
   'MAIL_SERVER_EMAIL',
   'MAIL_SERVER_PASS',
   'ADMIN_EMAIL',
-  'AIRTABLE_BASE_ID',
-  'AIRTABLE_ENDPOINT_URL',
   'PRODUCTION_WEB_URL',
   'SERVER_URL',
   'SENDER_NAME',
-  'ACCEPT_HIGHCHARTS_LICENSE'
+  'ACCEPT_HIGHCHARTS_LICENSE',
+  'REACT_APP_AIRTABLE_API_KEY',
+  'REACT_APP_AIRTABLE_BASE_ID'
 ];
 
 // Fails explicitly if the environment is improperly configured
