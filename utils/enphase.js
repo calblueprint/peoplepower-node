@@ -52,7 +52,9 @@ const getEnphaseDataForSubscriber = async (
 const getStartAndEndOfMonth = (year, month) => {
   const monthMoment = moment(`${month}/${year}`, 'MM/YYYY');
   const startDate = monthMoment.startOf('month').format('YYYY-MM-DD');
-  const endDate = monthMoment.endOf('month').format('YYYY-MM-DD');
+  const endMoment = monthMoment.endOf('month');
+  const currentDate = moment();
+  const endDate = moment.min(currentDate, endMoment).format('YYYY-MM-DD');
   return { startDate, endDate };
 };
 

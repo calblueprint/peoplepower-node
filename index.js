@@ -30,7 +30,10 @@ const apiKey = process.env.REACT_APP_AIRTABLE_API_KEY;
  */
 new Airlock({
   server: app,
-  allowedOrigins: [Constants.PRODUCTION_WEB_URL, ...Constants.DEVELOPMENT_WEB_URLS],
+  allowedOrigins: [
+    Constants.PRODUCTION_WEB_URL,
+    ...Constants.DEVELOPMENT_WEB_URLS
+  ],
   airtableApiKey: [apiKey],
   airtableBaseId: Constants.BASE_ID,
   airtableUserTableName: 'Owner',
@@ -114,12 +117,15 @@ app.get('/refreshSolarProjectData', async (req, res) => {
   const { month, year, solarProjectId } = req.query;
   try {
     const solarProject = await getSolarProjectById(solarProjectId);
+    console.log('Found Solar Project...');
     const enphaseData = await getEnphaseDataForMonth(
       solarProject.enphaseUserId,
       solarProject.enphaseSystemId,
       year,
       month
     );
+    console.log('Found Enphase Data');
+    console.log(enphaseData);
     let { monthlyProductionData } = solarProject;
     if (!monthlyProductionData) {
       monthlyProductionData = {};
