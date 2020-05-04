@@ -1,6 +1,6 @@
-po# peoplepower-node
+# peoplepower-node
 
-_Last updated: Feb 23, 2020 (by Fang)_
+_Last updated: May 4, 2020 (by Aivant)_
 
 For the peoplepower-web repo, go to: https://github.com/calblueprint/peoplepower-web
 
