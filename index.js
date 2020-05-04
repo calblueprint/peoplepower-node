@@ -122,6 +122,7 @@ app.get('/refreshSolarProjectData', async (req, res) => {
   const { month, year, solarProjectId } = req.query;
   try {
     const solarProject = await getSolarProjectById(solarProjectId);
+    console.log('Found Solar Project...');
     const enphaseData = await getEnphaseDataForMonth(
       solarProject.enphaseUserId,
       solarProject.enphaseSystemId,

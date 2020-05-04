@@ -55,7 +55,9 @@ const getEnphaseDataForSubscriber = async (
 const getStartAndEndOfMonth = (year, month) => {
   const monthMoment = moment(`${month}/${year}`, 'MM/YYYY');
   const startDate = monthMoment.startOf('month').format('YYYY-MM-DD');
-  const endDate = monthMoment.endOf('month').format('YYYY-MM-DD');
+  const endMoment = monthMoment.endOf('month');
+  const currentDate = moment().subtract(1, 'days');
+  const endDate = moment.min(currentDate, endMoment).format('YYYY-MM-DD');
   return { startDate, endDate };
 };
 
@@ -63,6 +65,8 @@ const getEnphaseDataForMonth = async (userId, systemId, year, month) => {
   console.log(`Getting Monthly Enphase Data for: ${month}/${year}`);
   const { startDate, endDate } = getStartAndEndOfMonth(year, month);
   const data = await getEnphaseData(userId, systemId, startDate, endDate);
+  console.log('Got Data from Enphase:');
+  console.log(data);
   return data.micro_production.reduce((a, b) => a + b, 0) / 1000; // sum up micro production values
 };
 
