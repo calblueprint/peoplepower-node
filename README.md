@@ -20,7 +20,7 @@ This repo is the home for any and all server-side code and scripts that are writ
 
 ## Testing Bill Generation
 
-In order to test bill generation, you need to create a publicly accessible tunnel to your localhost. Download [Ngrok] (https://ngrok.com/) and follow the steps below
+In order to test bill generation, you need to create a publicly accessible tunnel to your localhost. Download [Ngrok](https://ngrok.com/) and follow the steps below
 
 1. Run ngrok in one terminal window `ngrok http 3000`
 2. Update the environment variables on the frontend and set the SERVER_URL and/or AIRTABLE_ENDPOINT_URL to the ngrok url
