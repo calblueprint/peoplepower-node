@@ -6,51 +6,36 @@ For the peoplepower-web repo, go to: https://github.com/calblueprint/peoplepower
 
 This repo is the home for any and all server-side code and scripts that are written for Blueprint's People Power Solar Cooperative Project
 
-## How to Setup
+## Running Locally
 
 1. Clone the repo locally using the link at the top right of this page. Most likely the command will be:
 
 `git clone https://github.com/calblueprint/peoplepower-node.git`
 
-2. Create a file called `.env` and copy in the contents from `.env.example`. Fill in any secrets by getting the relevant keys from slack
+2. Create a file called `.env` and copy in the contents from `.env.example`. Fill in any secrets by getting the relevant keys from slack. You will also need to add a few extras to run the Airtable Schema Generator (details below)
 
-3. Run `yarn install` to download the necessary package
+3. Run `ACCEPT_HIGHCHARTS_LICENSE=YES yarn install` to download the necessary packages. (You only need to add the prefix the very first time)
 
-## How to Develop
+4. Run `yarn start` to run the app
 
-Currently there is only one main file called `index.js` that will contain all of our code.
+## Testing Bill Generation
 
-1. Add your functions to accomplish the task you've been assigned (pull data from enphase, utility API, or generate PDF) below the main function.
+In order to test bill generation, you need to create a publicly accessible tunnel to your localhost. Download [Ngrok] (https://ngrok.com/) and follow the steps below
 
-2. Have the function take in any inputs that make sense for your task and return something useful
+1. Run ngrok in one terminal window `ngrok http 3000`
+2. Update the environment variables on the frontend and set the SERVER_URL and/or AIRTABLE_ENDPOINT_URL to the ngrok url
+3. Update the local environment variables and set the SERVER_URL to the ngrok url
+4. Run `yarn start` in this repository
+5. Run `yarn start` in the frontend repository (say Yes to run on different port, it should run on `localhost:3001`
+6. Test! 
 
-3. Give an example of how to use the function by calling it from the main function to prove that it works
+## Deploying on Heroku
 
-4. If there are any API keys that your code needs to run, add it to the .env file (details below
+To deploy to heroku, you simply push to the following git url: `https://git.heroku.com/peoplepower-node.git` (you must have access to the heroku app. 
 
-### Dealing with secrets and environment variables
+The heroku setup includes a heroku scheduler add-on that runs the script in `bin/generateProductionData.js` once a day to update solar project's production data
 
-Any API Keys that we don't want to save to github, we will keep in a secret filed called `.env`. For now, please store any user identifying information as a secret as well (User ID's, etc). Here's an example:
-
-```
-ENPHASE_KEY=12345678
-SAMPLE_USER_ID=asdfghjkl
-```
-
-We can access these api keys from `index.js` through an object called `process.env`. For example if we wanted to print it out to the console:
-
-```
-console.log(process.env.ENPHASE_KEY)
-```
-
-If you want to add an api key, just create a new line in your own `.env` file as well as `.env.example`. In the `.env.example`, _*don't*_ include the key itself. An example `.env.example` looks like:
-
-```
-ENPHASE_KEY=
-SAMPLE_USER_ID=
-```
-
-Make sure you don't commit your API keys! When in doubt, ask in slack :)
+It also has a PUBLIC_KEY and PRIVATE_KEY environment variable for airlock. Details on generating those below
 
 ### Airlock Keys
 
