@@ -11,36 +11,17 @@ import generatePdfForSubscriber from './utils/pdfgeneration';
 import EmailGenerators from './utils/emailCopy';
 import sendEmail from './utils/email';
 import { getEnphaseDataForMonth } from './utils/enphase';
-import { getSolarProjectById, updateSolarProject } from './airtable/request';
+import {
+  getSolarProjectById,
+  updateSolarProject,
+  getOwnersByEmail
+} from './airtable/request';
 import Constants from './Constants';
-
-const AppConfigurations = [
-  'ENPHASE_KEY',
-  'REACT_APP_AIRTABLE_API_KEY',
-  'UTILITY_API_KEY',
-  'MAIL_SERVER_EMAIL',
-  'MAIL_SERVER_PASS',
-  'ADMIN_EMAIL',
-  'AIRTABLE_BASE_ID',
-  'AIRTABLE_ENDPOINT_URL',
-  'PRODUCTION_WEB_URL',
-  'SERVER_URL',
-  'SENDER_NAME',
-  'ACCEPT_HIGHCHARTS_LICENSE'
-];
-
-// Fails explicitly if the environment is improperly configured
-AppConfigurations.forEach(param => {
-  if (!process.env[param]) {
-    throw new Error(
-      `Required configuration variable ${param} is ${process.env[param]}. Do you have a .env file and is it setup correctly?`
-    );
-  }
-});
 
 const { pdfRegenerationError } = EmailGenerators;
 
-dotenv.config(); // Set up environment variables
+// This call sets up environment variables and ensures that all variables in .env.example exist
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -173,6 +154,15 @@ app.get('/refreshSolarProjectData', async (req, res) => {
         'Request Failed, likely due to malformed request or nonexistent Solar Project ID.'
       );
   }
+});
+
+app.get('/uniqueEmail', async (req, res) => {
+  console.log('Received Email Uniqueness Request with query');
+  console.log(req.query);
+  const { email } = req.query;
+  const owners = await getOwnersByEmail(email);
+  console.log(`Found ${owners.length} owners with email: ${email}`);
+  res.json({ unique: owners.length === 0 });
 });
 
 app.listen(port, () => console.log(`PP (Power) listening on port ${port}!`));

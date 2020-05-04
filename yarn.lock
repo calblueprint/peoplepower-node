@@ -1094,10 +1094,10 @@ aggregate-error@^3.0.0:
     clean-stack "^2.0.0"
     indent-string "^4.0.0"
 
-airlock-server@^0.2.15:
-  version "0.2.15"
-  resolved "https://registry.yarnpkg.com/airlock-server/-/airlock-server-0.2.15.tgz#13f1a0e605c6bda87f520f1873c9829de5b5dc16"
-  integrity sha512-MUnmq759hXcaXLGFtOFsU1pE4hHEr1RUduuamih00pvsqR2kzg7rwH/KnQlztRCfxiOiP6+mUaZNXN0VnXYXog==
+airlock-server@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/airlock-server/-/airlock-server-0.3.0.tgz#7a4a1de9aae402f8a0f895f5bf71d5fbf834b316"
+  integrity sha512-hxqbJtgDUwMOzN1SffDEXW4INDkPTGwPiwaCKSsSVQXK5f67SlWiMJiKo9mEZ7AoGpFVsZt5fKvrxqbkuW3y6g==
   dependencies:
     "@types/airtable" "^0.5.7"
     "@types/bcrypt" "^3.0.0"
@@ -1113,6 +1113,7 @@ airlock-server@^0.2.15:
     cookie-parser "^1.4.5"
     dotenv "^8.1.0"
     express "^4.17.1"
+    fromentries "^1.2.0"
     http-proxy "^1.18.0"
     jsonwebtoken "^8.5.1"
     lodash "^4.17.15"
@@ -1124,10 +1125,10 @@ airlock-server@^0.2.15:
     request "^2.88.0"
     winston "^3.2.1"
 
-airtable-schema-generator@^1.3.4:
-  version "1.3.4"
-  resolved "https://registry.yarnpkg.com/airtable-schema-generator/-/airtable-schema-generator-1.3.4.tgz#8b1c212ae61ba118f0d65e79c974eefed795273d"
-  integrity sha512-bN4I6Kb7E6i2JXnEs1YgkrXK2z+SfOn7oWprDn1hMvRlK1jvNKz22EA9qG4KSuXXNsFyyh2PHsmmSkKTS0JsRg==
+airtable-schema-generator@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/airtable-schema-generator/-/airtable-schema-generator-1.4.1.tgz#58c4954c8c410bf07d3d021d864b205b0da975ff"
+  integrity sha512-ORkFeQwyEsO/Di1NaP1ErY5HnOZztjnASa9exRKJo+abkLxOxueiEQJIpdsph2J4+9XvdaSt9udD6tcw0CkIOA==
   dependencies:
     dotenv "^8.2.0"
     puppeteer "^2.1.1"
@@ -3234,6 +3235,11 @@ fresh@0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
   integrity sha1-PYyt2Q2XZWn6g1qx+OSyOhBWBac=
+
+fromentries@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/fromentries/-/fromentries-1.2.0.tgz#e6aa06f240d6267f913cea422075ef88b63e7897"
+  integrity sha512-33X7H/wdfO99GdRLLgkjUrD4geAFdq/Uv0kl3HD4da6HDixd2GUg8Mw7dahLCV9r/EARkmtYBB6Tch4EEokFTQ==
 
 fs-extra@~1.0.0:
   version "1.0.0"

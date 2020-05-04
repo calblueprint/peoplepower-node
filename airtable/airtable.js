@@ -10,20 +10,21 @@
 */
 import Airtable from 'airtable';
 import { Columns } from './schema';
-import Constants from '../Constants';
 
 require('dotenv-safe').config();
 
-const apiKey = process.env.REACT_APP_AIRTABLE_API_KEY;
+const BASE_ID = process.env.REACT_APP_AIRTABLE_BASE_ID;
 
-require('dotenv-safe').config();
+const API_KEY = process.env.REACT_APP_AIRTABLE_API_KEY;
+const ENDPOINT_URL = 'https://api.airtable.com';
+const VIEW = 'Grid view';
 
 Airtable.configure({
-  endpointUrl: Constants.ENDPOINT_URL,
-  apiKey
+  endpointUrl: ENDPOINT_URL,
+  apiKey: API_KEY
 });
 
-const base = Airtable.base(Constants.BASE_ID);
+const base = Airtable.base(BASE_ID);
 
 // Transformation Utilities
 
@@ -111,7 +112,7 @@ function createRecord(table, record) {
 function getAllRecords(table, filterByFormula = '', sort = []) {
   return base(table)
     .select({
-      view: Constants.VIEW,
+      view: VIEW,
       filterByFormula,
       sort
     })
@@ -147,7 +148,7 @@ function getRecordById(table, id) {
 function getRecordsByAttribute(table, fieldType, field, sort = []) {
   return base(table)
     .select({
-      view: Constants.VIEW,
+      view: VIEW,
       filterByFormula: `{${fieldType}}='${field}'`,
       sort
     })
@@ -195,6 +196,9 @@ function deleteRecord(table, id) {
 }
 
 export {
+  base,
+  fromAirtableFormat,
+  toAirtableFormat,
   createRecord,
   getAllRecords,
   getRecordById,
