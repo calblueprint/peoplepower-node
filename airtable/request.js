@@ -58,12 +58,12 @@ export const createPayment = async record => {
   return createRecord(Tables.Payment, record);
 };
 
-export const createTestDevelopment = async record => {
-  return createRecord(Tables.TestDevelopment, record);
-};
-
 export const createInvestmentBreakdown = async record => {
   return createRecord(Tables.InvestmentBreakdown, record);
+};
+
+export const createTestDevelopment = async record => {
+  return createRecord(Tables.TestDevelopment, record);
 };
 
 /*
@@ -210,25 +210,6 @@ export const getAllPayments = async (filterByFormula = '', sort = []) => {
   return getAllRecords(Tables.Payment, filterByFormula, sort);
 };
 
-export const getTestDevelopmentById = async id => {
-  return getRecordById(Tables.TestDevelopment, id);
-};
-
-export const getTestDevelopmentsByIds = async ids => {
-  const formula = `OR(${ids.reduce(
-    (f, id) => `${f} {ID}='${id}',`,
-    ''
-  )} 1 < 0)`;
-  return getAllRecords(Tables.TestDevelopment, formula);
-};
-
-export const getAllTestDevelopments = async (
-  filterByFormula = '',
-  sort = []
-) => {
-  return getAllRecords(Tables.TestDevelopment, filterByFormula, sort);
-};
-
 export const getInvestmentBreakdownById = async id => {
   return getRecordById(Tables.InvestmentBreakdown, id);
 };
@@ -246,6 +227,25 @@ export const getAllInvestmentBreakdowns = async (
   sort = []
 ) => {
   return getAllRecords(Tables.InvestmentBreakdown, filterByFormula, sort);
+};
+
+export const getTestDevelopmentById = async id => {
+  return getRecordById(Tables.TestDevelopment, id);
+};
+
+export const getTestDevelopmentsByIds = async ids => {
+  const formula = `OR(${ids.reduce(
+    (f, id) => `${f} {ID}='${id}',`,
+    ''
+  )} 1 < 0)`;
+  return getAllRecords(Tables.TestDevelopment, formula);
+};
+
+export const getAllTestDevelopments = async (
+  filterByFormula = '',
+  sort = []
+) => {
+  return getAllRecords(Tables.TestDevelopment, filterByFormula, sort);
 };
 
 /*
@@ -284,12 +284,12 @@ export const updatePayment = async (id, recordUpdates) => {
   return updateRecord(Tables.Payment, id, recordUpdates);
 };
 
-export const updateTestDevelopment = async (id, recordUpdates) => {
-  return updateRecord(Tables.TestDevelopment, id, recordUpdates);
-};
-
 export const updateInvestmentBreakdown = async (id, recordUpdates) => {
   return updateRecord(Tables.InvestmentBreakdown, id, recordUpdates);
+};
+
+export const updateTestDevelopment = async (id, recordUpdates) => {
+  return updateRecord(Tables.TestDevelopment, id, recordUpdates);
 };
 
 /*
@@ -320,9 +320,9 @@ export const deletePledgeInvite = async id => {
 export const deletePayment = async id => {
   return deleteRecord(Tables.Payment, id);
 };
-export const deleteTestDevelopment = async id => {
-  return deleteRecord(Tables.TestDevelopment, id);
-};
 export const deleteInvestmentBreakdown = async id => {
   return deleteRecord(Tables.InvestmentBreakdown, id);
+};
+export const deleteTestDevelopment = async id => {
+  return deleteRecord(Tables.TestDevelopment, id);
 };

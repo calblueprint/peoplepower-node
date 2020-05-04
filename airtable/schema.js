@@ -12,8 +12,8 @@ export const Tables = {
   RateSchedule: 'Rate Schedule',
   PledgeInvite: 'Pledge Invite',
   Payment: 'Payment',
-  TestDevelopment: 'Test (Development)',
-  InvestmentBreakdown: 'Investment Breakdown'
+  InvestmentBreakdown: 'Investment Breakdown',
+  TestDevelopment: 'Test (Development)'
 };
 
 export const Columns = {
@@ -101,8 +101,6 @@ export const Columns = {
     message: { name: `Message`, type: `multilineText` },
     eventType: { name: `Event type`, type: `select` },
     id: { name: `ID`, type: `formula` },
-    location: { name: `Location`, type: `text` },
-    time: { name: `Time`, type: `text` },
     title: { name: `Title`, type: `text` },
     isGlobal: { name: `Is Global?`, type: `checkbox` }
   },
@@ -111,7 +109,6 @@ export const Columns = {
     dateCreated: { name: `Date Created`, type: `formula` },
     dateUpdated: { name: `Date Updated`, type: `formula` },
     name: { name: `Name`, type: `text` },
-    size: { name: `Size`, type: `number` },
     address: { name: `Address`, type: `formula` },
     status: { name: `Status`, type: `select` },
     projectGroupId: { name: `Project Group`, type: `foreignKey-one` },
@@ -167,7 +164,8 @@ export const Columns = {
     rate: { name: `Rate`, type: `number` },
     rebateRate: { name: `Rebate Rate`, type: `number` },
     id: { name: `ID`, type: `formula` },
-    subscriberIds: { name: `Subscribers`, type: `foreignKey-many` }
+    subscriberIds: { name: `Subscribers`, type: `foreignKey-many` },
+    status: { name: `Status`, type: `select` }
   },
   'Pledge Invite': {
     primaryKey: { name: `Primary Key`, type: `formula` },
@@ -200,14 +198,14 @@ export const Columns = {
     payerEmail: { name: `Payer Email`, type: `text` },
     id: { name: `ID`, type: `formula` }
   },
-  'Test (Development)': {
-    name: { name: `Name`, type: `text` },
-    tag: { name: `Tag`, type: `text` },
-    id: { name: `ID`, type: `formula` }
-  },
   'Investment Breakdown': {
     categoryName: { name: `Category Name`, type: `text` },
     percentage: { name: `Percentage`, type: `number` },
     color: { name: `Color`, type: `text` }
+  },
+  'Test (Development)': {
+    name: { name: `Name`, type: `text` },
+    tag: { name: `Tag`, type: `text` },
+    id: { name: `ID`, type: `formula` }
   }
 };
