@@ -53,7 +53,7 @@ const getStartAndEndOfMonth = (year, month) => {
   const monthMoment = moment(`${month}/${year}`, 'MM/YYYY');
   const startDate = monthMoment.startOf('month').format('YYYY-MM-DD');
   const endMoment = monthMoment.endOf('month');
-  const currentDate = moment();
+  const currentDate = moment().subtract(1, 'days');
   const endDate = moment.min(currentDate, endMoment).format('YYYY-MM-DD');
   return { startDate, endDate };
 };
