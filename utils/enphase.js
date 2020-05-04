@@ -62,6 +62,8 @@ const getEnphaseDataForMonth = async (userId, systemId, year, month) => {
   console.log(`Getting Monthly Enphase Data for: ${month}/${year}`);
   const { startDate, endDate } = getStartAndEndOfMonth(year, month);
   const data = await getEnphaseData(userId, systemId, startDate, endDate);
+  console.log('Got Data from Enphase:');
+  console.log(data);
   return data.micro_production.reduce((a, b) => a + b, 0) / 1000; // sum up micro production values
 };
 

@@ -124,8 +124,6 @@ app.get('/refreshSolarProjectData', async (req, res) => {
       year,
       month
     );
-    console.log('Found Enphase Data');
-    console.log(enphaseData);
     let { monthlyProductionData } = solarProject;
     if (!monthlyProductionData) {
       monthlyProductionData = {};
