@@ -18,7 +18,7 @@
     "express": "^4.17.1",
     "highcharts-export-server": "^2.0.24",
     "moment": "^2.24.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "nodemailer": "^6.4.4",
     "react": "^16.13.0",
     "react-dom": "^16.13.1",
