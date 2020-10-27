@@ -39,15 +39,6 @@ module.exports = {
   //   }
   // },
 
-  // can only see subscriber bills that are associated with you
-  [Tables.SubscriberBill]: (subscriberBill, authedUser) => {
-    return (
-      authedUser &&
-      authedUser.fields['Subscriber Bills'] &&
-      authedUser.fields['Subscriber Bills'].includes(subscriberBill.id)
-    );
-  },
-
   // [Tables.SolarProject]: {},
   [Tables.RateSchedule]: (rateSchedule, authedUser) => {
     return (

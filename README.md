@@ -18,20 +18,9 @@ This repo is the home for any and all server-side code and scripts that are writ
 
 4. Run `yarn start` to run the app
 
-## Testing Bill Generation
-
-In order to test bill generation, you need to create a publicly accessible tunnel to your localhost. Download [Ngrok](https://ngrok.com/) and follow the steps below
-
-1. Run ngrok in one terminal window `ngrok http 3000`
-2. Update the environment variables on the frontend and set the SERVER_URL and/or AIRTABLE_ENDPOINT_URL to the ngrok url
-3. Update the local environment variables and set the SERVER_URL to the ngrok url
-4. Run `yarn start` in this repository
-5. Run `yarn start` in the frontend repository (say Yes to run on different port, it should run on `localhost:3001`
-6. Test! 
-
 ## Deploying on Heroku
 
-To deploy to heroku, you simply push to the following git url: `https://git.heroku.com/peoplepower-node.git` (you must have access to the heroku app. 
+To deploy to heroku, you simply push to the following git url: `https://git.heroku.com/peoplepower-node.git` (you must have access to the heroku app.
 
 The heroku setup includes a heroku scheduler add-on that runs the script in `bin/generateProductionData.js` once a day to update solar project's production data
 

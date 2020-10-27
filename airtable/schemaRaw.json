@@ -130,7 +130,6 @@
       },
       {
         "id": "fldJ8T6NHBU75ZqCW",
-        "name": "Subscriber Bills",
         "type": "foreignKey",
         "typeOptions": {
           "foreignTableId": "tblZ2eBBhNq2VEA2D",
@@ -431,7 +430,6 @@
       },
       {
         "id": "fldOUjjqzDOUt8u0I",
-        "name": "Latest Bill Number",
         "type": "rollup",
         "typeOptions": {
           "relationColumnId": "fldJ8T6NHBU75ZqCW",
@@ -445,7 +443,6 @@
           },
           "resultType": "number"
         },
-        "foreignTableName": "Subscriber Bill",
         "foreignTableRollupColumnName": "Statement Number",
         "$$hashKey": "object:116"
       },
@@ -1091,32 +1088,6 @@
         },
         "foreignTable": "tblz1dquH21O9QSle",
         "$$hashKey": "object:923"
-      },
-      {
-        "id": "fldxTMLMo1lSo9V6N",
-        "name": "Enphase System ID",
-        "type": "text",
-        "typeOptions": null,
-        "$$hashKey": "object:924"
-      },
-      {
-        "id": "fldtJ7bSggBjPP2lM",
-        "name": "Enphase User ID",
-        "type": "text",
-        "typeOptions": null,
-        "$$hashKey": "object:925"
-      },
-      {
-        "id": "fldmTHMwr5WcCUNv2",
-        "name": "Subscriber Bill",
-        "type": "foreignKey",
-        "typeOptions": {
-          "foreignTableId": "tblZ2eBBhNq2VEA2D",
-          "symmetricColumnId": "fldPbPkHINBGdYwwK",
-          "relationship": "many"
-        },
-        "foreignTable": "tblZ2eBBhNq2VEA2D",
-        "$$hashKey": "object:926"
       }
     ],
     "primaryColumnName": "Primary Key",
@@ -1128,443 +1099,6 @@
     "isEmpty": false,
     "nameForUrl": "solar%20project",
     "$$hashKey": "object:6",
-    "numRecordsToList": 3
-  },
-  "tblZ2eBBhNq2VEA2D": {
-    "id": "tblZ2eBBhNq2VEA2D",
-    "name": "Subscriber Bill",
-    "columns": [
-      {
-        "id": "fldEb11Hw9eMxXGxo",
-        "name": "Primary Key",
-        "type": "formula",
-        "typeOptions": {
-          "formulaTextParsed": "{column_value_fldZAlv2G9jUIIaFh} & \"'s Bill # \" & {column_value_fldYuP2uCUsSy0IHq} & \". Balance: $\" &  ROUND(column_value_fldKPKZyNix02O7Dj, 2)",
-          "dependencies": {
-            "referencedColumnIdsForValue": [
-              "fldZAlv2G9jUIIaFh",
-              "fldYuP2uCUsSy0IHq",
-              "fldKPKZyNix02O7Dj"
-            ]
-          },
-          "resultType": "text"
-        },
-        "$$hashKey": "object:1113"
-      },
-      {
-        "id": "fld510BJvEy5tRLMx",
-        "name": "Date Created",
-        "type": "formula",
-        "typeOptions": {
-          "isDateTime": true,
-          "dateFormat": "Local",
-          "displayType": "createdTime",
-          "timeZone": "client",
-          "formulaTextParsed": "CREATED_TIME()",
-          "dependencies": {
-            "referencedColumnIdsForValue": []
-          },
-          "resultType": "date"
-        },
-        "$$hashKey": "object:1114"
-      },
-      {
-        "id": "flddM9v570MbHInCN",
-        "name": "Date Updated",
-        "type": "formula",
-        "typeOptions": {
-          "isDateTime": true,
-          "dateFormat": "Local",
-          "displayType": "lastModifiedTime",
-          "timeZone": "client",
-          "formulaTextParsed": "LAST_MODIFIED_TIME()",
-          "dependencies": {
-            "referencedColumnIdsForValue": [],
-            "dependsOnAllColumnsModifiedTime": true
-          },
-          "resultType": "date"
-        },
-        "$$hashKey": "object:1115"
-      },
-      {
-        "id": "fldZAlv2G9jUIIaFh",
-        "name": "Subscriber",
-        "type": "foreignKey",
-        "typeOptions": {
-          "relationship": "one",
-          "foreignTableId": "tblz1dquH21O9QSle",
-          "symmetricColumnId": "fldJ8T6NHBU75ZqCW",
-          "viewIdForRecordSelection": "viwIG34fV3VkyaGNu"
-        },
-        "foreignTable": "tblz1dquH21O9QSle",
-        "$$hashKey": "object:1116"
-      },
-      {
-        "id": "fldaCQEu0kyVsEzbe",
-        "name": "Statement Date",
-        "type": "date",
-        "typeOptions": {
-          "isDateTime": false,
-          "dateFormat": "Local"
-        },
-        "$$hashKey": "object:1117"
-      },
-      {
-        "id": "fldm22m48pUFtnK78",
-        "name": "Start Date",
-        "type": "date",
-        "typeOptions": {
-          "isDateTime": false,
-          "dateFormat": "Local"
-        },
-        "$$hashKey": "object:1118"
-      },
-      {
-        "id": "fldgUZjJarfroZEr0",
-        "name": "End Date",
-        "type": "date",
-        "typeOptions": {
-          "isDateTime": false,
-          "dateFormat": "Local"
-        },
-        "$$hashKey": "object:1119"
-      },
-      {
-        "id": "fldLAlePnIpFMEO7T",
-        "name": "Rate Schedule",
-        "type": "foreignKey",
-        "typeOptions": {
-          "relationship": "one",
-          "foreignTableId": "tblTXzlIwQ6znEf4R",
-          "symmetricColumnId": "fldxGLtkhooiAcymW"
-        },
-        "foreignTable": "tblTXzlIwQ6znEf4R",
-        "$$hashKey": "object:1120"
-      },
-      {
-        "id": "fldp3TUKBPEyJHf3A",
-        "name": "Estimated Rebate",
-        "type": "formula",
-        "typeOptions": {
-          "format": "currency",
-          "precision": 3,
-          "symbol": "$",
-          "formulaTextParsed": "-1 * {column_value_fldvxCsxJ0JaNLpfj} * {column_value_fldaMr7y16vNAfomo}",
-          "dependencies": {
-            "referencedColumnIdsForValue": [
-              "fldvxCsxJ0JaNLpfj",
-              "fldaMr7y16vNAfomo"
-            ]
-          },
-          "resultType": "number"
-        },
-        "$$hashKey": "object:1121"
-      },
-      {
-        "id": "fldTVSLX8JYHgUpTz",
-        "name": "Previous Total Estimated Rebate",
-        "type": "number",
-        "typeOptions": {
-          "format": "currency",
-          "precision": 3,
-          "symbol": "$",
-          "negative": false,
-          "validatorName": "positive"
-        },
-        "$$hashKey": "object:1122"
-      },
-      {
-        "id": "fldedgm72gXhGhoIL",
-        "name": "Balance on Previous Bill",
-        "type": "number",
-        "typeOptions": {
-          "format": "currency",
-          "precision": 3,
-          "symbol": "$",
-          "negative": false,
-          "validatorName": "positive"
-        },
-        "$$hashKey": "object:1123"
-      },
-      {
-        "id": "fldzXjOiOkPw3CcfW",
-        "name": "Payments",
-        "type": "foreignKey",
-        "typeOptions": {
-          "relationship": "many",
-          "foreignTableId": "tbl1W7ArDUv9zzmq0",
-          "symmetricColumnId": "fldpTSKzGrMKpqStb"
-        },
-        "foreignTable": "tbl1W7ArDUv9zzmq0",
-        "$$hashKey": "object:1124"
-      },
-      {
-        "id": "fldPuCd1AT1tOzGmY",
-        "name": "Amount Due",
-        "type": "formula",
-        "typeOptions": {
-          "format": "currency",
-          "precision": 3,
-          "symbol": "$",
-          "formulaTextParsed": "{column_value_fld3xckqBg5DwoP01} + {column_value_fldedgm72gXhGhoIL} - {column_value_fldp3TUKBPEyJHf3A} ",
-          "dependencies": {
-            "referencedColumnIdsForValue": [
-              "fld3xckqBg5DwoP01",
-              "fldedgm72gXhGhoIL",
-              "fldp3TUKBPEyJHf3A"
-            ]
-          },
-          "resultType": "number"
-        },
-        "$$hashKey": "object:1125"
-      },
-      {
-        "id": "fldu7oIiWkN5c1jtn",
-        "name": "ID",
-        "type": "formula",
-        "typeOptions": {
-          "formulaTextParsed": "RECORD_ID()",
-          "dependencies": {
-            "referencedColumnIdsForValue": []
-          },
-          "resultType": "text"
-        },
-        "$$hashKey": "object:1126"
-      },
-      {
-        "id": "fldYuP2uCUsSy0IHq",
-        "name": "Statement Number",
-        "type": "number",
-        "typeOptions": {
-          "format": "integer",
-          "negative": false,
-          "validatorName": "positive"
-        },
-        "$$hashKey": "object:1127"
-      },
-      {
-        "id": "fldvxCsxJ0JaNLpfj",
-        "name": "Net PGE Usage",
-        "type": "number",
-        "typeOptions": {
-          "format": "decimal",
-          "precision": 5,
-          "negative": true
-        },
-        "$$hashKey": "object:1128"
-      },
-      {
-        "id": "fldKafwmqqbJtw0Nh",
-        "name": "EBCE Rebate",
-        "type": "number",
-        "typeOptions": {
-          "symbol": "$",
-          "format": "currency",
-          "precision": 3,
-          "negative": true
-        },
-        "$$hashKey": "object:1129"
-      },
-      {
-        "id": "fldBEkjfzvO1As6Rw",
-        "name": "System Production",
-        "type": "number",
-        "typeOptions": {
-          "format": "decimal",
-          "precision": 5,
-          "negative": true
-        },
-        "$$hashKey": "object:1130"
-      },
-      {
-        "id": "fldUNaLmqVA8yIirI",
-        "name": "PP Rate",
-        "type": "lookup",
-        "typeOptions": {
-          "relationColumnId": "fldLAlePnIpFMEO7T",
-          "foreignTableRollupColumnId": "fldpz4vRjy848JohJ",
-          "format": "decimal",
-          "precision": 3,
-          "dependencies": {
-            "referencedColumnIdsForValue": [
-              "fldLAlePnIpFMEO7T",
-              "fldpz4vRjy848JohJ"
-            ]
-          },
-          "resultType": "number"
-        },
-        "foreignTableName": "Rate Schedule",
-        "foreignTableRollupColumnName": "Rate",
-        "$$hashKey": "object:1131"
-      },
-      {
-        "id": "fldaMr7y16vNAfomo",
-        "name": "Rebate Rate",
-        "type": "lookup",
-        "typeOptions": {
-          "relationColumnId": "fldLAlePnIpFMEO7T",
-          "foreignTableRollupColumnId": "fldLOUHrAiktwKYsJ",
-          "format": "decimal",
-          "precision": 3,
-          "dependencies": {
-            "referencedColumnIdsForValue": [
-              "fldLAlePnIpFMEO7T",
-              "fldLOUHrAiktwKYsJ"
-            ]
-          },
-          "resultType": "number"
-        },
-        "foreignTableName": "Rate Schedule",
-        "foreignTableRollupColumnName": "Rebate Rate",
-        "$$hashKey": "object:1132"
-      },
-      {
-        "id": "fld3xckqBg5DwoP01",
-        "name": "Current Charges",
-        "type": "formula",
-        "typeOptions": {
-          "format": "currency",
-          "precision": 3,
-          "symbol": "$",
-          "formulaTextParsed": "{column_value_fldBEkjfzvO1As6Rw}*{column_value_fldUNaLmqVA8yIirI}",
-          "dependencies": {
-            "referencedColumnIdsForValue": [
-              "fldBEkjfzvO1As6Rw",
-              "fldUNaLmqVA8yIirI"
-            ]
-          },
-          "resultType": "number"
-        },
-        "$$hashKey": "object:1133"
-      },
-      {
-        "id": "fldKPKZyNix02O7Dj",
-        "name": "Balance",
-        "type": "formula",
-        "typeOptions": {
-          "format": "currency",
-          "precision": 3,
-          "symbol": "$",
-          "formulaTextParsed": "{column_value_fldPuCd1AT1tOzGmY} - {column_value_fldls380U2xYGHsEq}",
-          "dependencies": {
-            "referencedColumnIdsForValue": [
-              "fldPuCd1AT1tOzGmY",
-              "fldls380U2xYGHsEq"
-            ]
-          },
-          "resultType": "number"
-        },
-        "$$hashKey": "object:1134"
-      },
-      {
-        "id": "fldls380U2xYGHsEq",
-        "name": "Amount Received",
-        "type": "rollup",
-        "typeOptions": {
-          "relationColumnId": "fldzXjOiOkPw3CcfW",
-          "foreignTableRollupColumnId": "fldfg1BuzowPi6tjH",
-          "format": "currency",
-          "precision": 3,
-          "symbol": "$",
-          "formulaTextParsed": "SUM(values)",
-          "dependencies": {
-            "referencedColumnIdsForValue": [
-              "fldzXjOiOkPw3CcfW",
-              "fldfg1BuzowPi6tjH"
-            ]
-          },
-          "resultType": "number"
-        },
-        "foreignTableName": "Payment",
-        "foreignTableRollupColumnName": "Amount",
-        "$$hashKey": "object:1135"
-      },
-      {
-        "id": "fld3XqRKGSb0osXjW",
-        "name": "Total Estimated Rebate",
-        "type": "formula",
-        "typeOptions": {
-          "formulaTextParsed": "{column_value_fldTVSLX8JYHgUpTz} + {column_value_fldp3TUKBPEyJHf3A}",
-          "dependencies": {
-            "referencedColumnIdsForValue": [
-              "fldTVSLX8JYHgUpTz",
-              "fldp3TUKBPEyJHf3A"
-            ]
-          },
-          "resultType": "number"
-        },
-        "$$hashKey": "object:1136"
-      },
-      {
-        "id": "fld9FxNUg7LZwVXIc",
-        "name": "Status",
-        "type": "select",
-        "typeOptions": {
-          "choiceOrder": [
-            "seltOC4DepXuUUGv6",
-            "sel8rc20eyjJajDVO",
-            "self4rZ4DAuBO89PW"
-          ],
-          "choices": {
-            "seltOC4DepXuUUGv6": {
-              "id": "seltOC4DepXuUUGv6",
-              "color": "gray",
-              "name": "Previous"
-            },
-            "sel8rc20eyjJajDVO": {
-              "id": "sel8rc20eyjJajDVO",
-              "color": "red",
-              "name": "Pending"
-            },
-            "self4rZ4DAuBO89PW": {
-              "id": "self4rZ4DAuBO89PW",
-              "color": "green",
-              "name": "Active"
-            }
-          },
-          "disableColors": false
-        },
-        "$$hashKey": "object:1137"
-      },
-      {
-        "id": "fldPbPkHINBGdYwwK",
-        "name": "Solar Project",
-        "type": "foreignKey",
-        "typeOptions": {
-          "foreignTableId": "tblpppeJpGXgnbPbx",
-          "relationship": "one",
-          "symmetricColumnId": "fldmTHMwr5WcCUNv2"
-        },
-        "foreignTable": "tblpppeJpGXgnbPbx",
-        "$$hashKey": "object:1138"
-      },
-      {
-        "id": "fldIWMxIFMyuDJQX8",
-        "name": "Bill PDF",
-        "type": "multipleAttachment",
-        "typeOptions": null,
-        "$$hashKey": "object:1139"
-      },
-      {
-        "id": "fldaRQSNQjBQqQJzl",
-        "name": "Due Date",
-        "type": "date",
-        "typeOptions": {
-          "isDateTime": false,
-          "dateFormat": "Local"
-        },
-        "$$hashKey": "object:1140"
-      }
-    ],
-    "primaryColumnName": "Primary Key",
-    "defaultView": {
-      "id": "viwjolb9a8DWjBDud",
-      "name": "Grid view"
-    },
-    "isEmptyDueToFilter": false,
-    "isEmpty": false,
-    "nameForUrl": "subscriber%20bill",
-    "$$hashKey": "object:7",
     "numRecordsToList": 3
   },
   "tblTXzlIwQ6znEf4R": {
@@ -1586,18 +1120,6 @@
           "resultType": "text"
         },
         "$$hashKey": "object:1451"
-      },
-      {
-        "id": "fldxGLtkhooiAcymW",
-        "name": "Subscriber Bill",
-        "type": "foreignKey",
-        "typeOptions": {
-          "foreignTableId": "tblZ2eBBhNq2VEA2D",
-          "symmetricColumnId": "fldLAlePnIpFMEO7T",
-          "relationship": "many"
-        },
-        "foreignTable": "tblZ2eBBhNq2VEA2D",
-        "$$hashKey": "object:1452"
       },
       {
         "id": "fldgf9LRHipp0MQAC",
@@ -1956,28 +1478,6 @@
         "$$hashKey": "object:1726"
       },
       {
-        "id": "fldj0zlTfovxhHwtP",
-        "name": "Type",
-        "type": "select",
-        "typeOptions": {
-          "choiceOrder": ["sel6lTk3cf3Atbj5H", "selefhXHucQjNIfi3"],
-          "choices": {
-            "sel6lTk3cf3Atbj5H": {
-              "id": "sel6lTk3cf3Atbj5H",
-              "name": "Bill Payment",
-              "color": "cyan"
-            },
-            "selefhXHucQjNIfi3": {
-              "id": "selefhXHucQjNIfi3",
-              "color": "yellow",
-              "name": "Buy Shares"
-            }
-          },
-          "disableColors": false
-        },
-        "$$hashKey": "object:1727"
-      },
-      {
         "id": "fldfg1BuzowPi6tjH",
         "name": "Amount",
         "type": "number",
@@ -1988,18 +1488,7 @@
         },
         "$$hashKey": "object:1728"
       },
-      {
-        "id": "fldpTSKzGrMKpqStb",
-        "name": "Subscriber Bill",
-        "type": "foreignKey",
-        "typeOptions": {
-          "relationship": "one",
-          "foreignTableId": "tblZ2eBBhNq2VEA2D",
-          "symmetricColumnId": "fldzXjOiOkPw3CcfW"
-        },
-        "foreignTable": "tblZ2eBBhNq2VEA2D",
-        "$$hashKey": "object:1729"
-      },
+
       {
         "id": "fld5ZwiPI5lcQTnsI",
         "name": "Order ID",
