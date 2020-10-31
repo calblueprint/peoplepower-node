@@ -1,19 +1,11 @@
 import dotenv from 'dotenv-safe';
 import express from 'express';
-import cors from 'cors';
 import Airlock from 'airlock-server';
 import { sendInviteEmail } from './utils/pledgeInvite';
-import generatePdfForSubscriber from './utils/pdfgeneration';
 import EmailGenerators from './utils/emailCopy';
 import sendEmail from './utils/email';
-import {
-  getSolarProjectById,
-  updateSolarProject,
-  getOwnersByEmail
-} from './airtable/request';
+import { getOwnersByEmail } from './airtable/request';
 import Constants from './Constants';
-
-const { pdfRegenerationError } = EmailGenerators;
 
 // This call sets up environment variables and ensures that all variables in .env.example exist
 dotenv.config();

@@ -107,54 +107,6 @@ export const getAllProjectGroups = async (filterByFormula = '', sort = []) => {
   return getAllRecords(Tables.ProjectGroup, filterByFormula, sort);
 };
 
-export const getAnnouncementById = async id => {
-  return getRecordById(Tables.Announcement, id);
-};
-
-export const getAnnouncementsByIds = async ids => {
-  const formula = `OR(${ids.reduce(
-    (f, id) => `${f} {ID}='${id}',`,
-    ''
-  )} 1 < 0)`;
-  return getAllRecords(Tables.Announcement, formula);
-};
-
-export const getAllAnnouncements = async (filterByFormula = '', sort = []) => {
-  return getAllRecords(Tables.Announcement, filterByFormula, sort);
-};
-
-export const getSolarProjectById = async id => {
-  return getRecordById(Tables.SolarProject, id);
-};
-
-export const getSolarProjectsByIds = async ids => {
-  const formula = `OR(${ids.reduce(
-    (f, id) => `${f} {ID}='${id}',`,
-    ''
-  )} 1 < 0)`;
-  return getAllRecords(Tables.SolarProject, formula);
-};
-
-export const getAllSolarProjects = async (filterByFormula = '', sort = []) => {
-  return getAllRecords(Tables.SolarProject, filterByFormula, sort);
-};
-
-export const getRateScheduleById = async id => {
-  return getRecordById(Tables.RateSchedule, id);
-};
-
-export const getRateSchedulesByIds = async ids => {
-  const formula = `OR(${ids.reduce(
-    (f, id) => `${f} {ID}='${id}',`,
-    ''
-  )} 1 < 0)`;
-  return getAllRecords(Tables.RateSchedule, formula);
-};
-
-export const getAllRateSchedules = async (filterByFormula = '', sort = []) => {
-  return getAllRecords(Tables.RateSchedule, filterByFormula, sort);
-};
-
 export const getPledgeInviteById = async id => {
   return getRecordById(Tables.PledgeInvite, id);
 };
@@ -169,41 +121,6 @@ export const getPledgeInvitesByIds = async ids => {
 
 export const getAllPledgeInvites = async (filterByFormula = '', sort = []) => {
   return getAllRecords(Tables.PledgeInvite, filterByFormula, sort);
-};
-
-export const getPaymentById = async id => {
-  return getRecordById(Tables.Payment, id);
-};
-
-export const getPaymentsByIds = async ids => {
-  const formula = `OR(${ids.reduce(
-    (f, id) => `${f} {ID}='${id}',`,
-    ''
-  )} 1 < 0)`;
-  return getAllRecords(Tables.Payment, formula);
-};
-
-export const getAllPayments = async (filterByFormula = '', sort = []) => {
-  return getAllRecords(Tables.Payment, filterByFormula, sort);
-};
-
-export const getInvestmentBreakdownById = async id => {
-  return getRecordById(Tables.InvestmentBreakdown, id);
-};
-
-export const getInvestmentBreakdownsByIds = async ids => {
-  const formula = `OR(${ids.reduce(
-    (f, id) => `${f} {ID}='${id}',`,
-    ''
-  )} 1 < 0)`;
-  return getAllRecords(Tables.InvestmentBreakdown, formula);
-};
-
-export const getAllInvestmentBreakdowns = async (
-  filterByFormula = '',
-  sort = []
-) => {
-  return getAllRecords(Tables.InvestmentBreakdown, filterByFormula, sort);
 };
 
 export const getTestDevelopmentById = async id => {
@@ -241,24 +158,8 @@ export const updateAnnouncement = async (id, recordUpdates) => {
   return updateRecord(Tables.Announcement, id, recordUpdates);
 };
 
-export const updateSolarProject = async (id, recordUpdates) => {
-  return updateRecord(Tables.SolarProject, id, recordUpdates);
-};
-
-export const updateRateSchedule = async (id, recordUpdates) => {
-  return updateRecord(Tables.RateSchedule, id, recordUpdates);
-};
-
 export const updatePledgeInvite = async (id, recordUpdates) => {
   return updateRecord(Tables.PledgeInvite, id, recordUpdates);
-};
-
-export const updatePayment = async (id, recordUpdates) => {
-  return updateRecord(Tables.Payment, id, recordUpdates);
-};
-
-export const updateInvestmentBreakdown = async (id, recordUpdates) => {
-  return updateRecord(Tables.InvestmentBreakdown, id, recordUpdates);
 };
 
 export const updateTestDevelopment = async (id, recordUpdates) => {
@@ -278,20 +179,8 @@ export const deleteProjectGroup = async id => {
 export const deleteAnnouncement = async id => {
   return deleteRecord(Tables.Announcement, id);
 };
-export const deleteSolarProject = async id => {
-  return deleteRecord(Tables.SolarProject, id);
-};
-export const deleteRateSchedule = async id => {
-  return deleteRecord(Tables.RateSchedule, id);
-};
 export const deletePledgeInvite = async id => {
   return deleteRecord(Tables.PledgeInvite, id);
-};
-export const deletePayment = async id => {
-  return deleteRecord(Tables.Payment, id);
-};
-export const deleteInvestmentBreakdown = async id => {
-  return deleteRecord(Tables.InvestmentBreakdown, id);
 };
 export const deleteTestDevelopment = async id => {
   return deleteRecord(Tables.TestDevelopment, id);
