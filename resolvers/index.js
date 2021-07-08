@@ -69,6 +69,18 @@ module.exports = {
           ][0] // ASSUMES announcements only ever belong to 1 project group
         )
       );
+    },
+    [Tables.PledgeInvite]: {
+      read: () => {
+        return true;
+      },
+      write: (pledgeInvite, authedUser) => {
+        return (
+          authedUser &&
+          authedUser.fields['Admin Of'] &&
+          authedUser.fields['Admin Of'].includes(pledgeInvite.projectGroupId)
+        );
+      }
     }
     // TODO: write rules for announcements
     // only project group admins should be able to write to the Announcements table
